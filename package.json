@@ -1,0 +1,13 @@
+{
+  "name": "project-4",
+  "version": "1.0.0",
+  "description": "Shubh weds Ayushi wedding invitation website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
