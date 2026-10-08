@@ -5,10 +5,9 @@
 .gate{position:absolute;left:50%;top:0;width:137.5vw;transform:translate3d(-50%,0,0);will-change:transform;pointer-events:none}
 .gimg{position:absolute;inset:0}
 .gimg i{position:absolute;left:0;right:0;background:top center/100% 100% no-repeat}
-/* gate = top (arch + capitals) + a band of pillar that repeats when the gate needs to be taller + base; never stretched */
-.gimg .gt{top:0;height:calc(var(--nh)*.5594 + 1px);background-image:url(../assets/img/gate-top.webp)}
-.gimg .gm{top:calc(var(--nh)*.5588);bottom:calc(var(--nh)*.3075);background:url(../assets/img/gate-middle.webp) top center/100% calc(var(--nh)*.13375) no-repeat round}
-.gimg .gb{bottom:0;height:calc(var(--nh)*.3081);background-image:url(../assets/img/gate-bottom.webp)}
+.gimg .gt{top:0;height:calc(var(--nh)*.3606);background-image:url(../assets/img/gate-top.webp)}
+.gimg .gm{top:calc(var(--nh)*.3594);bottom:calc(var(--nh)*.2);background-image:url(../assets/img/gate-middle.webp)}
+.gimg .gb{bottom:0;height:calc(var(--nh)*.2);background-image:url(../assets/img/gate-bottom.webp)}
 /* Shubh / Laabh: sit in the free space between each corner dome and the centre peak, just above the small finials (~5.1% down the gate image) */
 .sl{position:absolute;z-index:1;top:var(--slt,0px);margin:0;transform:translate(-50%,-100%);opacity:0;white-space:nowrap;pointer-events:none;
  font-family:"Amita","Yatra One","Tiro Devanagari Hindi",serif;font-weight:700;font-size:clamp(2.1rem,8vw,6.5rem);line-height:1.3;padding:.05em .15em .45em;
@@ -37,11 +36,11 @@
 .gate{position:relative;top:auto;left:50%}
 /* ---- page 2: invitation inside the gate. Large, clear, traditional type; each line fades in as it scrolls into view;
    the blocks spread out to fill the whole space between the pillars ---- */
-.gnote{position:absolute;left:0;right:0;top:calc(var(--nh)*.19);box-sizing:border-box;padding:0 27.5%;display:flex;flex-direction:column;justify-content:space-evenly;
+.gnote{position:absolute;left:0;right:0;top:calc(var(--nh)*.19);box-sizing:border-box;padding:0 27.5%;display:flex;flex-direction:column;justify-content:space-between;
  text-align:center;color:#5a1424;container-type:inline-size}
 .gnote p{margin:0}
 .gnote .rv{transition-duration:.9s}
-.gn-blk{display:flex;flex-direction:column;align-items:center;padding:clamp(10px,3cqw,26px) 0}
+.gn-blk{display:flex;flex-direction:column;align-items:center;padding:clamp(20px,6cqw,56px) 0}
 .gn-dear{font:700 clamp(16px,4.6cqw,30px)/1 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#a9761f}
 .gn-name{margin-top:.25em!important;font:400 clamp(30px,10cqw,72px)/1.15 "Yatra One",Georgia,serif;color:#7a1530}
 .gn-name .q{font-family:Georgia,serif;font-size:.85em;color:#c9a24d;padding:0 .06em}

@@ -11,11 +11,11 @@
     var vh=innerHeight,w=innerWidth*1.375,nh=w*AR;
     gate.style.setProperty('--nh',nh.toFixed(1)+'px');
     var top=nh*.19,need=0,sky=document.querySelector('.wall .skyline');
-    var D=sky?track.getBoundingClientRect().bottom-sky.getBoundingClientRect().top:0;   // how far the palace skyline rises over the gate
-    var bottom=Math.max(nh*.27,D*.74+16);                // keep the invitation clear of it                 // invitation sits between the arch and the base
+    // the invitation fills the gate from under the arch down to where the palace skyline (rising over the base) becomes visible
+    var D=sky?track.getBoundingClientRect().bottom-sky.getBoundingClientRect().top:0,skyH=sky?sky.offsetHeight:0;
+    var bottom=Math.max(nh*.2,D-skyH*.12+24);
     if(gnote){gnote.style.height='auto';need=top+gnote.offsetHeight+bottom}
-    var band=nh*.13375,h=Math.max(nh,MINH*vh,need);
-    h=nh+Math.ceil(Math.max(0,h-nh)/band-.001)*band;      // grow by whole pillar bands so nothing is stretched
+    var h=Math.max(nh,MINH*vh,need);                     // only when the content needs more room do the pillars stretch
     if(gnote)gnote.style.height=(h-top-bottom).toFixed(1)+'px';
     gate.style.height=h+'px';
     var th=0;sl.forEach(function(e){th=Math.max(th,e.offsetHeight)});
@@ -43,6 +43,7 @@
   addEventListener('scroll',kick,{passive:true});
   addEventListener('resize',function(){if(innerWidth===lw2&&innerHeight===lh2)return;lw2=innerWidth;lh2=innerHeight;layout();kick()});
   addEventListener('load',function(){layout();kick()});
+  var skyImg=document.querySelector('.wall .skyline');if(skyImg&&!skyImg.complete)skyImg.addEventListener('load',function(){layout();kick()});
   lw2=innerWidth;lh2=innerHeight;
   layout();read();qCur=qTarget;render();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){layout();kick()});
