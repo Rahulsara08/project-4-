@@ -10,8 +10,13 @@
   function layout(){
     var vh=innerHeight,w=innerWidth*1.375,nh=w*AR;
     gate.style.setProperty('--nh',nh.toFixed(1)+'px');
-    var need=gnote?nh*.2+gnote.offsetHeight+nh*.24:0;   // the gate grows (pillars stretch) to hold the invitation
-    var h=Math.max(nh,MINH*vh,need);
+    var top=nh*.19,need=0,sky=document.querySelector('.wall .skyline');
+    var D=sky?track.getBoundingClientRect().bottom-sky.getBoundingClientRect().top:0;   // how far the palace skyline rises over the gate
+    var bottom=Math.max(nh*.27,D*.74+16);                // keep the invitation clear of it                 // invitation sits between the arch and the base
+    if(gnote){gnote.style.height='auto';need=top+gnote.offsetHeight+bottom}
+    var band=nh*.13375,h=Math.max(nh,MINH*vh,need);
+    h=nh+Math.ceil(Math.max(0,h-nh)/band-.001)*band;      // grow by whole pillar bands so nothing is stretched
+    if(gnote)gnote.style.height=(h-top-bottom).toFixed(1)+'px';
     gate.style.height=h+'px';
     var th=0;sl.forEach(function(e){th=Math.max(th,e.offsetHeight)});
     gstage.style.setProperty('--slt',(nh*FY).toFixed(1)+'px');

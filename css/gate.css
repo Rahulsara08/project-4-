@@ -5,9 +5,10 @@
 .gate{position:absolute;left:50%;top:0;width:137.5vw;transform:translate3d(-50%,0,0);will-change:transform;pointer-events:none}
 .gimg{position:absolute;inset:0}
 .gimg i{position:absolute;left:0;right:0;background:top center/100% 100% no-repeat}
-.gimg .gt{top:0;height:calc(var(--nh)*.3606);background-image:url(../assets/img/gate-top.webp)}
-.gimg .gm{top:calc(var(--nh)*.3594);bottom:calc(var(--nh)*.2);background-image:url(../assets/img/gate-middle.webp)}
-.gimg .gb{bottom:0;height:calc(var(--nh)*.2);background-image:url(../assets/img/gate-bottom.webp)}
+/* gate = top (arch + capitals) + a band of pillar that repeats when the gate needs to be taller + base; never stretched */
+.gimg .gt{top:0;height:calc(var(--nh)*.5594 + 1px);background-image:url(../assets/img/gate-top.webp)}
+.gimg .gm{top:calc(var(--nh)*.5588);bottom:calc(var(--nh)*.3075);background:url(../assets/img/gate-middle.webp) top center/100% calc(var(--nh)*.13375) no-repeat round}
+.gimg .gb{bottom:0;height:calc(var(--nh)*.3081);background-image:url(../assets/img/gate-bottom.webp)}
 /* Shubh / Laabh: sit in the free space between each corner dome and the centre peak, just above the small finials (~5.1% down the gate image) */
 .sl{position:absolute;z-index:1;top:var(--slt,0px);margin:0;transform:translate(-50%,-100%);opacity:0;white-space:nowrap;pointer-events:none;
  font-family:"Amita","Yatra One","Tiro Devanagari Hindi",serif;font-weight:700;font-size:clamp(2.1rem,8vw,6.5rem);line-height:1.3;padding:.05em .15em .45em;
@@ -34,46 +35,49 @@
 .gtrack{overflow-x:clip;overflow-y:visible}
 .gstage{position:relative;top:auto;height:auto;overflow:visible;background:transparent}
 .gate{position:relative;top:auto;left:50%}
-/* ---- page 2: invitation inside the gate, revealed one by one ---- */
-.gnote{position:absolute;left:0;right:0;top:calc(var(--nh)*.2);text-align:center;padding:0 27.5%;color:#6b1f2a;box-sizing:border-box;container-type:inline-size}
-.gnote>*{margin-left:auto;margin-right:auto}
-.gnote .rv{transition-duration:1s}
-.gn-guest{margin-bottom:clamp(22px,6cqw,48px)}
-.gn-dear{margin:0;font:italic 500 clamp(15px,4.2cqw,26px)/1 "Cormorant Garamond",Georgia,serif;color:#a9761f;letter-spacing:.06em}
-.gn-name{margin:.15em 0 0;font:400 clamp(30px,10cqw,68px)/1.15 "Pinyon Script","Great Vibes",cursive;color:#7a1530}
-.gn-name .q{font-family:"Cormorant Garamond",Georgia,serif;font-size:.8em;color:#c9a24d;vertical-align:.15em;padding:0 .08em}
-.gn-quote{max-width:26em;margin:.55em auto 0;font:italic 500 clamp(13px,3.4cqw,20px)/1.45 "Cormorant Garamond",Georgia,serif;color:#7a5a50}
-.gn-welcome{max-width:28em;margin:0 0 .4em;font:500 clamp(14px,3.6cqw,22px)/1.5 "Cormorant Garamond",Georgia,serif;color:#5a3a30}
-.gn-names{display:flex;flex-direction:column;align-items:center;line-height:1}
-.gn-n{font:400 clamp(46px,17cqw,120px)/1.05 "Pinyon Script","Great Vibes",cursive;
- background:linear-gradient(180deg,#9a1d3a,#6b1f2a 60%,#4a0f1c);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .12em .08em}
-.gn-amp{font:500 clamp(20px,6cqw,40px)/1 "Cinzel",Georgia,serif;color:#c9a24d;margin:.05em 0}
-.gn-hi{margin-top:.55em;font:400 clamp(13px,3.4cqw,20px)/1 "Tiro Devanagari Hindi",serif;letter-spacing:.3em;color:#b07a1e}
-.gn-orn{display:flex;align-items:center;gap:10px;width:70%;margin-top:clamp(22px,6cqw,44px)!important;margin-bottom:clamp(18px,5cqw,36px)!important}
-.gn-orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,#c9a24d)}
+/* ---- page 2: invitation inside the gate. Large, clear, traditional type; each line fades in as it scrolls into view;
+   the blocks spread out to fill the whole space between the pillars ---- */
+.gnote{position:absolute;left:0;right:0;top:calc(var(--nh)*.19);box-sizing:border-box;padding:0 27.5%;display:flex;flex-direction:column;justify-content:space-evenly;
+ text-align:center;color:#5a1424;container-type:inline-size}
+.gnote p{margin:0}
+.gnote .rv{transition-duration:.9s}
+.gn-blk{display:flex;flex-direction:column;align-items:center;padding:clamp(10px,3cqw,26px) 0}
+.gn-dear{font:700 clamp(16px,4.6cqw,30px)/1 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#a9761f}
+.gn-name{margin-top:.25em!important;font:400 clamp(30px,10cqw,72px)/1.15 "Yatra One",Georgia,serif;color:#7a1530}
+.gn-name .q{font-family:Georgia,serif;font-size:.85em;color:#c9a24d;padding:0 .06em}
+.gn-quote{max-width:24em;margin-top:.6em!important;font:italic 600 clamp(17px,4.6cqw,30px)/1.4 "Cormorant Garamond",Georgia,serif;color:#5a3a30}
+.gn-welcome{max-width:24em;margin-bottom:.5em!important;font:600 clamp(18px,4.8cqw,32px)/1.45 "Cormorant Garamond",Georgia,serif;color:#4a2a22}
+.gn-n{font:400 clamp(48px,17cqw,128px)/1.1 "Yatra One",Georgia,serif;
+ background:linear-gradient(180deg,#a8243f,#7a1530 55%,#5a0f20);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .1em;
+ filter:drop-shadow(0 2px 0 rgba(242,201,110,.55))}
+.gn-amp{font:700 clamp(26px,8cqw,56px)/1 "Cinzel",Georgia,serif;color:#c9a24d;margin:.1em 0}
+.gn-hi{margin-top:.6em!important;font:400 clamp(18px,5cqw,32px)/1.2 "Amita","Tiro Devanagari Hindi",serif;letter-spacing:.12em;color:#b8771a}
+.gn-orn{display:flex;align-items:center;gap:12px;width:72%;margin:0 auto}
+.gn-orn i{flex:1;height:1.5px;background:linear-gradient(90deg,transparent,#c9a24d)}
 .gn-orn i:last-child{transform:scaleX(-1)}
-.gn-orn svg{width:clamp(26px,6cqw,40px);height:auto}
-.gn-cdh{margin:0;font:600 clamp(12px,3.3cqw,20px)/1 "Cinzel",Georgia,serif;letter-spacing:.32em;text-transform:uppercase;color:#a9761f}
-.gn-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2.2cqw,16px);max-width:30em;margin:.9em auto 0}
-.gn-tiles div{padding:.7em .2em .55em;border-radius:12px 12px 4px 4px;background:rgba(255,253,246,.9);border:1px solid rgba(201,162,77,.7);box-shadow:inset 0 0 0 3px #fffaf0,inset 0 0 0 4px rgba(201,162,77,.3),0 6px 14px rgba(107,31,42,.1)}
-.gn-tiles b{display:block;font:600 clamp(22px,7.5cqw,50px)/1 "Cinzel",Georgia,serif;color:#6b1f2a;font-variant-numeric:tabular-nums}
+.gn-orn svg{width:clamp(30px,7cqw,48px);height:auto}
+.gn-cdh{font:700 clamp(18px,5cqw,34px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.14em;text-transform:uppercase;color:#a9761f}
+.gn-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2.4cqw,18px);width:100%;max-width:32em;margin-top:.9em}
+.gn-tiles div{padding:.75em .15em .6em;border-radius:14px 14px 5px 5px;background:rgba(255,253,246,.94);border:1.5px solid rgba(201,162,77,.8);
+ box-shadow:inset 0 0 0 3px #fffaf0,inset 0 0 0 4px rgba(201,162,77,.3),0 6px 14px rgba(107,31,42,.12)}
+.gn-tiles b{display:block;font:700 clamp(26px,8.5cqw,60px)/1 "Cinzel",Georgia,serif;color:#6b1f2a;font-variant-numeric:tabular-nums}
 .gn-tiles b.gn-tick{animation:gnflip .45s ease}
 @keyframes gnflip{from{transform:translateY(-.25em);opacity:.3}to{transform:none;opacity:1}}
-.gn-tiles span{display:block;margin-top:.45em;font:600 clamp(8px,2.1cqw,12px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.18em;text-transform:uppercase;color:#a9761f}
-.gn-cdn{margin:.8em 0 0;font:italic 500 clamp(13px,3.3cqw,19px)/1.3 "Cormorant Garamond",Georgia,serif;color:#7a5a50}
-.gn-venue{margin-top:clamp(30px,8cqw,60px)}
-.gn-vh{margin:0;font:600 clamp(11px,3cqw,18px)/1 "Cinzel",Georgia,serif;letter-spacing:.32em;text-transform:uppercase;color:#a9761f}
-.gn-vn{margin:.3em 0 0;font:400 clamp(30px,9cqw,60px)/1.1 "Great Vibes",cursive;color:#7a1530}
-.gn-va{margin:.15em 0 0;font:600 clamp(13px,3.4cqw,20px)/1.2 "Cormorant Garamond",Georgia,serif;letter-spacing:.12em;color:#5a3a30}
-.gn-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:1.1em}
-.gn-btn{display:inline-flex;align-items:center;gap:.5em;padding:.7em 1.3em;border-radius:99px;border:0;cursor:pointer;text-decoration:none;pointer-events:auto;
- font:700 clamp(12px,3.2cqw,17px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.06em;color:#fff7e6;background:linear-gradient(180deg,#9a1d3a,#6b1f2a);
+.gn-tiles span{display:block;margin-top:.5em;font:700 clamp(10px,2.6cqw,16px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#8a5a1e}
+.gn-cdn{margin-top:.8em!important;font:italic 600 clamp(16px,4.2cqw,26px)/1.3 "Cormorant Garamond",Georgia,serif;color:#5a3a30}
+.gn-vh{font:700 clamp(18px,5cqw,34px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.14em;text-transform:uppercase;color:#a9761f}
+.gn-vn{margin-top:.25em!important;font:400 clamp(30px,9.5cqw,66px)/1.15 "Yatra One",Georgia,serif;color:#7a1530}
+.gn-va{margin-top:.2em!important;font:700 clamp(17px,4.6cqw,28px)/1.3 "Cormorant Garamond",Georgia,serif;letter-spacing:.06em;color:#4a2a22}
+.gn-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:1em}
+.gn-btn{display:inline-flex;align-items:center;gap:.5em;padding:.75em 1.4em;border-radius:99px;border:0;cursor:pointer;text-decoration:none;pointer-events:auto;
+ font:700 clamp(15px,3.8cqw,21px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.04em;color:#fff7e6;background:linear-gradient(180deg,#9a1d3a,#6b1f2a);
  box-shadow:0 6px 14px rgba(107,31,42,.28),inset 0 0 0 1.5px rgba(242,201,110,.7);transition:transform .2s,box-shadow .2s}
+.gn-btn svg{width:1.1em;height:1.1em}
 .gn-btn.alt{color:#6b1f2a;background:linear-gradient(180deg,#fffaf0,#f6e6c4);box-shadow:0 6px 14px rgba(107,31,42,.15),inset 0 0 0 1.5px #c9a24d}
 .gn-btn:hover,.gn-btn:focus-visible{transform:translateY(-2px);outline:none}
-.gn-end{margin:clamp(30px,8cqw,58px) 0 0;font:400 clamp(24px,7cqw,44px)/1.2 "Great Vibes",cursive;color:#7a1530}
-.gn-end span{display:block;margin-top:.5em;font:italic 500 clamp(12px,3cqw,17px)/1.2 "Cormorant Garamond",Georgia,serif;color:#a9761f}
+.gn-end{font:700 clamp(26px,7.4cqw,52px)/1.25 "Amita",Georgia,serif;color:#7a1530}
+.gn-sign{margin-top:.5em!important;font:italic 700 clamp(16px,4.2cqw,26px)/1.3 "Cormorant Garamond",Georgia,serif;color:#9a6a1e}
 .gn-toast{position:fixed;z-index:50;left:50%;bottom:24px;transform:translate(-50%,20px);padding:.7em 1.2em;border-radius:99px;background:#6b1f2a;color:#fff7e6;
  font:600 15px/1 "Cormorant Garamond",Georgia,serif;box-shadow:0 8px 20px rgba(0,0,0,.25);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
 .gn-toast.in{opacity:1;transform:translate(-50%,0)}
-@media (max-width:600px){.gnote{padding:0 24%}}
+@media (max-width:600px){.gnote{padding:0 23.5%}}

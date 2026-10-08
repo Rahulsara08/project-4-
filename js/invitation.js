@@ -2,7 +2,7 @@
 (function(){
   var C=window.WEDDING||{guestDefault:'Family & Friends',target:'2026-12-11T21:00:00+05:30',venue:'Mandap Lawn',city:'Jaipur, Rajasthan'};
   var q=new URLSearchParams(location.search),g=(q.get('to')||q.get('guest')||'').replace(/[<>]/g,'').trim();
-  var gn=document.getElementById('guestName');if(gn)gn.textContent=g||C.guestDefault;
+  [].forEach.call(document.querySelectorAll('.guest-name'),function(e){e.textContent=g||C.guestDefault});
   var vn=document.getElementById('venueName'),vc=document.getElementById('venueCity'),mp=document.getElementById('venueMap');
   if(vn)vn.textContent=C.venue;if(vc)vc.textContent=C.city;
   if(mp)mp.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(C.venue+', '+C.city);

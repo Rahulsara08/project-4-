@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#6b1f2a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Tiro+Devanagari+Hindi&family=Yatra+One&family=Amita:wght@700&family=Pinyon+Script&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Tiro+Devanagari+Hindi&family=Yatra+One&family=Amita:wght@700&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/common.css">
@@ -30,6 +30,7 @@
       <p class="ganesh">॥ श्री गणेशाय नमः ॥</p>
       <h1>Shubh<span class="weds">weds</span>Ayushi</h1>
       <p>are getting married</p>
+      <p class="hero-guest">Dear <span class="guest-name">Family &amp; Friends</span>, you are invited</p>
     </div>
     <img class="hawa" id="hawa" alt="Hawa Mahal, Jaipur" src="assets/img/hero-hawa-mahal.webp">
     <img class="tl" id="tl" alt="" src="assets/img/hero-tree-left.webp">
@@ -63,17 +64,34 @@
 <section class="gtrack" id="gtrack"><div class="gstage" id="gstage"><p class="sl sl-l" lang="hi">शुभ</p><p class="sl sl-r" lang="hi">लाभ</p><div class="gate" id="gate">
   <div class="gimg" role="img" aria-label="Floral wedding gate with carved pillars"><i class="gm"></i><i class="gt"></i><i class="gb"></i></div>
   <div class="gnote" id="gnote">
-    <div class="gn-guest rv"><p class="gn-dear">Dear</p><p class="gn-name"><span class="q">“</span><span id="guestName">Family &amp; Friends</span><span class="q">”</span></p>
-      <p class="gn-quote">Some moments are too precious to celebrate without the people we love.</p></div>
-    <p class="gn-welcome rv">With the blessings of our elders, we warmly invite you to the wedding celebrations of</p>
-    <div class="gn-names rv"><span class="gn-n">Shubh</span><span class="gn-amp">&amp;</span><span class="gn-n">Ayushi</span><span class="gn-hi" lang="hi">शुभ विवाह</span></div>
+    <div class="gn-blk">
+      <p class="gn-dear rv">Dear</p>
+      <p class="gn-name rv"><span class="q">“</span><span class="guest-name">Family &amp; Friends</span><span class="q">”</span></p>
+      <p class="gn-quote rv">Some moments are too precious to celebrate without the people we love.</p>
+    </div>
+    <div class="gn-blk">
+      <p class="gn-welcome rv">With the blessings of our elders, we warmly invite you to the wedding celebrations of</p>
+      <p class="gn-n rv">Shubh</p>
+      <p class="gn-amp rv">&amp;</p>
+      <p class="gn-n rv">Ayushi</p>
+      <p class="gn-hi rv" lang="hi">शुभ विवाह</p>
+    </div>
     <div class="gn-orn rv" aria-hidden="true"><i></i><svg viewBox="-20 -14 40 24" aria-hidden="true"><path d="M0 8Q-6 0 0-12Q6 0 0 8Z" fill="#e8b04a"/><path d="M0 8Q-13 3-15-6Q-5-5 0 8Z" fill="#d9972e"/><path d="M0 8Q13 3 15-6Q5-5 0 8Z" fill="#d9972e"/></svg><i></i></div>
-    <div class="gn-cd rv" role="timer" aria-label="Countdown to the wedding"><p class="gn-cdh">Counting the days</p>
-      <div class="gn-tiles"><div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Minutes</span></div><div><b data-k="s">00</b><span>Seconds</span></div></div>
-      <p class="gn-cdn" id="cdNote">until our pheras · 11 December 2026</p></div>
-    <div class="gn-venue rv"><p class="gn-vh">The Destination</p><p class="gn-vn" id="venueName">Mandap Lawn</p><p class="gn-va" id="venueCity">Jaipur, Rajasthan</p>
-      <div class="gn-btns"><a class="gn-btn" id="venueMap" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span>Get Directions</span></a><button class="gn-btn alt" id="shareBtn" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.4M8.3 13.2l7.4 4.4"/></svg><span>Share Invitation</span></button></div></div>
-    <p class="gn-end rv">We await your gracious presence<span>— The Sharma &amp; Sharma Families</span></p>
+    <div class="gn-blk" role="timer" aria-label="Countdown to the wedding">
+      <p class="gn-cdh rv">Counting the Days</p>
+      <div class="gn-tiles rv"><div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Minutes</span></div><div><b data-k="s">00</b><span>Seconds</span></div></div>
+      <p class="gn-cdn rv" id="cdNote">until our pheras · 11 December 2026</p>
+    </div>
+    <div class="gn-blk">
+      <p class="gn-vh rv">The Destination</p>
+      <p class="gn-vn rv" id="venueName">Mandap Lawn</p>
+      <p class="gn-va rv" id="venueCity">Jaipur, Rajasthan</p>
+      <div class="gn-btns rv"><a class="gn-btn" id="venueMap" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span>Get Directions</span></a><button class="gn-btn alt" id="shareBtn" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.4M8.3 13.2l7.4 4.4"/></svg><span>Share Invitation</span></button></div>
+    </div>
+    <div class="gn-blk">
+      <p class="gn-end rv">We await your gracious presence</p>
+      <p class="gn-sign rv">— The Sharma &amp; Sharma Families</p>
+    </div>
   </div>
 </div></div>
 </section></div>
