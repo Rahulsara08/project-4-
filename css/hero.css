@@ -1,0 +1,21 @@
+/* Page 1: Hawa Mahal hero (scroll parallax) */
+.track{height:300vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#4c8fe0;--th:min(74svh,118vw)}
+.stage img{max-width:none;position:absolute;display:block;user-select:none;-webkit-user-drag:none;pointer-events:none;will-change:transform}
+.sky{left:0;top:0;width:100%;height:120%;object-fit:cover}
+.stage{--hw:max(102vw,130svh)}
+.hawa{left:50%;top:0;width:var(--hw);height:calc(var(--hw)*var(--har,.9777));margin-left:calc(var(--hw)/-2)}
+.tl{left:calc(var(--th)*-.3);bottom:0;height:var(--th);transform-origin:0 100%}
+.tr{right:calc(var(--th)*-.3);bottom:0;height:calc(var(--th)*.864);transform-origin:100% 100%}
+.names{will-change:transform;transform-origin:50% 40%;animation:intro 1.4s cubic-bezier(.2,.7,.2,1) backwards;position:absolute;left:0;right:0;top:calc(2svh + env(safe-area-inset-top,0px));text-align:center;color:#fff;padding:0 1rem;text-shadow:0 2px 24px rgba(20,40,90,.45)}
+.names h1{will-change:auto;margin:0;font-family:"Yatra One","Tiro Devanagari Hindi","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(3rem,min(19vw,13svh),14.5rem);line-height:.9;letter-spacing:.01em;text-shadow:0 3px 26px rgba(20,40,90,.55),0 1px 0 rgba(255,214,120,.6)}
+.names .weds{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.7rem,6.2vw,3rem);font-style:italic;font-weight:500;margin:.15em 0;letter-spacing:.14em;color:#ffe9b0}
+.names p{margin:.9rem 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.4rem,4.2vw,2.2rem);font-weight:500;letter-spacing:.08em}
+@keyframes intro{from{opacity:0;letter-spacing:.2em}to{opacity:1}}
+.hint{position:absolute;left:0;right:0;bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));text-align:center;color:#fff;font-size:1rem;letter-spacing:.1em;text-shadow:0 1px 8px rgba(0,0,0,.6);z-index:3}
+.hint i{display:block;width:1px;height:28px;margin:.4rem auto 0;background:#fff;animation:d 1.6s ease-in-out infinite}
+@keyframes d{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.hint i{animation:none}}
+.names .ganesh{margin:0 0 clamp(.9rem,3.2svh,2.2rem)}
+@supports not (height:100svh){.stage{--hw:max(100vw,130vh);--th:min(74vh,118vw);height:100vh}
+.names{top:2vh}}

@@ -1,9 +1,11 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const build = require('./scripts/build');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
+const DEV = process.argv.includes('--dev');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -19,18 +21,27 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon',
   '.mp3': 'audio/mpeg',
   '.wav': 'audio/wav',
+  '.woff2': 'font/woff2',
 };
+
+// Only these folders/files are public; source partials, scripts and node_modules are not served.
+const PUBLIC = /^\/(index\.html|css\/[\w.-]+\.css|js\/[\w.-]+\.js|assets\/[\w./-]+)$/;
+
+build();
 
 const server = http.createServer((req, res) => {
   try {
     let reqUrl = decodeURI(req.url.split('?')[0]);
-    if (reqUrl === '/' || reqUrl === '') {
-      reqUrl = '/index.html';
+    if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
+    if (DEV && reqUrl === '/index.html') build();          // dev: pick up edits to src/sections without restarting
+
+    if (!PUBLIC.test(reqUrl) || reqUrl.includes('..')) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('404 Not Found');
+      return;
     }
 
     const filePath = path.normalize(path.join(PUBLIC_DIR, reqUrl));
-
-    // Prevent directory traversal
     if (!filePath.startsWith(PUBLIC_DIR)) {
       res.writeHead(403, { 'Content-Type': 'text/plain' });
       res.end('403 Forbidden');
@@ -43,15 +54,12 @@ const server = http.createServer((req, res) => {
         res.end('404 Not Found');
         return;
       }
-
       const ext = path.extname(filePath).toLowerCase();
-      const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-
       res.writeHead(200, {
-        'Content-Type': contentType,
-        'Cache-Control': 'no-cache',
+        'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+        // images rarely change: let browsers keep them for a day; pages, styles and scripts always fresh
+        'Cache-Control': ext === '.html' || ext === '.css' || ext === '.js' ? 'no-cache' : 'public, max-age=86400',
       });
-
       fs.createReadStream(filePath).pipe(res);
     });
   } catch (e) {
@@ -61,6 +69,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-  console.log(`Serving wedding invitation: http://localhost:${PORT}/index.html`);
+  console.log(`Wedding invitation running at http://localhost:${PORT}/`);
+  console.log(`Personal link example: http://localhost:${PORT}/?to=Rahul%20Sharma`);
 });

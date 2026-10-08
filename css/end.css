@@ -1,0 +1,4 @@
+/* Page 7: closing page */
+/* ---- last page: plain burgundy paper ---- */
+.pg7{position:relative;z-index:3;min-height:100vh;min-height:100svh;background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
+.pg7::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 75% at 50% 50%,transparent 40%,rgba(35,0,12,.5))}

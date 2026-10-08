@@ -1,0 +1,71 @@
+/* Page 4: Patrika Gate scene (sky, couple, trees, platform) */
+/* ---- page 4: layered Jaipur scene — sky, drifting clouds, toran arches either side, Patrika Gate in the centre,
+   ground with trees, flowers and a lotus pond; the couple fades in on top of the gate and comes down to the ground ---- */
+.pg4,.p4-gap{position:relative;z-index:3;background:#1660c4;--c1:url(../assets/img/cloud-1.webp);--c2:url(../assets/img/cloud-2.webp);--c3:url(../assets/img/cloud-3.webp)}
+/* three inches of open sky between the events and the gate; its colour runs into the top of the gate page sky */
+.p4-gap{overflow-x:clip;height:3in;background:linear-gradient(180deg,#1d64c3 0%,#1862c5 60%,#1660c4 100%)}
+/* soft cloud bank over the seam between the events wall and the sky */
+.p4-gap.real::before{display:none}
+.p4-band{position:absolute;z-index:4;left:-6%;width:112%;top:0;height:clamp(120px,19vw,260px);transform:translateY(-52%);pointer-events:none;display:block}
+.p4-gap::before{content:"";position:absolute;z-index:4;left:-6%;right:-6%;top:0;height:clamp(90px,15vw,210px);transform:translateY(-52%);pointer-events:none;
+ background:var(--c1) 0 70%,var(--c3) 33% 45%,var(--c2) 64% 60%,var(--c1) 100% 50%;background-size:auto 90%,auto 80%,auto 100%,auto 88%;background-repeat:no-repeat}
+.p4-stage{position:relative;height:100vh;height:100svh;overflow-x:clip;overflow-y:visible;
+ --plat:15vw;--base:calc(var(--plat)*.1);--tree:min(58svh,40vw);--urn:calc(var(--tree)*.34);
+ --edge:max(0px,min(8vw,calc(50% - var(--cw)*.5 - var(--tree)*.62)));
+ --pw:min(128vw,calc((100svh - var(--base) - 2.5svh)/.7477));--ph:calc(var(--pw)*.7477);--gh:min(calc(var(--ph)*1.06),calc(100svh - var(--base) - .4svh));--gw:calc(var(--pw)*1.28);--tw:calc(var(--ph)*.9/.733);--cw:calc(var(--pw)*.5);
+ --treeimg:url(../assets/img/flowering-tree.webp);--urnimg:url(../assets/img/flower-urn.webp)}
+@media (max-aspect-ratio:3/4){.p4-stage{--pw:min(185vw,calc((100svh - var(--base) - 14svh)/.7477));--cw:calc(var(--pw)*.46);--gw:calc(var(--pw)*1.16);--tw:calc(var(--pw)*.74);--tree:min(36svh,66vw);--edge:-9vw}}
+@supports not (height:100svh){.p4-stage{--tree:min(58vh,40vw);--pw:min(128vw,calc((100vh - var(--base) - 2.5vh)/.7477))}}
+.p4-stage img{position:absolute;display:block;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.p4-couple{will-change:transform}
+.p4-sky{left:0;top:0;width:100%;height:112%;object-fit:cover;object-position:50% 0}
+.p4-fade{position:absolute;left:0;right:0;top:0;height:12%;background:linear-gradient(180deg,#1660c4 0%,rgba(22,96,196,.6) 45%,rgba(22,96,196,0) 100%)}
+.p4-clouds{position:absolute;inset:0}
+.p4-cloud{position:absolute;left:var(--x,0);top:var(--y);width:var(--w);aspect-ratio:var(--ar);opacity:var(--o,1);background:center/contain no-repeat}
+.p4-cloud.drift{left:0;animation:p4drift var(--d) linear infinite;animation-delay:var(--dl)}
+.p4-cloud.c1{background-image:var(--c1);--ar:1050/334}
+.p4-cloud.c2{background-image:var(--c2);--ar:836/315}
+.p4-cloud.c3{background-image:var(--c3);--ar:1087/309}
+@keyframes p4drift{from{transform:translateX(-105%)}to{transform:translateX(100vw)}}
+.p4-toran{position:absolute;bottom:var(--base);width:var(--tw);height:calc(var(--tw)*.733*1.06);background:url(../assets/img/toran-arch.webp) center bottom/100% 100% no-repeat}
+.p4-toran.l{left:calc(50% - var(--gw)*.5 - var(--tw)*.5)}
+.p4-toran.r{left:calc(50% + var(--gw)*.5 - var(--tw)*.5)}
+@media (max-aspect-ratio:3/4){.p4-toran{bottom:calc(var(--base) + var(--ph)*.22)}
+.p4-toran.l{left:calc(var(--tw)*-.5)}
+.p4-toran.r{left:auto;right:calc(var(--tw)*-.5)}}
+.p4-gate{left:50%;bottom:var(--base);width:var(--gw);height:var(--gh);margin-left:calc(var(--gw)/-2);}
+.p4-couple{left:50%;bottom:0;width:var(--cw);height:auto;margin-left:calc(var(--cw)/-2);transform-origin:50% 100%;
+ filter:drop-shadow(0 0 1px rgba(70,20,20,.25))}
+.p4-csh{position:absolute;left:50%;bottom:0;width:calc(var(--cw)*.82);height:calc(var(--cw)*.07);margin-left:calc(var(--cw)*-.41);border-radius:50%;opacity:0;pointer-events:none;
+ background:radial-gradient(closest-side,rgba(70,30,10,.55),rgba(70,30,10,.28) 55%,transparent)}
+@media (prefers-reduced-motion:reduce){.p4-cloud{animation:none}}
+/* realistic animated sky (WebGL); when it runs, the drawn clouds are hidden */
+.p4-real{position:absolute;left:0;top:0;width:100%;height:100%;display:block;pointer-events:none}
+.pg4{margin-top:-2px}
+.p4-stage.real .p4-clouds{display:none}
+/* platform the couple lands on */
+.p4-plat{left:0;bottom:0;width:100%;height:auto;filter:drop-shadow(0 -4px 10px rgba(60,30,10,.25))}
+/* falling rose and marigold petals */
+.p4-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.p4-petal{position:absolute;top:-6%;left:var(--x);width:var(--s);height:calc(var(--s)*.72);border-radius:65% 0 65% 0;opacity:.92;
+ background:radial-gradient(circle at 30% 30%,#ff9fb0 0,#e0354f 55%,#a3122b 100%);animation:p4fall var(--d) linear infinite;animation-delay:var(--dl);will-change:transform}
+.p4-petal.m{background:radial-gradient(circle at 30% 30%,#ffd36b 0,#f2961a 60%,#c0600c 100%)}
+@keyframes p4fall{0%{transform:translate3d(0,0,0) rotate(0)}25%{transform:translate3d(var(--dx),28vh,0) rotate(110deg)}50%{transform:translate3d(0,56vh,0) rotate(200deg)}
+ 75%{transform:translate3d(var(--dx),84vh,0) rotate(290deg)}100%{transform:translate3d(0,114vh,0) rotate(380deg)}}
+@media (prefers-reduced-motion:reduce){.p4-petals{display:none}}
+/* flowering trees on both sides, leaning in towards the couple, each growing out of a marble flower urn */
+.p4-tr{position:absolute;bottom:calc(var(--plat)*.22 + var(--urn)*.62);height:var(--tree);aspect-ratio:1108/1105;transform-origin:50% 100%;pointer-events:none}
+/* 3D: each tree is turned in perspective so the side nearest the screen edge comes towards the viewer */
+.p4-tr.l{left:calc(var(--edge) - var(--tree)*.505);transform:perspective(700px) rotateY(24deg) skewX(-7deg)}
+.p4-tr.r{left:calc(100% - var(--edge) - var(--tree)*.505);transform:scaleX(-1) perspective(700px) rotateY(24deg) skewX(-7deg)}
+@media (max-aspect-ratio:3/4){.p4-tr.l{transform:perspective(700px) rotateY(12deg) skewX(-3deg)}
+.p4-tr.r{transform:scaleX(-1) perspective(700px) rotateY(12deg) skewX(-3deg)}}
+/* soft dark glow behind the crown so it lifts off the gate and sky */
+.p4-tr::before{content:"";position:absolute;left:4%;right:-6%;top:6%;bottom:30%;border-radius:50%;
+ background:radial-gradient(closest-side,rgba(35,10,45,.55),rgba(35,10,45,.24) 60%,transparent);filter:blur(14px);transform:translate(12%,9%)}
+.p4-tr>i{position:absolute;inset:0;background:var(--treeimg) center bottom/100% 100% no-repeat;
+ filter:saturate(1.08) contrast(1.05) drop-shadow(0 0 1px rgba(30,10,30,.3)) drop-shadow(20px 24px 14px rgba(25,8,40,.55)) drop-shadow(56px 58px 40px rgba(25,8,40,.34))}
+.p4-urn{position:absolute;bottom:calc(var(--plat)*.22);height:var(--urn);aspect-ratio:760/927;background:var(--urnimg) center bottom/100% 100% no-repeat;
+ filter:drop-shadow(0 8px 10px rgba(50,25,10,.3))}
+.p4-urn.l{left:calc(var(--edge) - var(--urn)*.41)}
+.p4-urn.r{left:calc(100% - var(--edge) - var(--urn)*.41)}

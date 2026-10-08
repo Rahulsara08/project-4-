@@ -1,0 +1,79 @@
+/* Page 3: events wall and ceremony cards */
+/* ---- page 3: full palace wall flush under the pillars; skyline fades in on top of it; garland hangs across the seam.
+   Everything sits behind the gate so the pillar bottoms overlap all of it ---- */
+.wall{position:relative;z-index:auto;display:block;width:100%;height:auto;line-height:0;background:transparent;margin-top:0;overflow-x:clip}
+.wall .wallimg{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;max-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 clamp(10px,3vw,30px));mask-image:linear-gradient(to bottom,transparent 0,#000 clamp(10px,3vw,30px))}
+.wall .skyline{position:absolute;left:-12.5%;top:0;width:125%;height:auto;max-width:none;transform:translateY(-101%);opacity:1;pointer-events:none;user-select:none;-webkit-user-drag:none;-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0,#000 78%,transparent 100%)}
+.wall .mala{position:absolute;left:-2%;top:0;width:104%;height:auto;max-width:none;transform:translateY(-20%);pointer-events:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 4px 6px rgba(90,40,20,.18))}
+.wall .fbed{position:absolute;z-index:3;left:0;top:0;width:100%;height:0;pointer-events:none}
+.wall .fbed{--fl:url(../assets/img/flower-bed.webp)}
+.wall .fbed::before,.wall .fbed::after{content:"";position:absolute;top:0;width:34%;aspect-ratio:1279/426;background:var(--fl) center/100% 100% no-repeat;-webkit-mask-image:linear-gradient(to right,#000 0,#000 45%,transparent 100%);mask-image:linear-gradient(to right,#000 0,#000 45%,transparent 100%);filter:drop-shadow(0 2px 3px rgba(80,35,20,.22))}
+.wall .fbed::before{left:-3%;transform:translateY(-84%)}
+.wall .fbed::after{right:-3%;transform:translateY(-84%) scaleX(-1)}
+/* ---- events carousel: one card per ceremony, swipe / drag / auto-advance, no buttons ---- */
+.events{--ev-w:min(86vw,760px);--ev-gold:#a9761f;position:relative;z-index:2;padding:21vw 0 11vw;line-height:1.35;font-family:"Cormorant Garamond",Georgia,serif;color:var(--txt);text-align:left}
+/* events: one card-sized frame; every event card sits inside it, stacked, and they change with a fade (no sliding) */
+/* the frame is a rectangle cut a little larger than the card, recessed into the wall, so the card reads as set inside it */
+.ev-track{--ev-pad:clamp(10px,2.4vw,22px);position:relative;display:grid;width:calc(var(--ev-w) + var(--ev-pad)*2);max-width:calc(100% - 16px);margin:0 auto;padding:var(--ev-pad);overflow:hidden;box-sizing:border-box;
+ background:linear-gradient(180deg,rgba(255,247,228,.9),rgba(250,236,204,.9));border:1.5px solid #c9a24d;border-radius:6px;
+ box-shadow:inset 0 0 0 4px rgba(255,251,240,.75),inset 0 0 0 5px rgba(185,138,53,.45),inset 0 8px 22px rgba(107,31,42,.22),0 12px 30px rgba(107,31,42,.22);outline:none;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.ev-track.drag{cursor:grabbing}
+.ev-track:focus-visible{box-shadow:inset 0 0 0 2px var(--ev-gold)}
+.ev-slide{grid-area:1/1;min-width:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.ev-slide.is-on{opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s}
+.ev-card{position:relative;display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:clamp(12px,3vw,30px);align-items:center;padding:clamp(12px,2.6vw,24px);border-radius:clamp(18px,3.2vw,28px);border:1.5px solid #c9a24d;
+ background:
+  radial-gradient(circle,#b98a35 0 2.2px,transparent 2.9px) left 8px top 8px/9px 9px no-repeat,
+  radial-gradient(circle,#b98a35 0 2.2px,transparent 2.9px) right 8px top 8px/9px 9px no-repeat,
+  radial-gradient(circle,#b98a35 0 2.2px,transparent 2.9px) left 8px bottom 8px/9px 9px no-repeat,
+  radial-gradient(circle,#b98a35 0 2.2px,transparent 2.9px) right 8px bottom 8px/9px 9px no-repeat,
+  linear-gradient(160deg,#fffdf6,#fbf0da);
+ box-shadow:inset 0 0 0 5px #fffaf0,inset 0 0 0 6px rgba(185,138,53,.45),0 14px 34px rgba(107,31,42,.22);
+}
+.ev-dots{display:flex;justify-content:center;gap:10px;width:max-content;margin:8px auto 0;padding:7px 13px;border-radius:999px;background:rgba(255,250,236,.92);border:1px solid rgba(201,162,77,.55);box-shadow:0 4px 12px rgba(107,31,42,.18)}
+.ev-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#c9a24d;opacity:.4;cursor:pointer;transition:opacity .3s,transform .3s}
+.ev-dots button[aria-current="true"]{opacity:1;background:#6b1f2a;transform:scale(1.25)}
+.ev-art{aspect-ratio:3/4;border-radius:14px;overflow:hidden;border:1px solid rgba(169,118,31,.6);box-shadow:inset 0 0 0 3px rgba(255,250,240,.65)}
+.ev-art svg{display:block;width:100%;height:100%;pointer-events:none}
+.ev-body{display:flex;flex-direction:column;gap:.32rem;min-width:0;padding-right:clamp(4px,1.4vw,12px)}
+.ev-day{font-size:clamp(.66rem,2vw,.8rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--ev-gold)}
+.ev-title{margin:0;font-family:"Great Vibes","Yatra One",cursive;font-weight:400;font-size:clamp(2.5rem,10.5vw,4.4rem);line-height:.95;color:var(--txt);padding-bottom:.04em}
+.ev-hi{font-family:"Tiro Devanagari Hindi",Georgia,serif;font-size:clamp(.8rem,2.4vw,1rem);color:var(--ev-gold);letter-spacing:.06em}
+.ev-meta{list-style:none;margin:.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:.26rem;font-size:clamp(.84rem,2.7vw,1.08rem);font-weight:600;color:var(--sub)}
+.ev-meta li{display:flex;align-items:flex-start;gap:.45rem}
+.ev-meta svg{flex:none;margin-top:.18em;color:var(--ev-gold)}
+.ev-note{margin:.35rem 0 0;font-style:italic;font-weight:500;font-size:clamp(.92rem,3vw,1.2rem);color:var(--sub);line-height:1.3}
+/* ---- event themes: each ceremony has its own colours; the frame behind the card takes the colour of the event shown ---- */
+.ev-haldi{--d:#a86a00;--m:#e8a317;--l:#fff4cc;--l2:#ffe08a}
+.ev-mehndi{--d:#2f6b2f;--m:#5e9e3e;--l:#f1f8e2;--l2:#cfe6a8}
+.ev-sangeet{--d:#7a2a6a;--m:#c0559f;--l:#fdf0f8;--l2:#f2c6e2}
+.ev-phere{--d:#a8241c;--m:#e2602a;--l:#fff1e6;--l2:#ffc9a3}
+.ev-reception{--d:#6b1f2a;--m:#b8862e;--l:#fff8ea;--l2:#f2d9a6}
+.ev-track{background:var(--fd,#6b1f2a) url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2244%22%20height%3D%2244%22%20viewBox%3D%220%200%2044%2044%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.16%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M22%204c5%206%205%2012%200%2018c-5-6-5-12%200-18zM22%2040c5-6%205-12%200-18c-5%206-5%2012%200%2018zM4%2022c6-5%2012-5%2018%200c-6%205-12%205-18%200zM40%2022c-6-5-12-5-18%200c6%205%2012%205%2018%200z%22/%3E%3Ccircle%20cx%3D%2222%22%20cy%3D%2222%22%20r%3D%223%22/%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%220%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%220%22%20cy%3D%2244%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2244%22%20r%3D%225%22/%3E%3C/g%3E%3C/svg%3E) 0 0/44px 44px!important;border:2px solid #e2b04f!important;border-radius:16px!important;
+ box-shadow:inset 0 0 0 5px rgba(0,0,0,.18),inset 0 0 0 6.5px rgba(242,201,110,.7),inset 0 10px 26px rgba(0,0,0,.35),0 16px 34px rgba(60,10,20,.35)!important;transition:background-color .6s ease}
+.ev-track[data-on="haldi"]{--fd:#b07a12}
+.ev-track[data-on="mehndi"]{--fd:#2f6b2f}
+.ev-track[data-on="sangeet"]{--fd:#6e2a63}
+.ev-track[data-on="phere"]{--fd:#9c2318}
+.ev-track[data-on="reception"]{--fd:#6b1f2a}
+.ev-slide .ev-card{border:2px solid #c9a24d;border-radius:clamp(16px,3vw,26px);
+ background:url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-50%20-50%20100%20100%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8862e%22%20stroke-opacity%3D%22.16%22%20stroke-width%3D%22.8%22%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%280%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2815%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2830%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2845%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2860%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2875%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%2890%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%28105%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%28120%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%28135%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%28150%29%22/%3E%3Cellipse%20rx%3D%229%22%20ry%3D%2230%22%20transform%3D%22rotate%28165%29%22/%3E%3Ccircle%20r%3D%2244%22/%3E%3Ccircle%20r%3D%2240%22%20stroke-dasharray%3D%222%203%22/%3E%3Ccircle%20r%3D%2212%22/%3E%3Ccircle%20r%3D%226%22/%3E%3C/g%3E%3C/svg%3E) right -8% bottom -22%/min(42%,300px) auto no-repeat,radial-gradient(130% 120% at 0% 0%,var(--l) 0%,#fffdf7 55%,var(--l2) 140%);
+ box-shadow:inset 0 0 0 5px rgba(255,255,255,.7),inset 0 0 0 6.5px color-mix(in srgb,var(--m) 55%,transparent),0 12px 26px rgba(0,0,0,.28)}
+.ev-slide .ev-card::before,.ev-slide .ev-card::after{content:"";position:absolute;width:clamp(26px,5vw,44px);height:clamp(26px,5vw,44px);border:2px solid var(--m);pointer-events:none}
+.ev-slide .ev-card::before{top:10px;left:10px;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.ev-slide .ev-card::after{right:10px;bottom:10px;border-left:0;border-top:0;border-radius:0 0 12px 0}
+.ev-slide .ev-art{border:2px solid var(--m);box-shadow:0 6px 14px rgba(0,0,0,.18),inset 0 0 0 3px rgba(255,255,255,.7)}
+.ev-slide .ev-day{align-self:flex-start;padding:.3em .9em;border-radius:99px;background:var(--d);color:#fff8e6;letter-spacing:.2em}
+.ev-slide .ev-title{color:var(--d)}
+.ev-slide .ev-hi,.ev-slide .ev-meta svg{color:var(--m)}
+.ev-slide .ev-meta{color:#4a3a34}
+.ev-loc{align-self:flex-start;display:inline-flex;align-items:center;gap:.45em;margin-top:.55rem;padding:.55em 1.15em;border-radius:99px;text-decoration:none;
+ font:700 clamp(.82rem,2.4vw,1rem)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.06em;color:#fff;background:linear-gradient(180deg,var(--m),var(--d));
+ box-shadow:0 4px 10px rgba(0,0,0,.22),inset 0 0 0 1.5px rgba(255,255,255,.35);transition:transform .2s,box-shadow .2s;cursor:pointer}
+.ev-loc:hover,.ev-loc:focus-visible{transform:translateY(-2px);box-shadow:0 7px 16px rgba(0,0,0,.28),inset 0 0 0 1.5px rgba(255,255,255,.5);outline:none}
+@media (max-width:420px){.ev-loc{padding:.5em .9em}}
+@media (max-width:420px){.ev-card{grid-template-columns:minmax(0,36%) minmax(0,1fr);gap:10px;padding:11px}
+.ev-title{font-size:2.35rem}
+.ev-meta{font-size:.8rem}
+.ev-note{font-size:.88rem}}
+@media (prefers-reduced-motion:reduce){.ev-slide,.ev-slide.is-on,.ev-dots button{transition:none}}
