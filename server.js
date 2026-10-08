@@ -27,13 +27,18 @@ const MIME_TYPES = {
 // Only these folders/files are public; source partials, scripts and node_modules are not served.
 const PUBLIC = /^\/(index\.html|css\/[\w.-]+\.css|js\/[\w.-]+\.js|assets\/[\w./-]+)$/;
 
-build();
+// Rebuild index.html when the file system allows it. Hosts with a read-only file system (serverless platforms)
+// simply use the committed index.html.
+function safeBuild() {
+  try { build(); } catch (e) { if (DEV) console.warn('Build skipped:', e.message); }
+}
+safeBuild();
 
-const server = http.createServer((req, res) => {
+function handler(req, res) {
   try {
     let reqUrl = decodeURI(req.url.split('?')[0]);
     if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
-    if (DEV && reqUrl === '/index.html') build();          // dev: pick up edits to src/sections without restarting
+    if (DEV && reqUrl === '/index.html') safeBuild();          // dev: pick up edits to src/sections without restarting
 
     if (!PUBLIC.test(reqUrl) || reqUrl.includes('..')) {
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -66,9 +71,14 @@ const server = http.createServer((req, res) => {
     res.writeHead(500, { 'Content-Type': 'text/plain' });
     res.end('500 Internal Server Error: ' + e.message);
   }
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`Wedding invitation running at http://localhost:${PORT}/`);
-  console.log(`Personal link example: http://localhost:${PORT}/?to=Rahul%20Sharma`);
-});
+// `node server.js` starts a server; platforms that import this file get the request handler instead.
+if (require.main === module) {
+  http.createServer(handler).listen(PORT, () => {
+    console.log(`Wedding invitation running at http://localhost:${PORT}/`);
+    console.log(`Personal link example: http://localhost:${PORT}/?to=Rahul%20Sharma`);
+  });
+}
+
+module.exports = handler;
