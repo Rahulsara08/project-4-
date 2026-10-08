@@ -22,7 +22,7 @@
   track.addEventListener('focusout',userEnd);
   track.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(cur+1)}else if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1)}});
   /* swipe (touch) or drag (mouse): the card does not move, it just fades to the next / previous one */
-  track.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;if(e.target.closest('.ev-loc'))return;drag={x:e.clientX,y:e.clientY};userStart();if(e.pointerType==='mouse')track.classList.add('drag')});
+  track.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;if(e.target.closest('a'))return;drag={x:e.clientX,y:e.clientY};userStart();if(e.pointerType==='mouse')track.classList.add('drag')});
   function endDrag(e){if(!drag)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag=null;track.classList.remove('drag');
     if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))show(cur+(dx<0?1:-1));userEnd()}
   track.addEventListener('pointerup',endDrag);track.addEventListener('pointercancel',function(){drag=null;track.classList.remove('drag');userEnd()});

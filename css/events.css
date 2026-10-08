@@ -67,11 +67,14 @@
 .ev-slide .ev-title{color:var(--d)}
 .ev-slide .ev-hi,.ev-slide .ev-meta svg{color:var(--m)}
 .ev-slide .ev-meta{color:#4a3a34}
-.ev-loc{align-self:flex-start;display:inline-flex;align-items:center;gap:.45em;margin-top:.55rem;padding:.55em 1.15em;border-radius:99px;text-decoration:none;
- font:700 clamp(.82rem,2.4vw,1rem)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.06em;color:#fff;background:linear-gradient(180deg,var(--m),var(--d));
- box-shadow:0 4px 10px rgba(0,0,0,.22),inset 0 0 0 1.5px rgba(255,255,255,.35);transition:transform .2s,box-shadow .2s;cursor:pointer}
-.ev-loc:hover,.ev-loc:focus-visible{transform:translateY(-2px);box-shadow:0 7px 16px rgba(0,0,0,.28),inset 0 0 0 1.5px rgba(255,255,255,.5);outline:none}
-@media (max-width:420px){.ev-loc{padding:.5em .9em}}
+/* venue text is the map link: tap it to open Google Maps */
+.ev-meta .ev-venue{display:block}
+.ev-map{display:inline-flex;align-items:center;gap:inherit;max-width:100%;color:var(--d);font-weight:700;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--m) 60%,transparent);
+ text-decoration-thickness:1.5px;text-underline-offset:3px;border-radius:6px;padding:2px 4px;margin:-2px -4px;transition:background .2s,color .2s;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.ev-map span{min-width:0}
+.ev-map .ev-ext{display:inline-block;vertical-align:-.05em;width:.8em;height:.8em;margin-left:.3em;opacity:.75}
+.ev-map:hover,.ev-map:focus-visible{background:color-mix(in srgb,var(--m) 16%,transparent);outline:none;text-decoration-color:var(--d)}
+.ev-map:active{background:color-mix(in srgb,var(--m) 26%,transparent)}
 @media (max-width:420px){.ev-card{grid-template-columns:minmax(0,36%) minmax(0,1fr);gap:10px;padding:11px}
 .ev-title{font-size:2.35rem}
 .ev-meta{font-size:.8rem}

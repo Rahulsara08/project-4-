@@ -41,6 +41,9 @@
 .gnote p{margin:0}
 .gnote .rv{transition-duration:.9s}
 .gn-blk{display:flex;flex-direction:column;align-items:center;padding:clamp(20px,6cqw,56px) 0}
+/* Shri Ganesh blesses the invitation, at the top inside the gate */
+.gn-ganesh{display:block;width:clamp(74px,26cqw,190px);height:auto;margin:0 auto .35em;filter:drop-shadow(0 6px 10px rgba(90,20,36,.28))}
+.gn-shri{margin-bottom:1.1em!important;font:400 clamp(15px,4.2cqw,26px)/1.2 "Tiro Devanagari Hindi",serif;letter-spacing:.06em;color:#b8771a}
 .gn-dear{font:700 clamp(16px,4.6cqw,30px)/1 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#a9761f}
 .gn-name{margin-top:.25em!important;font:400 clamp(30px,10cqw,72px)/1.15 "Yatra One",Georgia,serif;color:#7a1530}
 .gn-name .q{font-family:Georgia,serif;font-size:.85em;color:#c9a24d;padding:0 .06em}
