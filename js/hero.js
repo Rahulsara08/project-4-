@@ -10,9 +10,11 @@
     st.style.setProperty('--hw',Math.max(W*1.02,1.3*H)+'px');
     if(hawa.naturalWidth)st.style.setProperty('--har',(hawa.naturalHeight/hawa.naturalWidth*1.18).toFixed(4));
     st.style.setProperty('--th',Math.min(.74*H,1.18*W)+'px');
-    st.style.height=H+'px';
+    // phones: the screen gets taller when the address bar hides; size the hero to the tallest screen so nothing shows under it
+    if(!lvh){lvh=document.createElement('div');lvh.style.cssText='position:fixed;left:0;top:0;width:0;height:100vh;height:100lvh;visibility:hidden;pointer-events:none';document.body.appendChild(lvh)}
+    st.style.height=Math.max(H,lvh.offsetHeight)+'px';
   }
-  var lw=0,lh=0,rq=0;
+  var lw=0,lh=0,rq=0,lvh=null;
   function doRefit(){rq=0;setVars();layout();readTarget();cur=target;render(cur)}
   function refit(){if(rq)return;rq=requestAnimationFrame(doRefit)}
   function onSize(){if(innerWidth!==lw||innerHeight!==lh){lw=innerWidth;lh=innerHeight;refit()}}

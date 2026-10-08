@@ -3,16 +3,24 @@
 // Run: npm run build   (npm start runs it automatically)
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 
 function build() {
   const template = fs.readFileSync(path.join(SRC, 'index.html'), 'utf8');
-  const html = template.replace(/<!-- @include ([\w./-]+) -->/g, (_, file) => {
+  let html = template.replace(/<!-- @include ([\w./-]+) -->/g, (_, file) => {
     const full = path.join(SRC, file);
     if (!fs.existsSync(full)) throw new Error(`Missing section: src/${file}`);
     return fs.readFileSync(full, 'utf8').trimEnd();
+  });
+  // cache-busting: css/js links get ?v=<content hash>, so browsers fetch a file again only when it changed
+  html = html.replace(/(href|src)="((?:css|js)\/[\w.-]+\.(?:css|js))"/g, (m, attr, file) => {
+    const full = path.join(ROOT, file);
+    if (!fs.existsSync(full)) return m;
+    const v = crypto.createHash('md5').update(fs.readFileSync(full)).digest('hex').slice(0, 8);
+    return `${attr}="${file}?v=${v}"`;
   });
   fs.writeFileSync(path.join(ROOT, 'index.html'), html);
   return html.length;

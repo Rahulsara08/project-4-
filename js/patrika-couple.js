@@ -18,7 +18,9 @@
     var p=cl((start-top)/Math.max(1,start));                 // 0 -> 1 as the scene comes up until it fills the screen
     var headScreen0=vh,headScreen1=H-y1-ch;                  // couple's top edge on screen: at the gate top (screen bottom) -> landed
     var hs=headScreen0+(headScreen1-headScreen0)*p;          // moves up slower than the page
-    var y=p>=1?y1:(top+H)-(hs+ch);                           // distance from the scene bottom
+    // before page 4 arrives the couple waits at the top of the Patrika Gate and travels with the page (never shows
+    // early at the bottom of other pages); then they slide down the gate; after touchdown they stay on the platform
+    var y=p>=1?y1:(p<=0?H-gTop-ch:(top+H)-(hs+ch));
     couple.style.transform='translate3d(0,'+(-y).toFixed(1)+'px,0)';
     csh.style.opacity=es(cl((p-.9)/.1)).toFixed(3);
     csh.style.transform='translate3d(0,'+(-(y1+ch*.008)+csh.offsetHeight*.5).toFixed(1)+'px,0)';
