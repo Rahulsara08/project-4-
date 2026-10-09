@@ -1,23 +1,8 @@
-/* Meet the Bride & Groom: burgundy paisley page between Family and RSVP; the couple in a warm glow, their names
-   either side. (When the couple's own photos arrive they replace the illustration.) */
+/* Meet the Bride & Groom: burgundy paisley page between Family and RSVP - only its heading, the rest left open */
 .pgc{position:relative;z-index:3;overflow:hidden;--rodh:clamp(16px,2.4vw,34px);box-sizing:border-box;
- padding:calc(var(--rodh) + clamp(40px,7vw,90px)) 16px clamp(50px,8vw,110px);text-align:center;
+ min-height:80vh;min-height:80svh;padding:calc(var(--rodh) + clamp(40px,7vw,90px)) 16px clamp(50px,8vw,110px);text-align:center;
  background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
 .pgc::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 70% at 50% 50%,transparent 38%,rgba(35,0,12,.55))}
 .pc-rod{position:absolute;z-index:4;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(20,0,6,.55))}
-.pc-head{position:relative;z-index:2}
-.pc-head p,.pc-head h2{margin:0}
-.pc-k{font:700 clamp(12px,1.6vw,16px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.32em;text-transform:uppercase;color:#e8c97a}
-.pc-title{margin-top:.15em!important;font:400 clamp(40px,7vw,86px)/1.1 "Great Vibes",cursive;
+.pc-title{position:relative;z-index:2;margin:0;font:400 clamp(40px,7vw,86px)/1.1 "Great Vibes",cursive;
  background:linear-gradient(180deg,#fff1c4,#f2c96e 50%,#c9952e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 6px rgba(20,0,6,.6))}
-.pc-stage{position:relative;z-index:1;width:min(640px,88vw);margin:clamp(18px,3vw,36px) auto 0}
-.pc-glow{position:absolute;left:50%;top:48%;width:120%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
- background:radial-gradient(circle,rgba(255,200,120,.32),rgba(255,160,90,.12) 40%,transparent 68%)}
-.pc-couple{position:relative;display:block;width:100%;height:auto;filter:drop-shadow(0 18px 26px rgba(20,0,6,.55))}
-.pc-name{position:absolute;bottom:4%;margin:0;display:flex;flex-direction:column;gap:.1em}
-.pc-name.l{left:-2%;align-items:flex-start;text-align:left}
-.pc-name.r{right:-2%;align-items:flex-end;text-align:right}
-.pc-name b{font:400 clamp(26px,4.4vw,52px)/1 "Yatra One",Georgia,serif;background:linear-gradient(180deg,#fff1c4,#f2c96e 55%,#c9952e);
- -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 4px rgba(20,0,6,.7))}
-.pc-name small{font:700 clamp(11px,1.4vw,14px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.24em;text-transform:uppercase;color:#f6e2c0;text-shadow:0 1px 4px rgba(20,0,6,.8)}
-@media (max-width:600px){.pc-name{bottom:-4%}.pc-name.l{left:0}.pc-name.r{right:0}}
