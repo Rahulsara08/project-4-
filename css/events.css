@@ -80,3 +80,27 @@
 .ev-meta{font-size:.8rem}
 .ev-note{font-size:.88rem}}
 @media (prefers-reduced-motion:reduce){.ev-slide,.ev-slide.is-on,.ev-dots button{transition:none}}
+
+/* ===== illustrated cards: the couple's illustration stands in a gold jharokha (arch) frame glowing in the event's
+   colour; when a card comes in, the picture rises softly into the frame, a gold shimmer sweeps across and the
+   details fade in one after another ===== */
+.ev-slide .ev-art{position:relative;aspect-ratio:3/4.15;border-radius:50% 50% 14px 14px/26% 26% 14px 14px;border:2px solid #c9a24d;
+ background:radial-gradient(70% 55% at 50% 58%,#fffdf6 0%,var(--l) 45%,var(--l2) 100%);
+ box-shadow:0 10px 22px rgba(0,0,0,.22),inset 0 0 0 4px rgba(255,250,240,.85),inset 0 0 0 5.5px color-mix(in srgb,var(--m) 60%,transparent),inset 0 -30px 40px -20px color-mix(in srgb,var(--m) 35%,transparent)}
+/* a fine inner arch line and a small kalash finial on top */
+.ev-slide .ev-art::before{content:"";position:absolute;z-index:2;inset:9px;border-radius:inherit;border:1px solid color-mix(in srgb,var(--m) 45%,transparent);pointer-events:none}
+.ev-slide .ev-art::after{content:"";position:absolute;z-index:3;inset:0;pointer-events:none;border-radius:inherit;
+ background:linear-gradient(115deg,transparent 35%,rgba(255,240,200,.55) 48%,rgba(255,255,255,.75) 50%,rgba(255,240,200,.5) 52%,transparent 65%) -150% 0/250% 100% no-repeat}
+.ev-slide.is-on .ev-art::after{animation:evshine 1.4s ease .55s both}
+@keyframes evshine{from{background-position:-150% 0}to{background-position:250% 0}}
+.ev-pic{position:absolute;z-index:1;left:6%;right:6%;bottom:3%;width:88%;height:84%;object-fit:contain;object-position:50% 100%;
+ filter:drop-shadow(0 8px 10px rgba(60,20,10,.28));transform-origin:50% 100%}
+.ev-slide.is-on .ev-pic{animation:evrise .95s cubic-bezier(.215,.61,.355,1) both,evbreath 6s ease-in-out 1s infinite alternate}
+@keyframes evrise{from{opacity:0;transform:translateY(14%) scale(.94)}to{opacity:1;transform:none}}
+@keyframes evbreath{from{transform:scale(1)}to{transform:scale(1.025)}}
+.ev-slide.is-on .ev-body>*{animation:evtxt .6s ease both}
+.ev-slide.is-on .ev-body>:nth-child(1){animation-delay:.25s}.ev-slide.is-on .ev-body>:nth-child(2){animation-delay:.35s}
+.ev-slide.is-on .ev-body>:nth-child(3){animation-delay:.45s}.ev-slide.is-on .ev-body>:nth-child(4){animation-delay:.55s}
+.ev-slide.is-on .ev-body>:nth-child(5){animation-delay:.65s}
+@keyframes evtxt{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ev-slide.is-on .ev-pic,.ev-slide.is-on .ev-art::after,.ev-slide.is-on .ev-body>*{animation:none}}
