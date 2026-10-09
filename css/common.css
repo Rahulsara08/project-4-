@@ -2,12 +2,12 @@
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-/* place names (Hawa Mahal, Amer Fort): spaced gold capitals with a fine flourish beneath, as on old invitation cards */
-.place-tag{margin:0;display:flex;flex-direction:column;align-items:center;gap:.28em;white-space:nowrap;pointer-events:none;color:#e9c46a;
- font:600 clamp(14px,2.1vw,24px)/1 "Cinzel",Georgia,serif;letter-spacing:.26em;text-transform:uppercase}
-.place-tag span{padding-left:.26em;background:linear-gradient(180deg,#fff0bf,#e9c46a 55%,#b8862e);-webkit-background-clip:text;background-clip:text;color:transparent;
- filter:drop-shadow(0 2px 3px rgba(30,0,8,.55))}
-.place-tag svg{width:8.6em;height:auto;color:#d9a441;filter:drop-shadow(0 1px 2px rgba(30,0,8,.4))}
-/* on a light picture it sits on a small maroon plaque */
-.place-tag.plaque{padding:.62em 1.5em .5em;border-radius:3px;background:linear-gradient(180deg,rgba(110,18,44,.94),rgba(66,8,26,.94));
- box-shadow:0 8px 20px rgba(60,10,20,.35),inset 0 0 0 1px rgba(233,196,106,.55),inset 0 0 0 4px rgba(66,8,26,.94),inset 0 0 0 5px rgba(233,196,106,.3)}
+/* place names (Hawa Mahal, Amer Fort): the Hindi name above, spaced capitals below, set straight on the page */
+.place-name{margin:0;display:flex;flex-direction:column;align-items:center;gap:.12em;white-space:nowrap;pointer-events:none;text-align:center}
+.place-name .pn-hi{font:400 clamp(14px,1.9vw,23px)/1.15 "Amita","Tiro Devanagari Hindi",serif;letter-spacing:.06em}
+.place-name .pn-en{padding-left:.3em;font:700 clamp(15px,2.3vw,29px)/1.05 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase}
+.place-name.on-dark .pn-hi{color:#f2c96e;text-shadow:0 0 6px rgba(40,0,10,.95),0 2px 4px rgba(40,0,10,.8)}
+.place-name.on-dark .pn-en{background:linear-gradient(180deg,#fff2c6,#f2c96e 50%,#c9952e);-webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 0 3px rgba(40,0,10,.95)) drop-shadow(0 2px 4px rgba(40,0,10,.8))}
+.place-name.on-light .pn-hi{color:#a8691a;text-shadow:0 0 8px #f3e6c3,0 0 3px #f3e6c3}
+.place-name.on-light .pn-en{color:#7a1530;text-shadow:0 0 10px #f3e6c3,0 0 4px #f3e6c3,0 2px 0 rgba(242,201,110,.6)}

@@ -1,29 +1,59 @@
-/* Page 8: cream page with the embossed tree panel down both sides (the panel, then its top again below it, so about
-   one and a half panels), mirrored on the right, open space in the middle. Page 9 carries on in the same colour */
-.pg8{position:relative;z-index:3;overflow:hidden;--rodh:clamp(16px,2.4vw,34px);padding-top:var(--rodh);display:flex;justify-content:space-between;align-items:flex-start;background:#eadaaf}
-.p8-col{width:44%;flex:none;will-change:translate;
- -webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
-.p8-col img{display:block;width:100%;height:auto}
-.p8-col.r{transform:scaleX(-1)}
-@media (max-width:600px){.p8-col{width:47%}}
-.pg9{position:relative;z-index:3;background:#eadaaf}
+/* Page 8: cream page with the embossed tree panel down both sides (mirrored on the right) and, in the open middle,
+   the Venue, the closing (Thank You, Save the Date, Replay Invitation) and a final love note.
+   Page 9: the mountains with Amer Fort, in the same colour, so the two read as one footer */
+.pg8{position:relative;z-index:3;overflow:hidden;--rodh:clamp(16px,2.4vw,34px);--colw:44vw;padding-top:var(--rodh);
+ min-height:calc(var(--colw)*2150/775 + var(--rodh));background:#eadaaf}
 /* divider between the Wishing Wall and this page (the same gold rod as above the Wishing Wall) */
-.p8-rod{position:absolute;z-index:2;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(60,30,0,.4))}
-.pg9{overflow:hidden}
-/* mountain page: the gold range sets the size and its peaks touch the tree page above. On each side the red and green
-   peaks sit right under the gold peak (left peak at 12.6% of the width, right at 85.9%); every picture reaches a little
-   below the page so the parallax never opens a gap, and the cut sides of the red / green pictures fade out */
-.p9-mtn{position:relative;width:100%;aspect-ratio:1230/492}
+.p8-rod{position:absolute;z-index:3;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(60,30,0,.4))}
+/* the tree panels fade towards the middle and at the bottom, so no edge or line shows against the page */
+.p8-col{position:absolute;z-index:0;top:var(--rodh);width:var(--colw);will-change:translate;
+ -webkit-mask-image:linear-gradient(90deg,#000 78%,transparent),linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent),linear-gradient(180deg,#000 82%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}
+.p8-col.l{left:0}
+.p8-col.r{right:0;transform:scaleX(-1)}
+.p8-col img{display:block;width:100%;height:auto}
+.p8-content{position:relative;z-index:2;box-sizing:border-box;width:min(600px,58vw);margin:0 auto;padding:clamp(60px,9vw,140px) 0 clamp(30px,5vw,70px);text-align:center;color:#5a3a30}
+.p8-content p,.p8-content h2,.p8-content h3{margin:0}
+/* a soft glow of the page colour behind each block keeps the text clear of the tree tips (it is not a card) */
+.p8-blk{position:relative;padding:clamp(16px,2.6vw,30px) 0}
+.p8-blk::before{content:"";position:absolute;z-index:-1;inset:-6% -14%;background:radial-gradient(closest-side,rgba(234,218,175,.95),rgba(234,218,175,.8) 62%,rgba(234,218,175,0))}
+.p8-orn{display:block;width:clamp(44px,6vw,64px);height:auto;margin:clamp(6px,1.4vw,16px) auto}
+.p8-hi{font:400 clamp(15px,1.9vw,22px)/1.2 "Amita","Tiro Devanagari Hindi",serif;letter-spacing:.06em;color:#b8771a}
+.p8-h{margin-top:.25em!important;font:700 clamp(14px,1.8vw,20px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#7a1530}
+.p8-big{margin-top:.25em!important;font:400 clamp(32px,5vw,56px)/1.1 "Yatra One",Georgia,serif;
+ background:linear-gradient(180deg,#a8243f,#7a1530 55%,#5a0f20);-webkit-background-clip:text;background-clip:text;color:transparent}
+.p8-txt{margin-top:.45em!important;font:600 clamp(16px,1.9vw,21px)/1.55 "Cormorant Garamond",Georgia,serif;color:#5a3a30}
+.p8-when{font-style:italic;color:#7a4a3a}
+.p8-small{margin-top:.15em!important;font-size:clamp(14px,1.6vw,18px);letter-spacing:.14em;text-transform:uppercase;color:#a9761f}
+.p8-script{font:400 clamp(46px,7vw,82px)/1 "Great Vibes",cursive;color:#7a1530}
+.p8-sd{margin-top:1.3em!important}
+.p8-date{margin-top:.15em!important;font:400 clamp(30px,4.6vw,52px)/1.1 "Yatra One",Georgia,serif;letter-spacing:.06em;color:#7a1530}
+.p8-note{max-width:30em;margin-left:auto!important;margin-right:auto!important;font-style:italic}
+.p8-note .guest-name{font-style:normal;font-family:"Yatra One",Georgia,serif;font-weight:400;color:#7a1530}
+.p8-sign{margin-top:.9em!important;font:600 clamp(15px,1.7vw,19px)/1.3 "Cormorant Garamond",Georgia,serif;color:#7a4a3a}
+.p8-sign span{display:block;margin-top:.1em;font:400 clamp(36px,5.4vw,60px)/1.1 "Great Vibes",cursive;color:#7a1530}
+.p8-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:1.1em}
+.p8-btn{display:inline-flex;align-items:center;padding:.8em 1.6em;border:0;border-radius:99px;cursor:pointer;text-decoration:none;
+ font:700 clamp(12px,1.4vw,14px)/1 "Cinzel",Georgia,serif;letter-spacing:.14em;text-transform:uppercase;color:#fff1c4;
+ background:linear-gradient(180deg,#a8243f,#7a1530 60%,#5a0f20);box-shadow:0 6px 14px rgba(90,15,32,.3),inset 0 0 0 1.5px rgba(242,201,110,.6);transition:transform .2s,box-shadow .2s}
+.p8-btn.alt{color:#7a1530;background:linear-gradient(180deg,#fffaf0,#f3e3bd);box-shadow:0 6px 14px rgba(90,15,32,.18),inset 0 0 0 1.5px #c9952e}
+.p8-btn:hover,.p8-btn:focus-visible{transform:translateY(-2px);outline:none;box-shadow:0 10px 18px rgba(90,15,32,.35),inset 0 0 0 1.5px #f2c96e}
+@media (max-width:600px){.pg8{--colw:47vw}.p8-content{width:80vw}}
+
+.pg9{position:relative;z-index:3;overflow:hidden;background:#eadaaf}
+/* mountain page. On each side the red and green peaks sit right under the gold peak (left 12.6%, right 85.9% of the
+   width); the gold range has a little room above it so its right peak is never cut; every picture reaches below the
+   page so the parallax never opens a gap, and all of them fade out softly at the foot */
+.p9-mtn{position:relative;width:100%;aspect-ratio:1230/545}
 .p9-mtn img{position:absolute;display:block;height:auto;pointer-events:none}
-.m-gold{left:0;width:100%;bottom:-6.3%}
-/* Amer Fort stands in the valley, behind the red mountains and in front of the gold range */
+.m-gold{left:0;width:100%;bottom:-6.3%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(180deg,#000 70%,transparent 97%)}
 .m-fort{left:22.5%;width:55%;bottom:-3%;filter:drop-shadow(0 -6px 16px rgba(120,70,20,.22)) saturate(.96);
- -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.p9-mtn .place-tag{position:absolute;z-index:3;left:50%;bottom:4%;transform:translateX(-50%)}
-.m-r1{left:-15.96%;width:56%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2))}
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 75%,transparent 96%);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 75%,transparent 96%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.m-r1{left:-21.06%;width:66%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2));-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(180deg,#000 70%,transparent 97%)}
 .m-g1{left:-4.71%;width:34%;bottom:-8%;filter:drop-shadow(0 -6px 14px rgba(60,20,0,.28));
- -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
-.m-r2{left:56.75%;width:50%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2));
- -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%);mask-image:linear-gradient(90deg,transparent,#000 16%)}
+ -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent),linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(90deg,#000 88%,transparent),linear-gradient(180deg,#000 70%,transparent 97%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.m-r2{left:52.09%;width:58%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2));
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%),linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(90deg,transparent,#000 16%),linear-gradient(180deg,#000 70%,transparent 97%);-webkit-mask-composite:source-in;mask-composite:intersect}
 .m-g2{left:64.2%;width:38%;bottom:-8%;filter:drop-shadow(0 -6px 14px rgba(60,20,0,.28));
- -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%);mask-image:linear-gradient(90deg,transparent,#000 9%)}
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%),linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(90deg,transparent,#000 9%),linear-gradient(180deg,#000 70%,transparent 97%);-webkit-mask-composite:source-in;mask-composite:intersect}
+/* the fort's name, just above it */
+.p9-name{position:absolute;z-index:2;left:50%;bottom:58%;transform:translateX(-50%)}
