@@ -5,7 +5,8 @@
   window.__opReady=true;
   var root=document.documentElement,op=document.getElementById('op');
   function finish(){var nm=document.querySelector('.names');if(nm&&op)nm.style.animation='none'; // don't replay page 1's CSS fade
-    root.classList.remove('op-on','op-lock');if(op&&op.parentNode)op.parentNode.removeChild(op)}
+    root.classList.remove('op-on','op-lock');if(op&&op.parentNode)op.parentNode.removeChild(op);
+    window.__opDone=true;try{document.dispatchEvent(new Event('opening:done'))}catch(e){}}
   if(!op){finish();return}
   var $=function(i){return document.getElementById(i)};
   // test aid: #op-skip goes straight to the site, #op-skip=pg6,-200 then scrolls to an element (and by an offset)
