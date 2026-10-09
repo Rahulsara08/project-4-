@@ -4,7 +4,7 @@
 .pg6{position:relative;z-index:4;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;box-sizing:border-box;
  --rodh:clamp(16px,2.4vw,34px);--pil:clamp(66px,16vw,230px);--aw:calc(100vw - var(--pil)*2);--swz:min(460px,72vw);
  min-height:max(100vh,calc(var(--pil)*3.49 + var(--rodh) + 30px));min-height:max(100svh,calc(var(--pil)*3.49 + var(--rodh) + 30px));
- padding-top:calc(var(--rodh) + clamp(70px,14vw,170px));padding-bottom:clamp(30px,5.5vw,76px);
+ padding-top:calc(var(--rodh) + clamp(70px,14vw,170px));padding-bottom:clamp(64px,8.5vw,110px);
  background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
 .pg6::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 75% at 50% 55%,transparent 40%,rgba(35,0,12,.5))}
 .p6-rod{position:absolute;z-index:6;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(20,0,6,.55))}
@@ -37,6 +37,7 @@
 .p6-fr-t{position:absolute;z-index:2;left:0;right:0;top:0;height:calc(var(--aw)*.5314);background:url(../assets/img/mihrab-top.webp) top/100% 100% no-repeat;filter:drop-shadow(0 0 10px rgba(255,200,90,.35))}
 .p6-fr-m{position:absolute;z-index:2;left:0;right:0;top:calc(var(--aw)*.5);bottom:0;background:url(../assets/img/mihrab-legs.webp) top/100% 100% no-repeat}
 /* the frame's bottom: a rod cut from the frame's own side, laid across from leg to leg */
+.p6-tag{position:absolute;z-index:7;left:50%;bottom:calc(clamp(64px,8.5vw,110px)/2);transform:translate(-50%,50%)}
 .p6-fr-b{position:absolute;z-index:4;left:.25%;right:.25%;bottom:0;height:calc(var(--aw)*.0314);background:url(../assets/img/rsvp-frame-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 5px 7px rgba(20,0,6,.5))}
 .p6-body{position:relative;z-index:3;box-sizing:border-box;width:100%;padding:calc(var(--aw)*.31) 12% 0;text-align:center;color:#6b1f2a}
 .p6-k{margin:0;font:700 clamp(10px,2.3cqw,16px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.32em;color:#a9761f}

@@ -16,6 +16,10 @@
 .p9-mtn{position:relative;width:100%;aspect-ratio:1230/492}
 .p9-mtn img{position:absolute;display:block;height:auto;pointer-events:none}
 .m-gold{left:0;width:100%;bottom:-6.3%}
+/* Amer Fort stands in the valley, behind the red mountains and in front of the gold range */
+.m-fort{left:22.5%;width:55%;bottom:-3%;filter:drop-shadow(0 -6px 16px rgba(120,70,20,.22)) saturate(.96);
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.p9-mtn .place-tag{position:absolute;z-index:3;left:50%;bottom:4%;transform:translateX(-50%)}
 .m-r1{left:-15.96%;width:56%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2))}
 .m-g1{left:-4.71%;width:34%;bottom:-8%;filter:drop-shadow(0 -6px 14px rgba(60,20,0,.28));
  -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
