@@ -1,11 +1,13 @@
 /* Meet the Bride & Groom photo carousel: the middle photo at 95%, the others at 85%; moves on its own every 5 s
-   (only while on screen), and follows a drag or swipe - drag 50 px to change photo. */
+   (only while on screen), follows a drag or swipe (drag 50 px to change photo), and has a row of thumbnails. */
 (function(){
   var root=document.getElementById('tc'),strip=document.getElementById('tcStrip'),dotsBox=document.getElementById('tcDots');
   if(!root||!strip)return;
   var AUTO_DELAY=5000,DRAG_BUFFER=50;                       // tweak: time between slides, drag distance
   var slides=[].slice.call(strip.children),n=slides.length,idx=0,dragX=0,start=null,visible=false,timer=0;
-  var dots=slides.map(function(_,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Photo '+(i+1));
+  // thumbnails of every photo under the carousel; tap one to jump to it
+  var dots=slides.map(function(sl,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));
+    var im=document.createElement('img');im.src=sl.querySelector('img').getAttribute('src');im.alt='';im.loading='lazy';im.decoding='async';im.draggable=false;b.appendChild(im);
     b.addEventListener('click',function(){go(i);restart()});dotsBox.appendChild(b);return b});
   function render(){
     strip.style.transform='translateX(calc('+(-idx*100)+'% + '+dragX+'px))';
