@@ -2,7 +2,7 @@
 /* ===== last page: a gold rod divider, carved brackets with hanging diyas at both screen edges, a gold arch between them
    holding the wishing wall (sliding wish cards + a name / wish form), and the palace gateway with lit towers at the foot ===== */
 .pg7{position:relative;z-index:3;overflow:hidden;container-type:inline-size;
- --rodh:clamp(16px,2.4vw,34px);--br:clamp(88px,20vw,300px);--ins:calc(var(--br)*.12);--tw:clamp(34px,8vw,130px);
+ --rodh:clamp(16px,2.4vw,34px);--br:clamp(88px,20vw,300px);--ins:calc(var(--br)*.12);--hp:clamp(14px,3.4vw,46px);--aw:calc(100cqw - var(--ins)*2);--tw:max(40px,calc(var(--aw)*.11));--tx:calc(var(--ins) + var(--aw)*.077);
  min-height:100vh;min-height:100svh;background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
 .pg7::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 75% at 50% 45%,transparent 40%,rgba(35,0,12,.55))}
 
@@ -10,7 +10,7 @@
 .p7-rod{position:relative;z-index:6;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(20,0,6,.55))}
 
 /* the hall: brackets on both borders, the arch between them; the pillars run down to the arch's feet */
-.p7-hall{position:relative;z-index:1;padding:clamp(14px,3.4vw,46px) var(--ins) 0}
+.p7-hall{position:relative;z-index:1;padding:var(--hp) var(--ins) 0}
 .p7-br{position:absolute;z-index:3;top:0;bottom:0;width:var(--br);pointer-events:none;filter:drop-shadow(0 8px 12px rgba(20,0,6,.5))}
 .p7-br.l{left:0;transform:scaleX(-1)}
 .p7-br.r{right:0}
@@ -22,14 +22,21 @@
 @media (prefers-reduced-motion:no-preference){.p7-br .bt{animation:p7glow 3.2s ease-in-out infinite alternate}}
 @keyframes p7glow{from{filter:brightness(1)}to{filter:brightness(1.12) drop-shadow(0 0 10px rgba(255,190,90,.35))}}
 
-/* the gold arch: top / stretching legs / feet, so it grows to fit every wish and the form */
-.p7-arch{position:relative;z-index:2;container-type:inline-size;min-height:max(calc((100cqw - var(--ins)*2)*.62),calc(var(--br)*1.75))}
+/* the frame: the gold arch on top, springing from a lit tower on each side; the towers run down to the ground and the
+   palace gateway closes the frame at the bottom */
+.p7-arch{position:relative;z-index:2;container-type:inline-size;min-height:max(calc(var(--aw)*.5),calc(var(--br)*1.75))}
 .p7-frame{position:absolute;inset:0;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(20,0,6,.55))}
 .p7-frame i{position:absolute;left:0;right:0;background:center/100% 100% no-repeat}
 .p7-frame .at{top:0;height:40.5cqw;background-image:url(../assets/img/wish-arch-top.webp)}
-.p7-frame .am{top:40.3cqw;bottom:18.8cqw;background-image:url(../assets/img/wish-arch-middle.webp)}
-.p7-frame .ab{bottom:0;height:19cqw;background-image:url(../assets/img/wish-arch-bottom.webp)}
-.p7-in{position:relative;box-sizing:border-box;padding:19cqw 11.5cqw 14cqw;text-align:center;color:#f6e7c8}
+.p7-in{position:relative;box-sizing:border-box;padding:19cqw 14.5cqw 2cqw;text-align:center;color:#f6e7c8}
+/* towers: the cupola sits where the arch's curve comes down; storeys repeat to the ground, however tall the wall grows */
+.p7-tw{position:absolute;z-index:4;bottom:0;width:var(--tw);top:calc(var(--rodh) + var(--hp) + var(--aw)*.352 - var(--tw)*.2);pointer-events:none;
+ filter:drop-shadow(0 0 14px rgba(255,190,90,.28)) drop-shadow(0 10px 14px rgba(20,0,6,.55))}
+.p7-tw.l{left:calc(var(--tx) - var(--tw)/2)}
+.p7-tw.r{right:calc(var(--tx) - var(--tw)/2);transform:scaleX(-1)}
+.p7-tw i{position:absolute;left:0;right:0}
+.p7-tw .tc{top:0;height:calc(var(--tw)*1.86);background:url(../assets/img/tower-cap.webp) top center/100% 100% no-repeat}
+.p7-tw .ts{top:calc(var(--tw)*1.855);bottom:0;background:url(../assets/img/tower-storey.webp) top center/100% calc(var(--tw)*1.129) repeat-y}
 .p7-in p{margin:0}
 
 /* titles */
@@ -86,17 +93,14 @@
 .wf-msg{min-height:1.3em;margin-top:.5em!important;text-align:center;font:italic 600 15px/1.3 "Cormorant Garamond",Georgia,serif;color:#2e7d43}
 .wf-msg.bad{color:#b3263e}
 
-/* the palace gateway with a lit tower at each end, across the foot of the page */
-.p7-base{position:relative;z-index:1;margin-top:clamp(26px,5vw,70px);padding:0 calc(var(--tw)*.62)}
+/* the palace gateway across the foot of the page, from tower to tower */
+.p7-base{position:relative;z-index:1;margin-top:clamp(26px,5vw,70px);padding:0 var(--tx)}
 .p7-palace{display:block;width:100%;height:auto;filter:drop-shadow(0 -6px 14px rgba(20,0,6,.45))}
-.p7-tower{position:absolute;bottom:0;width:var(--tw);height:auto;filter:drop-shadow(0 0 14px rgba(255,190,90,.3))}
-.p7-tower.l{left:0}
-.p7-tower.r{right:0;transform:scaleX(-1)}
 
 /* phones: content starts lower (the arch's dome is narrow) and one card fills the frame */
 @media (max-width:600px){
- .p7-hall{padding-top:clamp(40px,12vw,64px)}
- .p7-in{padding:24cqw 10.5cqw 15cqw}
+ .pg7{--hp:clamp(40px,12vw,64px)}
+ .p7-in{padding:24cqw 14cqw 3cqw}
  .wc{flex-basis:84%}
  .wl-track{padding:10px 8% 18px}
  .wf-f span{font-size:11px}
