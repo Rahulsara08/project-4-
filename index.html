@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="css/events.css?v=7bb0062e">
   <link rel="stylesheet" href="css/patrika.css?v=e87ec174">
   <link rel="stylesheet" href="css/family.css?v=4e893e42">
-  <link rel="stylesheet" href="css/couple.css?v=466d0f43">
+  <link rel="stylesheet" href="css/couple.css?v=41fdcbe6">
   <link rel="stylesheet" href="css/rsvp.css?v=460d9ddd">
   <link rel="stylesheet" href="css/end.css?v=93dfe684">
   <link rel="stylesheet" href="css/garden.css?v=a3224130">
@@ -192,7 +192,25 @@
 </section>
 <section class="pgc" id="pgc" aria-labelledby="pgct" data-par-bg="-0.12">
   <i class="pc-rod" aria-hidden="true"></i>
-  <h2 class="pc-title rv" id="pgct">Meet the Bride &amp; Groom</h2>
+  <div class="pc-head">
+    <h2 class="pc-title rv" id="pgct">Meet the Bride &amp; Groom</h2>
+    <svg class="pc-orn rv" viewBox="-60 -10 120 20" aria-hidden="true"><path d="M-56 0H-16M16 0H56" stroke="#e8c97a" stroke-width="1"/><path d="M0 8Q-5 1 0-8Q5 1 0 8Z" fill="#f2c96e"/><path d="M0 8Q-11 5-13-3Q-5-2 0 8Z" fill="#e8a24a"/><path d="M0 8Q11 5 13-3Q5-2 0 8Z" fill="#e8a24a"/></svg>
+  </div>
+  <!-- photo carousel: one photo at a time in the middle, its neighbours smaller; slides every 5 s, drag or swipe to move -->
+  <div class="tc rv" id="tc" role="region" aria-roledescription="carousel" aria-label="Photos of Shubh and Ayushi">
+    <div class="tc-view">
+      <div class="tc-strip" id="tcStrip">
+      <div class="tc-slide"><img src="assets/img/couple-1.webp" alt="Running hand in hand through the garden" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-2.webp" alt="Smiles and sunglasses at the mehndi" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-3.webp" alt="A kiss on the hand" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-4.webp" alt="A flower and a shy smile" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-5.webp" alt="Down on one knee" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-6.webp" alt="Under a shower of petals and colour" draggable="false" loading="lazy" decoding="async"></div>
+      <div class="tc-slide"><img src="assets/img/couple-7.webp" alt="Raising a toast with friends" draggable="false" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+    <div class="tc-dots" id="tcDots"></div>
+  </div>
 </section>
 <section class="pg6" id="pg6" aria-labelledby="p6title" data-par-bg="-0.12">
   <i class="p6-rod" aria-hidden="true"></i>
@@ -316,6 +334,7 @@
 <script src="js/rsvp.js?v=f7a66b6b"></script>
 <script src="js/invitation.js?v=53d43dc0"></script>
 <script src="js/wishes.js?v=0dee0122"></script>
+<script src="js/carousel.js?v=9843c135"></script>
 <script src="js/closing.js?v=73ec8f6b"></script>
 <script src="js/mountains.js?v=aea14082"></script>
 <script src="js/parallax.js?v=72ce9843"></script>
