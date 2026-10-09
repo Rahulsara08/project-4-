@@ -1,8 +1,9 @@
 <section class="pg7" id="pg7" aria-labelledby="p7title">
   <div class="p7-rod" aria-hidden="true"></div>
+  <div class="p7-br l" aria-hidden="true"><i class="bt"></i><i class="bs"></i><i class="bb"></i></div>
+  <div class="p7-br r" aria-hidden="true"><i class="bt"></i><i class="bs"></i><i class="bb"></i></div>
+  <div class="p7-fill" aria-hidden="true"></div>
   <div class="p7-hall">
-    <div class="p7-br l" aria-hidden="true"><i class="bt"></i><i class="bs"></i><i class="bb"></i></div>
-    <div class="p7-br r" aria-hidden="true"><i class="bt"></i><i class="bs"></i><i class="bb"></i></div>
     <div class="p7-arch">
       <div class="p7-frame" aria-hidden="true"><i class="at"></i></div>
       <div class="p7-in">
@@ -20,8 +21,8 @@
         <form class="wf rv" id="wishForm" autocomplete="on" novalidate>
           <p class="wf-h">Write your wish</p>
           <label class="wf-f"><span>Your name</span><input id="wfName" name="name" type="text" maxlength="40" autocomplete="name" placeholder="e.g. Rahul Sharma" required></label>
-          <label class="wf-f"><span>Your wish</span><textarea id="wfWish" name="wish" maxlength="240" rows="3" placeholder="Write a blessing for the couple…" required></textarea></label>
-          <div class="wf-row"><small class="wf-left" id="wfLeft">240 letters left</small><button class="wf-btn" type="submit">Send Blessing <span aria-hidden="true">🪔</span></button></div>
+          <label class="wf-f"><span>Your wish</span><textarea id="wfWish" name="wish" rows="2" placeholder="Write a blessing for the couple…" required></textarea></label>
+          <button class="wf-btn" type="submit" aria-label="Send your wish"><svg viewBox="0 0 100 92" aria-hidden="true"><defs><linearGradient id="wfHeart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cf3554"/><stop offset=".6" stop-color="#931c39"/><stop offset="1" stop-color="#5a0f20"/></linearGradient></defs><path d="M50 88C20 66 3 50 3 28 3 13 15 3 28 3c10 0 17 5 22 13C55 8 62 3 72 3c13 0 25 10 25 25 0 22-17 38-47 60z" fill="url(#wfHeart)" stroke="#f2c96e" stroke-width="3"/><path d="M22 14c-6 2-10 8-10 14" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="4" stroke-linecap="round"/></svg><span>Send</span></button>
           <p class="wf-msg" id="wfMsg" role="status"></p>
         </form>
       </div>

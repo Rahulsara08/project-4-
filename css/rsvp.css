@@ -2,7 +2,7 @@
 /* ===== page 6: RSVP. Gold rod divider with hanging garlands, curtained pillars at both sides, a gold mihrab in the
    middle rising from the floor with the invitation, and Hawa Mahal at its foot ===== */
 .pg6{position:relative;z-index:3;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;box-sizing:border-box;
- --rodh:clamp(16px,2.4vw,34px);--pil:clamp(66px,16vw,230px);--aw:calc(100vw - var(--pil)*2);
+ --rodh:clamp(16px,2.4vw,34px);--pil:clamp(66px,16vw,230px);--aw:calc(100vw - var(--pil)*2);--swz:min(460px,72vw);
  min-height:max(100vh,calc(var(--pil)*3.49 + var(--rodh) + 30px));min-height:max(100svh,calc(var(--pil)*3.49 + var(--rodh) + 30px));
  padding-top:calc(var(--rodh) + clamp(70px,14vw,170px));
  background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
@@ -25,9 +25,9 @@
 .p6-lot.r{right:calc(var(--pil)*.3);transform:translateX(50%)}
 /* the mihrab: arch top + straight legs stretched to the floor; cream panel inside it */
 .p6-arch{position:relative;z-index:3;width:var(--aw);min-height:calc(var(--aw)*1.05);display:flex;flex-direction:column;align-items:center;container-type:inline-size}
-.p6-in-t{position:absolute;left:0;right:0;top:0;height:calc(var(--aw)*.5314);background:radial-gradient(circle,rgba(201,162,77,.16) 1px,transparent 1.5px) 0 0/16px 16px,linear-gradient(180deg,#fffaf0,#fbf1dc);
+.p6-in-t{position:absolute;left:0;right:0;top:0;height:calc(var(--aw)*.5314);background:#fffdf8 url(../assets/img/gate-swirl-paper.webp) 0 0/var(--swz) auto repeat;
  -webkit-mask:url(../assets/img/mihrab-mask.png) top/100% 100% no-repeat;mask:url(../assets/img/mihrab-mask.png) top/100% 100% no-repeat}
-.p6-in-b{position:absolute;left:3.2%;right:3.2%;top:calc(var(--aw)*.5);bottom:0;background:radial-gradient(circle,rgba(201,162,77,.16) 1px,transparent 1.5px) 0 0/16px 16px,linear-gradient(180deg,#fbf1dc,#f6e6c4)}
+.p6-in-b{position:absolute;left:3.2%;right:3.2%;top:calc(var(--aw)*.5);bottom:0;background:#fffdf8 url(../assets/img/gate-swirl-paper.webp) calc(var(--aw)*-.032) calc(var(--aw)*-.5)/var(--swz) auto repeat}
 .p6-fr-t{position:absolute;z-index:2;left:0;right:0;top:0;height:calc(var(--aw)*.5314);background:url(../assets/img/mihrab-top.webp) top/100% 100% no-repeat;filter:drop-shadow(0 0 10px rgba(255,200,90,.35))}
 .p6-fr-m{position:absolute;z-index:2;left:0;right:0;top:calc(var(--aw)*.5);bottom:0;background:url(../assets/img/mihrab-legs.webp) top/100% 100% no-repeat}
 .p6-body{position:relative;z-index:3;box-sizing:border-box;width:100%;padding:calc(var(--aw)*.31) 12% 0;text-align:center;color:#6b1f2a}

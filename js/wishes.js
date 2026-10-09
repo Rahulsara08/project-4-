@@ -5,7 +5,7 @@
   var track=document.getElementById('wlTrack'),form=document.getElementById('wishForm');
   if(!track||!form)return;
   var C=window.WEDDING||{},KEY='sa-wishes',URL_=C.wishesUrl||'';
-  var count=document.getElementById('wlCount'),msg=document.getElementById('wfMsg'),left=document.getElementById('wfLeft');
+  var count=document.getElementById('wlCount'),msg=document.getElementById('wfMsg');
   var nameIn=document.getElementById('wfName'),wishIn=document.getElementById('wfWish');
   var prev=track.parentNode.querySelector('.prev'),next=track.parentNode.querySelector('.next');
   var seen={},total=0;
@@ -15,7 +15,7 @@
   function clean(s,n){return String(s||'').replace(/\s+/g,' ').trim().slice(0,n)}
 
   function card(w,isNew){
-    var name=clean(w.name,40),wish=clean(w.wish,240),k=name.toLowerCase()+'|'+wish.toLowerCase();
+    var name=clean(w.name,40),wish=clean(w.wish,600),k=name.toLowerCase()+'|'+wish.toLowerCase();
     if(!name||!wish||seen[k])return null;seen[k]=1;
     var el=document.createElement('article');el.className='wc'+(isNew?' new':'');el.setAttribute('aria-label','Wish from '+name);
     var p=document.createElement('p');p.textContent=wish;
@@ -63,22 +63,20 @@
   /* ---- form ---- */
   var q=new URLSearchParams(location.search),guest=clean(q.get('to')||q.get('guest'),40);
   if(guest&&nameIn&&!nameIn.value)nameIn.value=guest;
-  function upd(){if(left)left.textContent=(240-wishIn.value.length)+' letters left'}
-  wishIn.addEventListener('input',function(){upd();wishIn.parentNode.classList.remove('err')});
+  wishIn.addEventListener('input',function(){wishIn.parentNode.classList.remove('err')});
   nameIn.addEventListener('input',function(){nameIn.parentNode.classList.remove('err')});
-  upd();
   function say(t,bad){msg.textContent=t;msg.classList.toggle('bad',!!bad)}
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var w={name:clean(nameIn.value,40),wish:clean(wishIn.value,240)};
+    var w={name:clean(nameIn.value,40),wish:clean(wishIn.value,600)};
     nameIn.parentNode.classList.toggle('err',!w.name);wishIn.parentNode.classList.toggle('err',w.wish.length<2);
     if(!w.name){say('Please write your name.',1);nameIn.focus();return}
     if(w.wish.length<2){say('Please write your wish.',1);wishIn.focus();return}
     var el=add(w,true,true);
     if(!el){say('This wish is already on the wall. Thank you!');return}
     var list=load();list.push({name:w.name,wish:w.wish,t:Date.now()});save(list);
-    setCount();wishIn.value='';upd();hold();
+    setCount();wishIn.value='';hold();
     track.scrollTo({left:0,behavior:reduce?'auto':'smooth'});
     say('Thank you, '+w.name+'! Your blessing is on the wall.');
     if(URL_&&window.fetch)fetch(URL_,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(w)}).catch(function(){});
