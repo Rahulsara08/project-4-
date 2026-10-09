@@ -12,12 +12,10 @@
 .names .weds{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.7rem,6.2vw,3rem);font-style:italic;font-weight:500;margin:.15em 0;letter-spacing:.14em;color:#ffe9b0}
 .names p{margin:.9rem 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.4rem,4.2vw,2.2rem);font-weight:500;letter-spacing:.08em}
 @keyframes intro{from{opacity:0;letter-spacing:.2em}to{opacity:1}}
-.hint{position:absolute;left:0;right:0;bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));text-align:center;color:#fff;font-size:1rem;letter-spacing:.1em;text-shadow:0 1px 8px rgba(0,0,0,.6);z-index:3}
-.hint i{display:block;width:1px;height:28px;margin:.4rem auto 0;background:#fff;animation:d 1.6s ease-in-out infinite}
-@keyframes d{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1)}}
-@media (prefers-reduced-motion:reduce){.hint i{animation:none}}
 .names .ganesh{margin:0 0 clamp(.9rem,3.2svh,2.2rem)}
 @supports not (height:100svh){.stage{--hw:max(100vw,130vh);--th:min(74vh,118vw);height:100vh}
 .names{top:2vh}}
 .names .hero-guest{margin:.7rem auto 0;max-width:90%;font:600 clamp(1.05rem,3.2vw,1.6rem)/1.3 "Cormorant Garamond",Georgia,serif;letter-spacing:.04em;color:#fff3c4}
 .names .hero-guest .guest-name{font-family:"Yatra One",Georgia,serif;font-weight:400;letter-spacing:.02em;color:#fff}
+/* while the opening plays, the hero text is brought in by js/opening.js instead of this animation */
+.op-on .names{animation:none}

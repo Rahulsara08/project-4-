@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Tiro+Devanagari+Hindi&family=Yatra+One&family=Amita:wght@700&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <script>/* the opening plays first; if its script never loads, the page shows after 8 s anyway */
+    document.documentElement.classList.add('op-on','op-lock');
+    setTimeout(function(){if(!window.__opReady)document.documentElement.classList.remove('op-on','op-lock')},8000);</script>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/hero.css">
@@ -20,9 +23,11 @@
   <link rel="stylesheet" href="css/family.css">
   <link rel="stylesheet" href="css/rsvp.css">
   <link rel="stylesheet" href="css/end.css">
+  <link rel="stylesheet" href="css/opening.css">
   <script src="js/config.js"></script>
 </head>
 <body>
+<!-- @include sections/00-opening.html -->
 <!-- @include sections/01-hero.html -->
 <!-- @include sections/02-gate.html -->
 <!-- @include sections/03-events.html -->
@@ -32,6 +37,7 @@
 <!-- @include sections/07-end.html -->
 
 <script src="js/hero.js"></script>
+<script src="js/opening.js"></script>
 <script src="js/gate.js"></script>
 <script src="js/road.js"></script>
 <script src="js/events.js"></script>
