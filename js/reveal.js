@@ -7,4 +7,5 @@
   // backup: check positions on scroll too, so nothing can stay hidden
   function chk(){var vh=innerHeight;els=els.filter(function(e){var r=e.getBoundingClientRect();if(r.top<vh*.9&&r.bottom>0){e.classList.add('in');return false}return true})}
   addEventListener('scroll',chk,{passive:true});addEventListener('load',chk);chk();
+  window.revealAdd=function(e){if(io)io.observe(e);els.push(e)};
 })();

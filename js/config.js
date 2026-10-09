@@ -5,6 +5,12 @@ window.WEDDING = {
   target: '2026-12-11T21:00:00+05:30',         // countdown target (the pheras), India time
   venue: 'Mandap Lawn',                        // destination shown on page 2
   city: 'Jaipur, Rajasthan',
+  // Footer: people guests can call. Put the real names and numbers here (the number is what the Call button dials).
+  contacts: [
+    { name: 'Anil Sharma', role: "Groom's Father", phone: '+91 98765 43210' },
+    { name: 'Rajesh Verma', role: "Bride's Father", phone: '+91 98765 43211' },
+    { name: 'Rohan Sharma', role: 'For Travel & Stay', phone: '+91 98765 43212' }
+  ],
   // Last page, Wishing Wall: the first cards on the wall. Guests' own wishes are added after these.
   wishes: [
     { name: 'Nani Ji', wish: 'May your home always be filled with laughter, love and the fragrance of fresh jasmine. Sada sukhi raho!' },

@@ -12,7 +12,9 @@
 .sl{position:absolute;z-index:1;top:var(--slt,0px);margin:0;transform:translate(-50%,-100%);opacity:0;white-space:nowrap;pointer-events:none;
  font-family:"Amita","Yatra One","Tiro Devanagari Hindi",serif;font-weight:700;font-size:clamp(2.1rem,8vw,6.5rem);line-height:1.3;padding:.05em .15em .45em;
  background:linear-gradient(180deg,#ec6a2c 0%,#c8281d 52%,#8a1a1f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
- filter:drop-shadow(0 1px 0 #f2c66a) drop-shadow(0 5px 12px rgba(140,30,20,.22));
+ /* 3D: a gold top edge, a few stepped darker layers below (the letter's depth), then a soft dark shadow behind */
+ filter:drop-shadow(0 -1px 0 #ffd98a) drop-shadow(1px 1px 0 #7a1418) drop-shadow(1px 1px 0 #66101a) drop-shadow(1px 1px 0 #520c14) drop-shadow(1px 2px 0 #3e0a0f)
+  drop-shadow(0 10px 14px rgba(0,0,0,.38));
  transition:opacity .7s ease}
 /* same spots as before: 32.5% / 67.5% across the 137.5vw gate, i.e. 25.94% / 74.06% of the screen */
 .sl-l{left:25.94%}
