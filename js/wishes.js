@@ -67,6 +67,16 @@
   nameIn.addEventListener('input',function(){nameIn.parentNode.classList.remove('err')});
   function say(t,bad){msg.textContent=t;msg.classList.toggle('bad',!!bad)}
 
+  // a small puff of tiny hearts from the Send heart (gentler than the RSVP celebration)
+  var sendBtn=form.querySelector('.wf-btn');
+  function puff(){
+    if(reduce||!sendBtn)return;
+    sendBtn.classList.remove('sent');void sendBtn.offsetWidth;sendBtn.classList.add('sent');
+    for(var i=0;i<9;i++){var h=document.createElement('i');h.className='wf-puff'+(i%3===0?' g':'');
+      var a=(-90+(i-4)*16)*Math.PI/180,r=60+Math.random()*40;
+      h.style.cssText='--tx:'+(Math.cos(a)*r).toFixed(0)+'px;--ty:'+(Math.sin(a)*r).toFixed(0)+'px;--dl:'+(i*.04).toFixed(2)+'s';
+      h.addEventListener('animationend',function(){this.remove()});sendBtn.appendChild(h)}
+  }
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var w={name:clean(nameIn.value,40),wish:clean(wishIn.value,600)};
@@ -79,6 +89,7 @@
     setCount();wishIn.value='';hold();
     track.scrollTo({left:0,behavior:reduce?'auto':'smooth'});
     say('Thank you, '+w.name+'! Your blessing is on the wall.');
+    puff();
     if(URL_&&window.fetch)fetch(URL_,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(w)}).catch(function(){});
   });
 })();

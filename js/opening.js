@@ -1,15 +1,18 @@
-/* Opening: tap to open the velvet curtains, the stage and its chandelier, the stage curtains part, the velvet backdrop
-   with the gold oval, then page 1 rises from the bottom (text first, then Hawa Mahal) and the site scrolls as usual.
-   The velvet (folds, sheen, the swagged valance with its gold fringe and tassels) is drawn with WebGL. */
+/* Opening: the guest's name on velvet curtains with a gold rod of garlands and lanterns. Tap to Open: the decorations
+   fade, the curtains part, a gold arch stage appears with page 1 of the site inside it, and the camera moves slowly
+   into the arch until page 1 fills the screen; then the site carries on. The velvet is drawn with WebGL. */
 (function(){
   window.__opReady=true;
   var root=document.documentElement,op=document.getElementById('op');
-  function finish(){var nm=document.querySelector('.names');if(nm&&op)nm.style.animation='none'; // already brought in; don't replay the CSS fade
-    root.classList.remove('op-on','op-lock');if(op&&op.parentNode)op.parentNode.removeChild(op);
-    if(window.heroIntro)heroIntro.set({stage:0,names:0,hawa:0,op:1})}
+  function finish(){var nm=document.querySelector('.names');if(nm&&op)nm.style.animation='none'; // don't replay page 1's CSS fade
+    root.classList.remove('op-on','op-lock');if(op&&op.parentNode)op.parentNode.removeChild(op)}
   if(!op){finish();return}
   var $=function(i){return document.getElementById(i)};
-  var front=$('opFront'),stage=$('opStage'),fin=$('opFinal'),dim=$('opDim'),black=$('opBlack'),oval=$('opOval'),chF=$('opChandF'),chS=$('opChand');
+  // test aid: #op-skip goes straight to the site, #op-skip=pg6,-200 then scrolls to an element (and by an offset)
+  var sk=/op-skip(?:=([\w-]+)(?:,(-?\d+))?)?/.exec(location.hash);
+  if(sk){finish();if(sk[1])setTimeout(function(){var el=$(sk[1]);if(el){el.scrollIntoView();if(sk[2])scrollBy(0,+sk[2])}},700);return}
+  var front=$('opFront'),stage=$('opStage'),hang=$('opHang'),dim=$('opDim'),black=$('opBlack'),chS=$('opChand'),arch=$('opArch'),win=$('opWin');
+  var corners=[].slice.call(front.querySelectorAll('.op-corner')),props=[].slice.call(stage.querySelectorAll('.op-urn,.op-lotus-c'));
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if('scrollRestoration' in history)history.scrollRestoration='manual';
   scrollTo(0,0);
@@ -71,7 +74,7 @@
     var l=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,0,0);
     var U={};['R','T','O','N','VAL','FLAT','LIT','SW'].forEach(function(k){U[k]=gl.getUniformLocation(pr,k)});
     var self={o:0,lit:1,cssW:1,
-      size:function(){var r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,opts.flat?1:1.5);
+      size:function(){var r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,opts.flat?1:1.25);
         self.cssW=r.width||1;var w=Math.max(2,Math.round(r.width*d)),h=Math.max(2,Math.round(r.height*d));
         if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}gl.viewport(0,0,w,h)},
       draw:function(t){
@@ -130,34 +133,27 @@
     s.push('</svg>');return s.join('');
   }
 
-  /* ---------- the gold oval frame ---------- */
-  function ovalFrame(){
-    var s=['<defs><linearGradient id="ovg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a5a14"/><stop offset=".3" stop-color="#f8e08e"/><stop offset=".55" stop-color="#b07a22"/><stop offset=".8" stop-color="#f3d27a"/><stop offset="1" stop-color="#7a4c10"/></linearGradient></defs>',
-      '<ellipse cx="150" cy="230" rx="146" ry="226" fill="none" stroke="url(#ovg)" stroke-width="2"/>',
-      '<ellipse cx="150" cy="230" rx="139" ry="219" fill="none" stroke="url(#ovg)" stroke-width="9"/>',
-      '<ellipse cx="150" cy="230" rx="139" ry="219" fill="none" stroke="#fff3c4" stroke-opacity=".35" stroke-width="1.2"/>',
-      '<ellipse cx="150" cy="230" rx="130" ry="210" fill="none" stroke="#f3d27a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray=".1 6.5"/>',
-      '<ellipse cx="150" cy="230" rx="125" ry="205" fill="none" stroke="url(#ovg)" stroke-width="1.6"/>'];
-    // scrolls around the frame
-    for(var i=0;i<12;i++){var a=i/12*Math.PI*2,x=150+Math.cos(a)*139,y=230+Math.sin(a)*219,deg=a*180/Math.PI+90;
-      s.push('<g transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+deg.toFixed(1)+')"><path d="M-9 0C-9-7-2-9 0-4 2-9 9-7 9 0 5-3 2-1 0 4-2-1-5-3-9 0Z" fill="url(#ovg)"/><circle r="2.2" cy="-1" fill="#fff3c4" opacity=".7"/></g>')}
-    s.push('<g transform="translate(150 6)"><path d="M0-14C6-6 14-4 20 2 12 2 6 6 0 12-6 6-12 2-20 2-14-4-6-6 0-14Z" fill="url(#ovg)"/><circle r="3.2" cy="-1" fill="#c8304f"/></g>');
-    return s.join('');
+  var vFront,vBack;
+  try{vFront=Velvet($('opCurtain'),{valance:true,foldPx:44});vBack=Velvet($('opVelvet'),{flat:true,pleats:9})}catch(e){finish();return}
+  chS.innerHTML=chandelier('chs');
+
+  /* ---------- page 1 of the site, copied into the arch's window ---------- */
+  var hero=$('stage'),clone=null,G=null;
+  function makeClone(){
+    if(clone||!hero)return;
+    clone=hero.cloneNode(true);clone.removeAttribute('id');
+    [].forEach.call(clone.querySelectorAll('[id]'),function(e){e.removeAttribute('id')});
+    clone.classList.add('op-clone');clone.style.width=hero.offsetWidth+'px';clone.style.height=hero.offsetHeight+'px';
+    win.appendChild(clone);
   }
-
-  var vFront,vInner,vBack;
-  try{
-    vFront=Velvet($('opCurtain'),{valance:true,foldPx:44});
-    vInner=Velvet($('opInner'),{valance:true,foldPx:26});
-    vBack=Velvet($('opVelvet'),{flat:true,pleats:9});
-  }catch(e){finish();return}
-  chS.innerHTML=chandelier('chs');chF.innerHTML=chandelier('chf');
-  $('opOvalSvg').innerHTML=ovalFrame();
-
-  /* ---------- page 1 starts below the screen; it rises at the end ---------- */
-  var vh=innerHeight;
-  function heroAt(p1,p2,p3){if(window.heroIntro)heroIntro.set({stage:(1-p1)*vh,names:(1-p2)*vh*.42,op:p2,hawa:(1-p3)*vh})}
-  heroAt(0,0,0);
+  // geometry in the stage layer's own px (the layer is the full screen before it is transformed)
+  function geo(){
+    var sw=arch.offsetWidth,ah=arch.offsetHeight,ax=arch.offsetLeft,ay=arch.offsetTop;
+    var ix0=ax+sw*.078,ix1=ax+sw*.926,iy0=ay+sw*.178,iy1=ay+ah-sw*.0758;   // the opening inside the gold arch
+    var W=hero?hero.offsetWidth:innerWidth,H=hero?hero.offsetHeight:innerHeight,k0=Math.max((ix1-ix0)/W,(iy1-iy0)/H);
+    var sy0=ay+sw*.695;  // below the arch's curve the opening is a straight-sided rectangle; the zoom ends when it covers the screen
+    G={ax:ax,ay:ay,W:W,H:H,icx:(ix0+ix1)/2,icy:(iy0+iy1)/2,fy:(sy0+iy1)/2,k0:k0,S1:1/k0,Sout:Math.max(1.2/k0,W/(ix1-ix0)*1.1,H/(iy1-sy0)*1.1)};
+  }
 
   /* ---------- timeline ---------- */
   function cl(x){return x<0?0:x>1?1:x}
@@ -166,57 +162,61 @@
   function seg(t,a,b,f){return (f||io)(cl((t-a)/(b-a)))}
   function lerp(a,b,k){return a+(b-a)*k}
   var t0=0,started=false,done=false,start=performance.now(),seek=null;
-  var decor=[].slice.call(front.querySelectorAll('.op-gar,.op-lamp,.op-corner'));
-  window.__opSeek=function(sec){seek=sec;started=true;op.classList.add('go');paint(performance.now())}; // test aid: freeze the opening at a moment
+  window.__opSeek=function(sec){seek=sec;if(!started){started=true;op.classList.add('go');makeClone()}geo();paint(performance.now())}; // test aid: freeze at a moment
 
-  function frame(now){if(!done&&paint(now))requestAnimationFrame(frame)}
   function paint(now){
-    var T=(now-start)/1000,t=seek!=null?seek:started?(now-t0)/1000:0;
-    // front curtains part from the middle, the camera moves in
-    var fo=seg(t,.25,2.5);vFront.o=fo*1.75;
-    var fs=lerp(1,1.32,seg(t,.6,2.7,function(k){return k*k}));
-    front.style.transform='scale('+fs.toFixed(4)+')';
-    var dk=seg(t,.5,1.7);decor.forEach(function(d){d.style.opacity=(1-dk).toFixed(3)});front.style.opacity=(1-seg(t,2.3,2.75)).toFixed(3);
-    // the stage: lights come up, slow approach, then the camera moves into the arch
-    var ss=lerp(.9,1,seg(t,.3,2.6,eo))*lerp(1,1.04,seg(t,2.6,3.8,function(k){return k}))*lerp(1,1.95,seg(t,3.8,5.7));
-    stage.style.transform='scale('+ss.toFixed(4)+')';
-    dim.style.opacity=(.6*(1-seg(t,.3,2.2))).toFixed(3);
-    chS.style.setProperty('--glow',(.7+.3*seg(t,2.4,3.4)).toFixed(3));
-    vInner.o=seg(t,3.6,5.5)*1.75;
-    stage.style.opacity=(1-seg(t,5,5.9)).toFixed(3);
-    // the velvet backdrop with the oval
-    fin.style.transform='scale('+lerp(1.16,1,seg(t,3.8,6.1,eo)).toFixed(4)+')';
-    oval.style.opacity=seg(t,4.6,5.7).toFixed(3);
-    chF.style.opacity=(seg(t,5.5,6.1)*(1-seg(t,6.6,7.3))).toFixed(3);
-    // page 1 rises from the bottom: the page, its text, then Hawa Mahal
-    var p1=seg(t,7.3,8.6),p2=seg(t,7.7,8.9,eo),p3=seg(t,8.1,9.5,eo);
-    op.style.background=started&&t>7.2?'transparent':'';
-    if(started&&t>7.2){vh=innerHeight;fin.style.transform='translate3d(0,'+(-p1*vh).toFixed(1)+'px,0)';heroAt(p1,p2,p3)}
-
-    if(!started||t<2.8)vFront.draw(T);
-    if(!started||t<6)vInner.draw(T);
-    if(!started||t<7.3||!vBack.drawn){vBack.draw(T);vBack.drawn=true}
-    if(started&&t>=9.6&&seek==null){done=true;finish();return false}
+    var T=(now-start)/1000,t=seek!=null?seek:started?(now-t0)/1000:0,cx=innerWidth/2,cy=innerHeight/2;
+    // 1. the rod with its garlands and lanterns fades, then the curtains part and the camera moves through them
+    var hk=1-seg(t,.15,1.1);hang.style.opacity=hk.toFixed(3);corners.forEach(function(c){c.style.opacity=hk.toFixed(3)});
+    vFront.o=seg(t,.35,2.6)*1.75;
+    var fs=lerp(1,1.28,seg(t,.7,2.8,function(k){return k*k}));
+    front.style.transform='translate3d('+((1-fs)*cx).toFixed(1)+'px,'+((1-fs)*cy).toFixed(1)+'px,0) scale('+fs.toFixed(4)+')';
+    front.style.opacity=(1-seg(t,2.4,2.85)).toFixed(3);
+    // 2. the stage lights up; page 1 fades in inside the arch while the chandelier fades away
+    dim.style.opacity=(.6*(1-seg(t,.35,2.2))).toFixed(3);
+    chS.style.opacity=(1-seg(t,2.3,3.1)).toFixed(3);
+    if(clone)clone.style.opacity=seg(t,2.2,3.3).toFixed(3);
+    var pk=(1-seg(t,4.1,5.2)).toFixed(3);props.forEach(function(e){e.style.opacity=pk});   // the flowers in front of the arch step aside
+    // 3. slow zoom into the arch: its opening glides to the centre and grows until page 1 fills the screen,
+    //    while the frame, pillars and flowers move out past the edges
+    if(G){
+      var Spre=lerp(.9,1,seg(t,.35,2.7,eo)),S=Spre*Math.exp(Math.log(G.Sout)*seg(t,3.9,6.7));
+      var v=cl(Math.log(Math.max(1,S))/Math.log(G.S1));v=v*v*(3-2*v);
+      var w=S>G.S1?cl(Math.log(S/G.S1)/Math.log(G.Sout/G.S1)):0;w=w*w*(3-2*w);
+      var Fy=lerp(G.icy,G.fy,w);   // after page 1 fits, the camera centres on the straight part of the opening
+      var Pcx=lerp(cx+Spre*(G.icx-cx),G.W/2,v),Pcy=lerp(cy+Spre*(G.icy-cy),G.H/2,v);
+      var Tx=Pcx-S*G.icx,Ty=Pcy-S*Fy;
+      stage.style.transform='translate3d('+Tx.toFixed(2)+'px,'+Ty.toFixed(2)+'px,0) scale('+S.toFixed(5)+')';
+      if(clone){ // page 1 stays in the arch until it fits the screen exactly, then holds still while the arch moves past
+        var K=Math.min(1,S*G.k0),Ax=K<1?Tx+S*G.icx-K*G.W/2:0,Ay=K<1?Ty+S*G.icy-K*G.H/2:0;
+        clone.style.transform='translate3d('+((Ax-Tx)/S-G.ax).toFixed(2)+'px,'+((Ay-Ty)/S-G.ay).toFixed(2)+'px,0) scale('+(K/S).toFixed(5)+')';
+      }
+    }
+    // 4. the real page 1 is underneath in the same place: fade the opening away and hand over
+    op.style.opacity=started?(1-seg(t,6.7,7.2)).toFixed(3):'';
+    if(!started||t<2.9)vFront.draw(T);
+    if(started&&t>=7.25&&seek==null){done=true;finish();return false}
     return true;
   }
+  function frame(now){if(!done&&paint(now))requestAnimationFrame(frame)}
 
   function go(){
-    if(started)return;started=true;t0=performance.now();op.classList.add('go');
-    if(reduce){ // no camera moves: a soft fade straight to page 1
-      done=true;op.style.transition='opacity .7s';op.style.opacity='0';heroAt(1,1,1);setTimeout(finish,750)}
+    if(started)return;started=true;t0=performance.now();op.classList.add('go');makeClone();geo();
+    if(reduce){done=true;op.style.transition='opacity .7s';op.style.opacity='0';setTimeout(finish,750)}
   }
   var hs=/op-seek=([\d.]+)/.exec(location.hash);if(hs)setTimeout(function(){__opSeek(+hs[1])},400);
   op.addEventListener('click',go);
   op.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
 
-  function resize(){vFront.size();vInner.size();vBack.size();vBack.drawn=false;if(!started){vh=innerHeight;heroAt(0,0,0)}}
+  function resize(){vFront.size();vBack.size();vBack.draw(0);geo();
+    if(clone&&hero){clone.style.width=hero.offsetWidth+'px';clone.style.height=hero.offsetHeight+'px'}}
   addEventListener('resize',resize);
   resize();
 
   // fade in from black once the scene's pictures are ready (or after 2.5 s at the latest)
   var imgs=[].slice.call(op.querySelectorAll('img')),left=imgs.length,shown=false;
   function show(){if(shown)return;shown=true;black.style.opacity='0';setTimeout(function(){op.classList.add('ready');try{$('opTap').focus({preventScroll:true})}catch(e){}},700)}
-  imgs.forEach(function(im){if(im.complete)left--;else im.addEventListener('load',function(){if(--left<=0)show()}),im.addEventListener('error',function(){if(--left<=0)show()})});
+  imgs.forEach(function(im){if(im.complete)left--;else{im.addEventListener('load',function(){if(--left<=0)show()});im.addEventListener('error',function(){if(--left<=0)show()})}});
   if(left<=0)show();setTimeout(show,2500);
   requestAnimationFrame(frame);
 })();

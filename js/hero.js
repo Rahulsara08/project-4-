@@ -1,8 +1,6 @@
 (function(){
   var $=function(i){return document.getElementById(i)};
-  var track=$('track'),stage=$('stage'),sky=$('sky'),hawa=$('hawa'),tl=$('tl'),tr=$('tr'),names=document.querySelector('.names');
-  // entrance offsets, driven by js/opening.js: the page rises from the bottom, then the text, then Hawa Mahal
-  var intro={stage:0,names:0,hawa:0,op:1};
+  var track=$('track'),sky=$('sky'),hawa=$('hawa'),tl=$('tl'),tr=$('tr'),names=document.querySelector('.names');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var cur=0,target=0,last=0,running=false,T=1,vh=innerHeight;
   function cl(x){return Math.min(1,Math.max(0,x))}
@@ -33,16 +31,14 @@
   function render(s){
     var H=hawa.offsetHeight||vh*1.5;
     // Hawa Mahal scrolls exactly with the page, then holds at the bottom
-    hawa.style.transform='translate3d(0,'+(vh*0.6-s+intro.hawa).toFixed(2)+'px,0)';
+    hawa.style.transform='translate3d(0,'+(vh*0.6-s).toFixed(2)+'px,0)';
     // trees: slide in from the left and right at the bottom of Hawa Mahal, complete at the end
     var e=es(cl((s-0.4*T)/(0.55*T)));
     tl.style.transform='translate3d('+(-(1-e)*105).toFixed(2)+'%,0,0)';
     tr.style.transform='translate3d('+((1-e)*105).toFixed(2)+'%,0,0)';
     sky.style.transform='translate3d(0,'+(-(s/T)*12).toFixed(2)+'%,0)';
     // text slides down with the scroll and disappears behind the building (no blur / fade)
-    names.style.transform='translate3d(0,'+(Math.min(s*0.6,vh)+intro.names).toFixed(2)+'px,0)';
-    names.style.opacity=intro.op<1?intro.op.toFixed(3):'';
-    stage.style.transform=intro.stage?'translate3d(0,'+intro.stage.toFixed(2)+'px,0)':'';
+    names.style.transform='translate3d(0,'+Math.min(s*0.6,vh).toFixed(2)+'px,0)';
   }
   function loop(now){
     var dt=Math.min(0.05,(now-last)/1000||0.016);last=now;
@@ -57,5 +53,4 @@
   hawa.addEventListener('load',function(){lw=0;onSize()});
   lw=innerWidth;lh=innerHeight;
   setVars();layout();readTarget();cur=target;render(cur);
-  window.heroIntro={set:function(o){for(var k in o)intro[k]=o[k];render(cur)}};
 })();

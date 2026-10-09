@@ -1,34 +1,26 @@
-/* RSVP: accepting sets off a burst of rose petals, marigolds, jasmine, leaves and gold sparkles */
+/* RSVP: accepting sends sweet pink and red hearts floating up the page */
 (function(){
   var btn=document.getElementById('p6yes'),fx=document.getElementById('p6fx'),th=document.getElementById('p6thanks'),sec=document.getElementById('pg6');if(!btn)return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,KINDS=['rose','rose','mari','mari','leaf','jas','gold'];
-  function burst(n){
-    if(reduce)return;
-    var sr=sec.getBoundingClientRect(),br=btn.getBoundingClientRect(),cx=br.left+br.width/2-sr.left,cy=br.top+br.height/2-sr.top;
-    for(var i=0;i<n;i++){
-      var e=document.createElement('i'),k=KINDS[i%KINDS.length],a=Math.random()*Math.PI*2,r=80+Math.random()*Math.min(520,sr.width*.55);
-      e.className='p6-p '+k;
-      e.style.cssText='--x:'+cx+'px;--y:'+cy+'px;--s:'+(9+Math.random()*14).toFixed(1)+'px;--d:'+(2.6+Math.random()*2.2).toFixed(2)+'s;'+
-        '--bx:'+(Math.cos(a)*r).toFixed(0)+'px;--by:'+(Math.sin(a)*r*.75-60).toFixed(0)+'px;--dx:'+(Math.random()*120-60).toFixed(0)+'px;'+
-        '--fall:'+(260+Math.random()*420).toFixed(0)+'px;--r1:'+(Math.random()*360).toFixed(0)+'deg;--r2:'+(360+Math.random()*540).toFixed(0)+'deg';
-      e.addEventListener('animationend',function(){this.remove()});
-      fx.appendChild(e);
-    }
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,KINDS=['a','b','a','b','c'];
+  function heart(x,y,size,rise,dur,delay){
+    var e=document.createElement('i');e.className='p6-h '+KINDS[Math.floor(Math.random()*KINDS.length)];
+    e.style.cssText='--x:'+x.toFixed(0)+'px;--y:'+y.toFixed(0)+'px;--s:'+size.toFixed(1)+'px;--rise:'+rise.toFixed(0)+'px;--d:'+dur.toFixed(2)+'s;--dl:'+delay.toFixed(2)+'s;'+
+      '--sx:'+(Math.random()*70-35).toFixed(0)+'px;--g:'+(1+Math.random()*.6).toFixed(2)+';--r0:'+(Math.random()*30-15).toFixed(0)+'deg';
+    e.addEventListener('animationend',function(){this.remove()});fx.appendChild(e);
   }
-  function rain(n){            // petals falling from the garlands at the top
+  // hearts grow as they float up from the bottom of the page, and a few pop out of the button
+  function hearts(){
     if(reduce)return;
-    var w=sec.clientWidth;
-    for(var i=0;i<n;i++){
-      var e=document.createElement('i'),k=KINDS[i%KINDS.length];e.className='p6-p '+k;
-      e.style.cssText='--x:'+(Math.random()*w).toFixed(0)+'px;--y:-20px;--s:'+(8+Math.random()*12).toFixed(1)+'px;--d:'+(4+Math.random()*3).toFixed(2)+'s;animation-delay:'+(Math.random()*1.8).toFixed(2)+'s;'+
-        '--bx:0px;--by:'+(sec.clientHeight*.3).toFixed(0)+'px;--dx:'+(Math.random()*160-80).toFixed(0)+'px;--fall:'+(sec.clientHeight*.75).toFixed(0)+'px;--r1:'+(Math.random()*360).toFixed(0)+'deg;--r2:'+(400+Math.random()*500).toFixed(0)+'deg';
-      e.addEventListener('animationend',function(){this.remove()});fx.appendChild(e);
-    }
+    var w=sec.clientWidth,h=sec.clientHeight,sr=sec.getBoundingClientRect(),br=btn.getBoundingClientRect();
+    for(var i=0;i<54;i++){var u=Math.random(),x=w*(.5+(u-.5)*Math.abs(u-.5)*2.2+(Math.random()-.5)*.5);
+      heart(Math.max(10,Math.min(w-10,x)),h+20,14+Math.random()*22,h*(.45+Math.random()*.55),3.6+Math.random()*2.6,Math.random()*2.6)}
+    var cx=br.left+br.width/2-sr.left,cy=br.top+br.height/2-sr.top;
+    for(i=0;i<14;i++)heart(cx+(Math.random()-.5)*br.width,cy,9+Math.random()*10,120+Math.random()*160,1.8+Math.random()*1.2,Math.random()*.4);
   }
   function accepted(first){
     btn.classList.add('done');btn.disabled=true;btn.firstChild.textContent='Accepted with Joy ✓';
     th.textContent='Thank you! We can\u2019t wait to celebrate with you.';th.classList.add('in');
-    if(first){burst(90);setTimeout(function(){rain(70)},350);setTimeout(function(){burst(50)},900)}
+    if(first)hearts();
   }
   try{if(localStorage.getItem('sa-rsvp')==='yes')accepted(false)}catch(e){}
   btn.addEventListener('click',function(){accepted(true);try{localStorage.setItem('sa-rsvp','yes')}catch(e){}});
