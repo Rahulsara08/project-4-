@@ -2,12 +2,9 @@
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-/* place names (Hawa Mahal, Amer Fort): the Hindi name above, spaced capitals below, set straight on the page */
+/* place names (Hawa Mahal, Amer Fort): spaced capitals set straight on the page */
 .place-name{margin:0;display:flex;flex-direction:column;align-items:center;gap:.12em;white-space:nowrap;pointer-events:none;text-align:center}
-.place-name .pn-hi{font:400 clamp(14px,1.9vw,23px)/1.15 "Amita","Tiro Devanagari Hindi",serif;letter-spacing:.06em}
 .place-name .pn-en{padding-left:.3em;font:700 clamp(15px,2.3vw,29px)/1.05 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase}
-.place-name.on-dark .pn-hi{color:#f2c96e;text-shadow:0 0 6px rgba(40,0,10,.95),0 2px 4px rgba(40,0,10,.8)}
 .place-name.on-dark .pn-en{background:linear-gradient(180deg,#fff2c6,#f2c96e 50%,#c9952e);-webkit-background-clip:text;background-clip:text;color:transparent;
  filter:drop-shadow(0 0 3px rgba(40,0,10,.95)) drop-shadow(0 2px 4px rgba(40,0,10,.8))}
-.place-name.on-light .pn-hi{color:#a8691a;text-shadow:0 0 8px #f3e6c3,0 0 3px #f3e6c3}
-.place-name.on-light .pn-en{color:#7a1530;text-shadow:0 0 10px #f3e6c3,0 0 4px #f3e6c3,0 2px 0 rgba(242,201,110,.6)}
+.place-name.on-light .pn-en{color:#7a1530;text-shadow:0 1px 0 rgba(242,201,110,.55)}

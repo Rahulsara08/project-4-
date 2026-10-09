@@ -46,7 +46,7 @@
 .p9-mtn{position:relative;width:100%;aspect-ratio:1230/545}
 .p9-mtn img{position:absolute;display:block;height:auto;pointer-events:none}
 .m-gold{left:0;width:100%;bottom:-6.3%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(180deg,#000 70%,transparent 97%)}
-.m-fort{left:22.5%;width:55%;bottom:-3%;filter:drop-shadow(0 -6px 16px rgba(120,70,20,.22)) saturate(.96);
+.m-fort{left:22.5%;width:55%;bottom:-3%;
  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 75%,transparent 96%);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 75%,transparent 96%);-webkit-mask-composite:source-in;mask-composite:intersect}
 .m-r1{left:-21.06%;width:66%;bottom:-8%;filter:drop-shadow(0 -4px 12px rgba(90,40,10,.2));-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(180deg,#000 70%,transparent 97%)}
 .m-g1{left:-4.71%;width:34%;bottom:-8%;filter:drop-shadow(0 -6px 14px rgba(60,20,0,.28));
@@ -57,3 +57,7 @@
  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%),linear-gradient(180deg,#000 70%,transparent 97%);mask-image:linear-gradient(90deg,transparent,#000 9%),linear-gradient(180deg,#000 70%,transparent 97%);-webkit-mask-composite:source-in;mask-composite:intersect}
 /* the fort's name, just above it */
 .p9-name{position:absolute;z-index:2;left:50%;bottom:58%;transform:translateX(-50%)}
+/* lines appear one after another as they scroll in */
+.p8-blk .rv{transition-duration:.9s}
+.p8-blk .rv:nth-child(2){transition-delay:.12s}.p8-blk .rv:nth-child(3){transition-delay:.24s}.p8-blk .rv:nth-child(4){transition-delay:.36s}
+.p8-blk .rv:nth-child(5){transition-delay:.48s}.p8-blk .rv:nth-child(6){transition-delay:.6s}.p8-blk .rv:nth-child(7){transition-delay:.72s}
