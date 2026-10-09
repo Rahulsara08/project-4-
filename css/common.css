@@ -8,3 +8,7 @@
 .place-name.on-dark .pn-en{background:linear-gradient(180deg,#fff2c6,#f2c96e 50%,#c9952e);-webkit-background-clip:text;background-clip:text;color:transparent;
  filter:drop-shadow(0 0 3px rgba(40,0,10,.95)) drop-shadow(0 2px 4px rgba(40,0,10,.8))}
 .place-name.on-light .pn-en{color:#7a1530;text-shadow:0 1px 0 rgba(242,201,110,.55)}
+/* a plain line under each place name (part of the name, so it fades in with it) */
+.place-name .pn-en::after{content:"";display:block;height:1.5px;margin-top:.4em;margin-left:-.3em;background:#e9c46a}
+.place-name.on-dark .pn-en::after{background:linear-gradient(90deg,#c9952e,#f2c96e 50%,#c9952e)}
+.place-name.on-light .pn-en::after{background:#a9761f}
