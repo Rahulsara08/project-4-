@@ -41,7 +41,7 @@
 .p7-frame i{position:absolute;left:0;right:0;background:center/100% 100% no-repeat}
 .p7-frame .at{top:0;height:40.5cqw;background-image:url(../assets/img/wish-arch-top.webp)}
 /* a lamp hangs in the arch's dome */
-.p7-lamp{position:absolute;left:50%;top:2.6cqw;width:15cqw;height:auto;transform:translateX(-50%);transform-origin:50% 0;filter:drop-shadow(0 0 18px rgba(255,190,90,.55));pointer-events:none}
+.p7-lamp{position:absolute;z-index:1;left:50.33%;top:6.6cqw;width:6.6cqw;height:auto;transform:translateX(-50%);transform-origin:50% 0;filter:drop-shadow(0 0 18px rgba(255,190,90,.55));pointer-events:none}
 @media (prefers-reduced-motion:no-preference){.p7-lamp{animation:p7sway 4.5s ease-in-out infinite alternate}}
 @keyframes p7sway{from{transform:translateX(-50%) rotate(-2deg)}to{transform:translateX(-50%) rotate(2deg)}}
 .p7-in{position:relative;box-sizing:border-box;padding:29cqw 14.5cqw 1cqw;text-align:center;color:#5a3a30}
@@ -86,11 +86,11 @@
 .wl-nav.next{right:-4px}
 .wl-nav:hover,.wl-nav:focus-visible{transform:scale(1.08);outline:none}
 .wl-nav[disabled]{opacity:.35;cursor:default;transform:none}
-.wl-count{font:600 clamp(12px,1.4cqw,15px)/1.3 "Cormorant Garamond",Georgia,serif;letter-spacing:.12em;color:#a9761f}
 
 /* the form (small), with a heart to send */
 .wf{box-sizing:border-box;max-width:400px;margin:clamp(10px,1.8cqw,20px) auto 0;padding:clamp(12px,1.6cqw,16px) clamp(14px,1.8cqw,18px) 10px;border-radius:14px;text-align:left;color:#4a2a22;
- background:linear-gradient(180deg,rgba(255,250,240,.96),rgba(251,236,208,.96));box-shadow:inset 0 0 0 1.5px #c9a24d,0 8px 18px rgba(90,30,20,.2)}
+ background:linear-gradient(180deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.9) 38%,rgba(255,248,236,.45) 72%,rgba(255,248,236,.12) 100%),
+  url(../assets/img/lake-palace.webp) center bottom/100% auto no-repeat,linear-gradient(180deg,#fffaf0,#fbecd0);box-shadow:inset 0 0 0 1.5px #c9a24d,0 8px 18px rgba(90,30,20,.2)}
 .wf-h{text-align:center;font:700 clamp(13px,1.6cqw,16px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.16em;text-transform:uppercase;color:#7a1530;margin-bottom:.2em!important}
 .wf-f{display:block;margin-top:.5em}
 .wf-f span{display:block;margin-bottom:.25em;font:700 10.5px/1.2 "Cinzel",Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#a9761f}
@@ -117,14 +117,14 @@
 .wf-msg.bad{color:#b3263e}
 
 /* the palace gateway between the towers, on the same ground as pillars and towers */
-.p7-base{position:relative;z-index:2;margin-top:clamp(12px,2.4vw,30px);padding:0 var(--tc)}
+.p7-base{position:relative;z-index:2;margin-top:clamp(6px,1.2vw,16px);padding:0 var(--tc)}
 .p7-palace{display:block;width:100%;height:auto;filter:drop-shadow(0 -4px 10px rgba(90,30,20,.25))}
 
 /* phones: content starts lower (the arch's dome is narrow) and one card fills the frame */
 @media (max-width:600px){
  .p7-head{padding:0 calc(var(--br)*.62)}
  .p7-in{padding:31cqw 14cqw 2cqw}
- .p7-lamp{width:17cqw}
+ .p7-lamp{width:8cqw}
  .wc{flex-basis:74%}
  .wl-track{padding:8px 9% 14px}
 }

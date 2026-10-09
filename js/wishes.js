@@ -5,7 +5,7 @@
   var track=document.getElementById('wlTrack'),form=document.getElementById('wishForm');
   if(!track||!form)return;
   var C=window.WEDDING||{},KEY='sa-wishes',URL_=C.wishesUrl||'';
-  var count=document.getElementById('wlCount'),msg=document.getElementById('wfMsg');
+  var msg=document.getElementById('wfMsg');
   var nameIn=document.getElementById('wfName'),wishIn=document.getElementById('wfWish');
   var prev=track.parentNode.querySelector('.prev'),next=track.parentNode.querySelector('.next');
   var seen={},total=0;
@@ -23,16 +23,15 @@
     el.appendChild(p);el.appendChild(b);total++;return el;
   }
   function add(w,first,isNew){var el=card(w,isNew);if(!el)return null;if(first)track.insertBefore(el,track.firstChild);else track.appendChild(el);return el}
-  function setCount(){if(count)count.textContent=total+(total===1?' wish':' wishes')+'  ·  swipe to read'}
 
   // guests' own wishes first (newest first), then the family's
   load().slice().reverse().forEach(function(w){add(w)});
   (C.wishes||[]).forEach(function(w){add(w)});
-  setCount();
+  
 
   // shared wall (optional)
   if(URL_&&window.fetch)fetch(URL_).then(function(r){return r.json()}).then(function(list){
-    if(!Array.isArray(list))return;list.slice().reverse().forEach(function(w){add(w)});setCount();nav()}).catch(function(){});
+    if(!Array.isArray(list))return;list.slice().reverse().forEach(function(w){add(w)});nav()}).catch(function(){});
 
   /* ---- sliding ---- */
   function cards(){return track.children}
@@ -90,7 +89,7 @@
     var el=add(w,true,true);
     if(!el){say('This wish is already on the wall. Thank you!');return}
     var list=load();list.push({name:w.name,wish:w.wish,t:Date.now()});save(list);
-    setCount();wishIn.value='';hold();
+    wishIn.value='';hold();
     track.scrollTo({left:0,behavior:reduce?'auto':'smooth'});
     say('Thank you, '+w.name+'! Your blessing is on the wall.');
     puff();

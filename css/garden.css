@@ -1,0 +1,8 @@
+/* Page 8: cream page with the embossed tree panels down both sides (the panel, then its top part again below it,
+   so about one and a half panels), mirrored on the right, with open space in the middle */
+.pg8{position:relative;z-index:3;overflow:hidden;display:flex;justify-content:space-between;align-items:flex-start;background:#f1e1bc}
+.p8-col{width:44%;flex:none;will-change:translate;
+ -webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
+.p8-col img{display:block;width:100%;height:auto}
+.p8-col.r{transform:scaleX(-1)}
+@media (max-width:600px){.p8-col{width:47%}}
