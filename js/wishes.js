@@ -36,17 +36,21 @@
 
   /* ---- sliding ---- */
   function cards(){return track.children}
-  function step(){var c=cards();return c.length>1?c[1].offsetLeft-c[0].offsetLeft:track.clientWidth}
-  function idx(){return Math.round(track.scrollLeft/Math.max(1,step()))}
   function maxScroll(){return track.scrollWidth-track.clientWidth}
-  function go(i){var c=cards();if(!c.length)return;i=Math.max(0,Math.min(c.length-1,i));
-    var el=c[i],x=el.offsetLeft-(track.clientWidth-el.offsetWidth)/2;track.scrollTo({left:Math.max(0,Math.min(maxScroll(),x)),behavior:reduce?'auto':'smooth'})}
+  // arrows go to the next / previous card's resting (centred) position, the same spots the swipe snaps to
+  function by(d){
+    var c=cards(),tr=track.getBoundingClientRect(),sl=track.scrollLeft,m=maxScroll(),pos=[],i,x;
+    for(i=0;i<c.length;i++){var r=c[i].getBoundingClientRect();pos.push(Math.max(0,Math.min(m,Math.round(sl+r.left-tr.left-(track.clientWidth-r.width)/2))))}
+    x=sl;
+    if(d>0){for(i=0;i<pos.length;i++)if(pos[i]>sl+4){x=pos[i];break}}
+    else{for(i=pos.length-1;i>=0;i--)if(pos[i]<sl-4){x=pos[i];break}}
+    track.scrollTo({left:x,behavior:reduce?'auto':'smooth'})}
   function nav(){var m=maxScroll();if(prev)prev.disabled=track.scrollLeft<=4;if(next)next.disabled=track.scrollLeft>=m-4}
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  prev&&prev.addEventListener('click',function(){hold();go(idx()-1)});
-  next&&next.addEventListener('click',function(){hold();go(idx()+1)});
+  prev&&prev.addEventListener('click',function(){hold();by(-1)});
+  next&&next.addEventListener('click',function(){hold();by(1)});
   track.addEventListener('scroll',function(){nav()},{passive:true});
-  track.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();hold();go(idx()+1)}else if(e.key==='ArrowLeft'){e.preventDefault();hold();go(idx()-1)}});
+  track.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();hold();by(1)}else if(e.key==='ArrowLeft'){e.preventDefault();hold();by(-1)}});
 
   // auto-slide: one card every few seconds while the wall is on screen; any touch pauses it for a while
   var visible=false,pausedUntil=0,timer=null;
@@ -55,7 +59,7 @@
   track.addEventListener('mouseenter',function(){pausedUntil=Infinity});
   track.addEventListener('mouseleave',function(){pausedUntil=Date.now()+2500});
   function tick(){if(!visible||reduce||document.hidden||Date.now()<pausedUntil)return;
-    if(track.scrollLeft>=maxScroll()-4)track.scrollTo({left:0,behavior:'smooth'});else go(idx()+1)}
+    if(track.scrollLeft>=maxScroll()-4)track.scrollTo({left:0,behavior:'smooth'});else by(1)}
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting},{threshold:.4}).observe(track);else visible=true;
   timer=setInterval(tick,3600);
   addEventListener('resize',nav);nav();

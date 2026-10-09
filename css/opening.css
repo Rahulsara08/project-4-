@@ -8,7 +8,7 @@ html.op-lock,html.op-lock body{overflow:hidden}
  -webkit-tap-highlight-color:transparent;--vh:1vh;
  --sw:min(84vw,calc(var(--vh)*70));--ah:min(calc(var(--vh)*76),calc(var(--sw)*1.8));--at:max(calc(var(--vh)*7),calc((var(--vh)*100 - var(--ah))*.42))}
 @supports (height:1dvh){.op{--vh:1dvh}}
-.op img{position:absolute;display:block;max-width:none;height:auto;pointer-events:none;-webkit-user-drag:none}
+.op :not(.op-clone)>img{position:absolute;display:block;max-width:none;height:auto;pointer-events:none;-webkit-user-drag:none}
 .op-stage,.op-front{position:absolute;inset:0;transform-origin:0 0;will-change:transform,opacity}
 .op canvas{position:absolute;display:block}
 .op-black{position:absolute;inset:0;z-index:9;background:#000;pointer-events:none;transition:opacity 1.4s ease}
@@ -25,7 +25,8 @@ html.op-lock,html.op-lock body{overflow:hidden}
  -webkit-mask-position:0 0,0 calc(var(--sw)*880/1266),0 100%;mask-position:0 0,0 calc(var(--sw)*880/1266),0 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .op-clone{position:absolute!important;left:0;top:0;margin:0;transform-origin:0 0;will-change:transform,opacity;opacity:0;pointer-events:none}
 .op-clone .names{animation:none!important}
-.op-arch i{position:absolute;left:0;right:0;background:center top/100% 100% no-repeat;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
+.op-frame{position:absolute;inset:0;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
+.op-arch i{position:absolute;left:0;right:0;background:center top/100% 100% no-repeat}
 .op-arch .oa-t{top:0;height:calc(var(--sw)*900/1266);background-image:url(../assets/img/family-arch-top.webp)}
 .op-arch .oa-m{top:calc(var(--sw)*880/1266);bottom:calc(var(--sw)*120/1266);background-image:url(../assets/img/family-arch-middle.webp)}
 .op-arch .oa-b{bottom:0;height:calc(var(--sw)*133/1266);background-image:url(../assets/img/family-arch-bottom.webp)}
@@ -53,21 +54,20 @@ html.op-lock,html.op-lock body{overflow:hidden}
 
 /* ---- 1. front curtains ---- */
 .op-curtain{inset:0;width:100%;height:100%}
-.op-hang{position:absolute;inset:0;z-index:2;pointer-events:none;--rt:calc(var(--vh)*15.2);--rh:clamp(14px,2.4vw,30px)}
-/* the gold rod runs from the left edge to the right; garlands and lanterns hang from it */
-.op-rod{position:absolute;left:0;right:0;top:var(--rt);height:var(--rh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.55))}
-.op-gar{top:calc(var(--rt) + var(--rh)*.45);height:calc(var(--vh)*44)!important;width:auto;transform-origin:50% 0;filter:drop-shadow(0 8px 10px rgba(0,0,0,.55));animation:opsw 4.6s ease-in-out infinite alternate}
-.op-gar.l{left:4vw}
-.op-gar.r{right:4vw;animation-delay:-2.2s}
-.op-lamp{position:absolute;top:calc(var(--rt) + var(--rh)*.4);width:clamp(70px,18vw,140px);transform-origin:50% 0;animation:opsw 5.2s ease-in-out infinite alternate}
-.op-lamp.l{left:max(19vw,70px)}
-.op-lamp.r{right:max(19vw,70px);animation-delay:-2.6s}
-.op-lamp img{position:relative;width:100%}
-.op-lamp i{position:absolute;left:50%;top:62%;width:320%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
- background:radial-gradient(circle,rgba(255,196,110,.5),rgba(255,140,60,.16) 35%,transparent 68%);mix-blend-mode:screen;animation:oplamp 2.4s ease-in-out infinite alternate}
+.op-hang{position:absolute;inset:0;z-index:2;pointer-events:none}
+.op-gar{top:calc(var(--vh)*13);height:calc(var(--vh)*30)!important;width:auto;transform-origin:50% 0;filter:drop-shadow(0 8px 10px rgba(0,0,0,.55));animation:opsw 4.6s ease-in-out infinite alternate}
+.op-gar.l{left:3vw}
+.op-gar.r{right:3vw;animation-delay:-2.2s}
+/* a gold wall lamp fixed to each side of the screen, its wall plate on the edge */
+.op-lamp{position:absolute;top:calc(var(--vh)*44);width:min(17vw,calc(var(--vh)*21))}
+.op-lamp.l{left:0;transform:scaleX(-1)}
+.op-lamp.r{right:0}
+.op .op-lamp img{position:relative;width:100%;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
+.op-lamp i{position:absolute;left:31%;top:57%;width:300%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+ background:radial-gradient(circle,rgba(255,206,130,.5),rgba(255,150,70,.16) 35%,transparent 68%);mix-blend-mode:screen;animation:oplamp 2.4s ease-in-out infinite alternate}
 @keyframes oplamp{0%{opacity:.75}35%{opacity:1}60%{opacity:.85}100%{opacity:.95}}
 @keyframes opsw{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
-.op-corner{z-index:3;bottom:calc(var(--vh)*-2);width:min(46vw,360px);filter:drop-shadow(0 -4px 14px rgba(0,0,0,.6))}
+.op-corner{z-index:3;bottom:calc(var(--vh)*-2);width:min(46vw,calc(var(--vh)*34),360px);filter:drop-shadow(0 -4px 14px rgba(0,0,0,.6))}
 .op-corner.l{left:-7vw}
 .op-corner.r{right:-7vw;transform:scaleX(-1)}
 
@@ -88,4 +88,4 @@ html.op-lock,html.op-lock body{overflow:hidden}
 .op-tap:hover,.op-tap:focus-visible{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.55),0 0 30px rgba(242,201,110,.45),inset 0 0 0 3px rgba(255,241,196,.18);outline:none}
 .op.ready .op-card{opacity:1}
 .op.go .op-card{opacity:0;transition-duration:.45s}
-@media (prefers-reduced-motion:reduce){.op-gar,.op-lamp,.op-lamp i{animation:none}}
+@media (prefers-reduced-motion:reduce){.op-gar,.op-lamp i{animation:none}}

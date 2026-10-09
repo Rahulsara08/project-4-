@@ -148,7 +148,9 @@
   }
   // geometry in the stage layer's own px (the layer is the full screen before it is transformed)
   function geo(){
-    var sw=arch.offsetWidth,ah=arch.offsetHeight,ax=arch.offsetLeft,ay=arch.offsetTop;
+    var tf=stage.style.transform;stage.style.transform='none';
+    var ar=arch.getBoundingClientRect(),sr=stage.getBoundingClientRect();stage.style.transform=tf;
+    var sw=ar.width,ah=ar.height,ax=ar.left-sr.left,ay=ar.top-sr.top;
     var ix0=ax+sw*.078,ix1=ax+sw*.926,iy0=ay+sw*.178,iy1=ay+ah-sw*.0758;   // the opening inside the gold arch
     var W=hero?hero.offsetWidth:innerWidth,H=hero?hero.offsetHeight:innerHeight,k0=Math.max((ix1-ix0)/W,(iy1-iy0)/H);
     var sy0=ay+sw*.695;  // below the arch's curve the opening is a straight-sided rectangle; the zoom ends when it covers the screen
