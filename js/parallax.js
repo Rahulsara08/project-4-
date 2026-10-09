@@ -27,4 +27,5 @@
   var rt=0;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(measure,150)});
   addEventListener('load',function(){measure();setTimeout(measure,1200)});
   measure();
+  window.parallaxRefresh=measure;
 })();

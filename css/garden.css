@@ -61,3 +61,31 @@
 .p8-blk .rv{transition-duration:.9s}
 .p8-blk .rv:nth-child(2){transition-delay:.12s}.p8-blk .rv:nth-child(3){transition-delay:.24s}.p8-blk .rv:nth-child(4){transition-delay:.36s}
 .p8-blk .rv:nth-child(5){transition-delay:.48s}.p8-blk .rv:nth-child(6){transition-delay:.6s}.p8-blk .rv:nth-child(7){transition-delay:.72s}
+
+/* ===== Amer Fort entrance: once the section is 30% into view, the layers rise out of the ground one after another
+   (js/mountains.js): back range -> title + underline -> middle (red) -> the fort -> front mountains.
+   Tweak the timing here: */
+.pg9{--mt-rise:1.2s;   /* each mountain layer rising */
+ --mt-title:.8s;        /* title fade + lift */
+ --mt-line:.6s;         /* underline growing from the centre */
+ --mt-fort:1s;          /* the fort rising */
+ --mt-ease:cubic-bezier(.215,.61,.355,1);   /* "power3.out" */
+ --t1:var(--mt-rise);                                           /* title starts      */
+ --t2:calc(var(--t1) + var(--mt-title)*.5 + var(--mt-line));   /* middle starts     */
+ --t3:calc(var(--t2) + var(--mt-rise));                         /* fort starts       */
+ --t4:calc(var(--t3) + var(--mt-fort))}                         /* front starts      */
+/* the layering stays: back < fort < middle < front, title on top */
+.m-gold{z-index:0}.m-fort{z-index:1}.m-r1,.m-r2{z-index:2}.m-g1,.m-g2{z-index:3}.p9-name{z-index:4}
+.p9-name .pn-en::after{transform-origin:50% 50%}
+/* waiting: everything below the ground (pg9 clips it), the title invisible */
+.pg9.mt-wait .p9-mtn img{transform:translateY(100%);will-change:transform}
+.pg9.mt-wait .m-fort{opacity:0}
+.pg9.mt-wait .p9-name .pn-en{opacity:0;transform:translateY(20px)}
+.pg9.mt-wait .p9-name .pn-en::after{transform:scaleX(0)}
+/* playing: each layer's transition starts when the previous one has finished */
+.pg9.mt-play .m-gold{transition:transform var(--mt-rise) var(--mt-ease)}
+.pg9.mt-play .p9-name .pn-en{transition:opacity var(--mt-title) ease var(--t1),transform var(--mt-title) var(--mt-ease) var(--t1)}
+.pg9.mt-play .p9-name .pn-en::after{transition:transform var(--mt-line) var(--mt-ease) calc(var(--t1) + var(--mt-title)*.5)}
+.pg9.mt-play .m-r1,.pg9.mt-play .m-r2{transition:transform var(--mt-rise) var(--mt-ease) var(--t2)}
+.pg9.mt-play .m-fort{transition:transform var(--mt-fort) var(--mt-ease) var(--t3),opacity var(--mt-fort) ease var(--t3)}
+.pg9.mt-play .m-g1,.pg9.mt-play .m-g2{transition:transform var(--mt-rise) var(--mt-ease) var(--t4)}
