@@ -1,9 +1,20 @@
 /* Page 8: cream page with the embossed tree panel down both sides (the panel, then its top again below it, so about
    one and a half panels), mirrored on the right, open space in the middle. Page 9 carries on in the same colour */
-.pg8{position:relative;z-index:3;overflow:hidden;display:flex;justify-content:space-between;align-items:flex-start;background:#eadaaf}
+.pg8{position:relative;z-index:3;overflow:hidden;--rodh:clamp(16px,2.4vw,34px);padding-top:var(--rodh);display:flex;justify-content:space-between;align-items:flex-start;background:#eadaaf}
 .p8-col{width:44%;flex:none;will-change:translate;
  -webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
 .p8-col img{display:block;width:100%;height:auto}
 .p8-col.r{transform:scaleX(-1)}
 @media (max-width:600px){.p8-col{width:47%}}
 .pg9{position:relative;z-index:3;min-height:100vh;min-height:100svh;background:#eadaaf}
+/* divider between the Wishing Wall and this page (the same gold rod as above the Wishing Wall) */
+.p8-rod{position:absolute;z-index:2;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(60,30,0,.4))}
+.pg9{overflow:hidden}
+/* mountain footer: the gold range sets the size; each nearer layer is shorter so the ones behind still show */
+.p9-mtn{position:absolute;left:0;right:0;bottom:0;aspect-ratio:1230/523}
+.p9-mtn img{position:absolute;display:block;height:auto;pointer-events:none}
+.m-gold{left:0;width:100%;bottom:-2%}
+.m-r1{left:-5%;width:50%;bottom:-4%;filter:drop-shadow(0 -4px 10px rgba(90,40,10,.18))}
+.m-r2{right:-4%;width:40%;bottom:-4%;filter:drop-shadow(0 -4px 10px rgba(90,40,10,.18))}
+.m-g1{left:-8%;width:36%;bottom:-5%;filter:drop-shadow(0 -6px 12px rgba(60,20,0,.25))}
+.m-g2{right:-6%;width:30%;bottom:-5%;filter:drop-shadow(0 -6px 12px rgba(60,20,0,.25))}

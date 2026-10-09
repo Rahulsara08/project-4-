@@ -18,7 +18,7 @@
 .p6-pil{position:absolute;z-index:4;top:calc(var(--rodh)*.55);bottom:0;width:var(--pil);background:url(../assets/img/rsvp-pillar.webp) center bottom/100% 100% no-repeat;filter:drop-shadow(0 10px 18px rgba(15,0,5,.55))}
 .p6-pil.l{left:0}
 .p6-pil.r{right:0;transform:scaleX(-1)}
-/* corner bouquets: four pictures stacked in depth (back to front: gold spray, leafy branch, lotus, lotus plant);
+/* corner bouquets: three pictures stacked in depth (back to front: gold spray, leafy branch, lotus);
    each drifts at its own speed with the scroll, so they separate like layers. They spill over the divider onto the
    Wishing Wall, so the page only clips sideways (where supported) */
 @supports (overflow:clip){.pg6{overflow:visible;overflow-x:clip}}
@@ -26,10 +26,9 @@
 .p6-cl.l{left:calc(var(--pil)*-.32)}
 .p6-cl.r{right:calc(var(--pil)*-.32);transform:scaleX(-1)}
 .p6-cl img{position:absolute;display:block;height:auto}
-.p6-cl .c1{width:80%;left:-2%;bottom:16%;filter:drop-shadow(0 6px 8px rgba(20,0,6,.4))}
-.p6-cl .c2{width:72%;left:30%;bottom:26%;filter:drop-shadow(0 8px 10px rgba(20,0,6,.45))}
-.p6-cl .c3{width:54%;left:22%;bottom:5%;filter:drop-shadow(0 10px 14px rgba(20,0,6,.5))}
-.p6-cl .c4{width:66%;left:-8%;bottom:-3%;filter:drop-shadow(0 12px 16px rgba(20,0,6,.55))}
+.p6-cl .c1{width:84%;left:-6%;bottom:20%;filter:drop-shadow(0 6px 8px rgba(20,0,6,.4))}
+.p6-cl .c2{width:70%;left:34%;bottom:16%;filter:drop-shadow(0 8px 10px rgba(20,0,6,.45))}
+.p6-cl .c3{width:60%;left:4%;bottom:-2%;filter:drop-shadow(0 12px 16px rgba(20,0,6,.55))}
 /* the mihrab: arch top + straight legs stretched to the floor; cream panel inside it */
 .p6-arch{position:relative;z-index:3;width:var(--aw);min-height:calc(var(--aw)*1.05);display:flex;flex-direction:column;align-items:center;container-type:inline-size}
 .p6-in-t{position:absolute;left:0;right:0;top:0;height:calc(var(--aw)*.5314);background:#fffdf8 url(../assets/img/gate-swirl-paper.webp) 0 0/var(--swz) auto repeat;
