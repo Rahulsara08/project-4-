@@ -70,3 +70,18 @@
 .p5-div::after{transform:scaleX(-1)}
 .p5-div svg{width:clamp(26px,11cqw,46px);height:auto}
 @media (prefers-reduced-motion:reduce){.p5-lan,.p5-lan::after{animation:none}}
+/* golden lotus plants growing out of the frame's left and right borders, inside the frame (js/lotus.js): revealed from
+   the bottom up as the page scrolls, growing a little as they rise, then swaying gently */
+.p5-plant{position:absolute;z-index:0;bottom:calc(var(--fw)*.09);width:min(calc(var(--fw)*.26),300px);aspect-ratio:945/1645;pointer-events:none;
+ transform-origin:50% 100%;transform:scale(var(--pl-s,.92)) rotate(var(--pl-r,0deg));will-change:transform}
+.p5-plant.l{left:calc(var(--fw)*.055)}
+.p5-plant.r{right:calc(var(--fw)*.055)}
+.p5-plant.r img{transform:scaleX(-1)}
+.p5-plant img{display:block;width:100%;height:100%;object-fit:contain;opacity:.95;--reveal:6;
+ -webkit-mask-image:linear-gradient(to top,#000 calc(var(--reveal)*1% - 10%),transparent calc(var(--reveal)*1%));
+ mask-image:linear-gradient(to top,#000 calc(var(--reveal)*1% - 10%),transparent calc(var(--reveal)*1%));-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.p5-plant.grown{animation:p5sway 4.5s ease-in-out infinite alternate}
+.p5-plant.r.grown{animation-delay:-2.2s}
+@keyframes p5sway{from{--pl-r:-1.2deg}to{--pl-r:1.2deg}}
+@property --pl-r{syntax:"<angle>";inherits:false;initial-value:0deg}
+@media (prefers-reduced-motion:reduce){.p5-plant{--pl-s:1}.p5-plant img{--reveal:110}.p5-plant.grown{animation:none}}

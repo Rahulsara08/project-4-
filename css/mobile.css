@@ -21,3 +21,6 @@
 /* ---- page 4, Patrika Gate: keep the gate picture's true shape (it was drawn ~9% wider on phones); the torans follow
    the gate's edges, so they move in with it ---- */
 .p4-stage{--gw:calc(var(--gh)*1423/1064)}
+
+/* ---- page 5, family: the growing lotus plants are larger on phones and start just above the peacocks ---- */
+.p5-plant{width:calc(var(--fw)*.34);bottom:calc(var(--fw)*.36)}
