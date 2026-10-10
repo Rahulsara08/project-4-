@@ -1,6 +1,6 @@
 (function(){
   var root=document.getElementById('events');if(!root)return;
-  var track=document.getElementById('evTrack'),slides=[].slice.call(track.children);
+  var track=document.getElementById('evTrack'),slides=[].slice.call(track.querySelectorAll('.ev-slide'));
   var n=slides.length,GAP=5500,cur=0,timer=0,resumeT=0,hold=false,visible=true,drag=null;
   // dots under the card
   var dots=document.createElement('div');dots.className='ev-dots';dots.setAttribute('role','tablist');

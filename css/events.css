@@ -104,3 +104,36 @@
 .ev-slide.is-on .ev-body>:nth-child(5){animation-delay:.65s}
 @keyframes evtxt{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.ev-slide.is-on .ev-pic,.ev-slide.is-on .ev-art::after,.ev-slide.is-on .ev-body>*{animation:none}}
+
+/* ===== the gold frame hung on the wall: the coloured panel and card backgrounds are gone, so the palace wall shows;
+   the frame casts a soft shadow on the wall; inside it a cream mat, tinted in the event's colour, sits recessed, and
+   the illustration and details stand on it as raised layers. The frame is three pieces (top, a band of the side
+   rosettes, bottom); when the details need more height (phones) the band repeats instead of stretching. ===== */
+.events{--fw:min(94vw,900px)}
+.ev-track{width:var(--fw)!important;max-width:none!important;overflow:visible!important;background:none!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;box-sizing:border-box;padding:calc(var(--fw)*.262) calc(var(--fw)*.15) calc(var(--fw)*.225)!important;
+ min-height:calc(var(--fw)*1222/1216);align-content:center;transition:none}
+.ev-track:focus-visible{outline:2px solid #c9952e;outline-offset:-30px}
+/* the mat behind the details: recessed under the frame's inner edge */
+.ef-mat{position:absolute;z-index:0;left:calc(var(--fw)*.125);right:calc(var(--fw)*.125);top:calc(var(--fw)*.232);bottom:calc(var(--fw)*.196);
+ border-radius:calc(var(--fw)*.05);pointer-events:none;background:radial-gradient(90% 80% at 40% 40%,#fffdf6,var(--ml,#fff8ea) 55%,var(--ml2,#f2d9a6) 130%);
+ box-shadow:inset 0 10px 22px rgba(90,45,10,.32),inset 0 -6px 14px rgba(90,45,10,.18),inset 0 0 0 1px rgba(150,100,30,.25);transition:background .6s ease}
+.ev-track[data-on="haldi"]{--ml:#fff4cc;--ml2:#ffd76a}
+.ev-track[data-on="mehndi"]{--ml:#f1f8e2;--ml2:#c4e09a}
+.ev-track[data-on="sangeet"]{--ml:#fdf0f8;--ml2:#eebbdc}
+.ev-track[data-on="phere"]{--ml:#fff1e6;--ml2:#ffbf94}
+.ev-track[data-on="reception"]{--ml:#fff8ea;--ml2:#eed09a}
+/* the frame on top, casting its shadow onto the wall */
+.ef{position:absolute;z-index:3;inset:0;pointer-events:none;filter:drop-shadow(10px 18px 14px rgba(60,25,5,.42)) drop-shadow(0 2px 2px rgba(60,25,5,.35))}
+.ef b{position:absolute;left:0;right:0;background:center top/100% 100% no-repeat}
+.ef .ef-t{top:0;height:calc(var(--fw)*.4309);background-image:url(../assets/img/ev-frame-t.webp)}
+.ef .ef-m{top:calc(var(--fw)*.4301);bottom:calc(var(--fw)*.3742);background:url(../assets/img/ev-frame-m.webp) center top/100% auto;background-repeat:no-repeat round}
+.ef .ef-b{bottom:0;height:calc(var(--fw)*.375);background-image:url(../assets/img/ev-frame-b.webp)}
+/* the details on the mat: no card any more, just raised layers */
+.ev-slide{position:relative;z-index:1}
+.ev-slide .ev-card{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+.ev-slide .ev-card::before,.ev-slide .ev-card::after{display:none!important}
+.ev-slide .ev-art{box-shadow:0 14px 22px rgba(80,35,5,.32),0 3px 6px rgba(80,35,5,.25),inset 0 0 0 4px rgba(255,250,240,.85),inset 0 0 0 5.5px color-mix(in srgb,var(--m) 60%,transparent)!important}
+.ev-slide .ev-title{text-shadow:0 1px 0 rgba(255,255,255,.8),0 4px 8px rgba(90,40,10,.22)}
+.ev-slide .ev-body{text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.ev-dots{position:relative;z-index:4;margin-top:clamp(4px,1.4vw,14px)}
