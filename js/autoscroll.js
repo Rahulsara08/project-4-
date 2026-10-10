@@ -10,13 +10,13 @@
   function run(){
     if(started||stop)return;started=true;
     var gate=document.getElementById('p2');if(!gate)return;
-    var from=scrollY,to=gate.offsetTop,dist=to-from;if(dist<40)return;
+    var from=scrollY,dist=gate.offsetTop-from;if(dist<40)return;
     var dur=Math.min(16000,Math.max(6000,dist/110*1000)),t0=performance.now();
     on();
     function step(now){
       if(stop)return;
       var k=Math.min(1,(now-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
-      scrollTo(0,from+dist*e);
+      scrollTo(0,from+(gate.offsetTop-from)*e);        // re-read: phones may still be settling the layout
       if(k<1)raf=requestAnimationFrame(step);else off();
     }
     raf=requestAnimationFrame(step);

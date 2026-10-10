@@ -1,7 +1,7 @@
 /* Meet the Bride & Groom: burgundy paisley page between Family and RSVP, the heading and a photo carousel */
 .pgc{position:relative;z-index:3;overflow:hidden;--rodh:clamp(16px,2.4vw,34px);box-sizing:border-box;
  padding:calc(var(--rodh) + clamp(44px,7vw,90px)) 0 clamp(60px,9vw,120px);text-align:center;
- background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
+ background:#5c0f22;clip-path:inset(0)}
 .pgc::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 70% at 50% 50%,transparent 38%,rgba(35,0,12,.55))}
 .pc-rod{position:absolute;z-index:4;left:0;right:0;top:0;height:var(--rodh);background:url(../assets/img/rsvp-rod.webp) center/100% 100% no-repeat;filter:drop-shadow(0 6px 8px rgba(20,0,6,.55))}
 .pc-head{position:relative;z-index:2;padding:0 16px}

@@ -35,6 +35,7 @@ async function main() {
     const errors = [];
     page.on('pageerror', e => errors.push(String(e.message || e)));
     page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
     await page.setViewport({ width: w, height: h, deviceScaleFactor: 1, isMobile: w < 768, hasTouch: w < 1024 });
 
     // --- opening animation frames

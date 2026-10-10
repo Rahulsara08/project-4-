@@ -7,8 +7,8 @@
   function es(t){return t*t*(3-2*t)}
   function setVars(){
     var st=document.getElementById('stage'),W=st.clientWidth||innerWidth,H=innerHeight;
-    st.style.setProperty('--hw',Math.max(W*1.02,1.3*H)+'px');
-    if(hawa.naturalWidth)st.style.setProperty('--har',(hawa.naturalHeight/hawa.naturalWidth*1.18).toFixed(4));
+    st.style.setProperty('--hw',(window.MOBILE&&MOBILE.on()?MOBILE.hawaW(W,H):Math.max(W*1.02,1.3*H))+'px');
+    if(hawa.naturalWidth)st.style.setProperty('--har',(hawa.naturalHeight/hawa.naturalWidth*(window.MOBILE&&MOBILE.on()?1:1.18)).toFixed(4));   // phones: true shape, no stretch
     st.style.setProperty('--th',Math.min(.74*H,1.18*W)+'px');
     // phones: the screen gets taller when the address bar hides; size the hero to the tallest screen so nothing shows under it
     if(!lvh){lvh=document.createElement('div');lvh.style.cssText='position:fixed;left:0;top:0;width:0;height:100vh;height:100lvh;visibility:hidden;pointer-events:none';document.body.appendChild(lvh)}
@@ -19,7 +19,7 @@
   function refit(){if(rq)return;rq=requestAnimationFrame(doRefit)}
   function onSize(){if(innerWidth!==lw||innerHeight!==lh){lw=innerWidth;lh=innerHeight;refit()}}
   function layout(){
-    vh=innerHeight;
+    vh=document.getElementById('stage').offsetHeight||innerHeight;   // the stage is as tall as the tallest phone screen
     var H=hawa.offsetHeight||vh*1.5;
     T=Math.max(1,H-0.4*vh-3);                          // distance the building travels = scroll distance (1:1)
     track.style.height=(vh+T)+'px';

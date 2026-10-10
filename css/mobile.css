@@ -1,0 +1,23 @@
+/* ===== Mobile layer (phones up to 767px; this file is loaded only on phones, so laptops and desktops are untouched) ===== */
+
+/* ---- page 2, the gate: show the whole gate (was 137.5% of the screen wide, cutting off its outer pillars), and let the
+   pillars grow by repeating a seamless stretch of their shaft instead of stretching the picture ---- */
+.gate{width:115vw}
+/* Shubh / Laabh sit over the gate's two side domes (32.5% / 67.5% across the gate) */
+.sl-l{left:29.875%}
+.sl-r{left:70.125%}
+.sl{font-size:clamp(1.9rem,9.5vw,3.4rem)}
+/* the middle piece: its top (pillar capitals) and bottom stay as drawn; the shaft between repeats a whole number of
+   times (background-repeat: round), so nothing is stretched out of shape */
+.gimg .gm{box-sizing:border-box;padding:calc(var(--nh)*.19943) 0 calc(var(--nh)*.10781);
+ background:url(../assets/img/gate-mid-tile.webp) center top/100% auto;background-repeat:no-repeat round;
+ background-origin:content-box;background-clip:content-box}
+.gimg .gm::before,.gimg .gm::after{content:"";position:absolute;left:0;right:0;background:center/100% 100% no-repeat}
+.gimg .gm::before{top:0;height:calc(var(--nh)*.19943 + 1px);background-image:url(../assets/img/gate-mid-a.webp)}
+.gimg .gm::after{bottom:0;height:calc(var(--nh)*.10781 + 1px);background-image:url(../assets/img/gate-mid-b.webp)}
+/* the invitation text between the pillars (the opening is narrower now, so a touch more room) */
+.gnote{padding:0 22.5%}
+
+/* ---- page 4, Patrika Gate: keep the gate picture's true shape (it was drawn ~9% wider on phones); the torans follow
+   the gate's edges, so they move in with it ---- */
+.p4-stage{--gw:calc(var(--gh)*1423/1064)}

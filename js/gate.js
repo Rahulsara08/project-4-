@@ -8,7 +8,7 @@
   function cl(x){return Math.min(1,Math.max(0,x))}
   function es(t){return t*t*(3-2*t)}
   function layout(){
-    var vh=innerHeight,w=innerWidth*1.375,nh=w*AR;
+    var vh=innerHeight,w=gate.offsetWidth||innerWidth*1.375,nh=w*AR;   // 137.5vw on desktop; css/mobile.css narrows it on phones
     gate.style.setProperty('--nh',nh.toFixed(1)+'px');
     var top=nh*.19,need=0,sky=document.querySelector('.wall .skyline');
     // the invitation fills the gate from under the arch down to where the palace skyline (rising over the base) becomes visible

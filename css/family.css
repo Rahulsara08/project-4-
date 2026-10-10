@@ -4,7 +4,7 @@
    shape) to hold both families' elephant frames */
 .pg5{position:relative;z-index:3;overflow-x:clip;display:flex;flex-direction:column;align-items:center;padding:calc(var(--lw)*.13) 16px 12vh;box-sizing:border-box;
  --lw:clamp(150px,34vw,400px);--fw:calc(100vw - 2.4cm);
- background:#5c0f22 url(../assets/img/burgundy-paisley.webp) 0 0/min(760px,100vw) auto repeat}
+ background:#5c0f22;clip-path:inset(0)}
 .pg5::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(35,0,12,.55),transparent 22%),radial-gradient(120% 70% at 50% 45%,transparent 40%,rgba(35,0,12,.45))}
 /* lantern on a wall bracket, fixed to the right edge; the lantern sways a little and glows */
 .p5-lamp{position:absolute;z-index:4;top:0;right:0;width:var(--lw);aspect-ratio:1025/1051;pointer-events:none}
