@@ -14,15 +14,17 @@
 
 /* ---- the runway ---- */
 .rw-view{position:relative;flex:1;min-height:0}
-.rw-track{--ph:min(calc((100svh - var(--rodh) - 150px)*.4),440px);--pw:calc(var(--ph)*.8);--stem:clamp(16px,3vh,34px);--gap:clamp(14px,2.2vw,30px);
- position:absolute;top:0;bottom:0;left:0;display:flex;align-items:stretch;padding:0 calc(50vw - var(--pw)/2);will-change:transform}
-.rw-line{position:absolute;z-index:1;left:calc(50vw - var(--pw)*.5 - 40px);right:calc(50vw - var(--pw)*.5 - 40px);top:50%;height:3px;margin-top:-1.5px;pointer-events:none;border-radius:2px;
+.rw-track{--ph:min(calc((100svh - var(--rodh) - 150px)*.4),440px);--pw:calc(var(--ph)*.8);--stem:clamp(16px,3vh,34px);--gap:clamp(56px,7vw,120px);--cph:calc(var(--ph)*1.25);--cpw:calc(var(--cph)*.8);
+ position:absolute;top:0;bottom:0;left:0;display:flex;align-items:stretch;padding:0 calc(50vw - var(--cpw)/2 - var(--gap)/2);will-change:transform}
+/* the line runs from the start photo to the end photo (placed by js/runway.js) */
+.rw-line{position:absolute;z-index:1;left:0;width:0;top:50%;height:3px;margin-top:-1.5px;pointer-events:none;border-radius:2px;
  background:linear-gradient(90deg,rgba(242,201,110,0),#f2c96e 6%,#ffe7a8 50%,#f2c96e 94%,rgba(242,201,110,0));box-shadow:0 0 10px rgba(242,201,110,.75),0 0 2px #fff3c4}
 .rw-step{position:relative;z-index:2;flex:none;width:calc(var(--pw) + var(--gap));margin:0}
 /* stem and diamond node joining each photo to the line */
 .rw-step::before{content:"";position:absolute;left:50%;width:2px;margin-left:-1px;height:var(--stem);background:rgba(242,201,110,.55);transition:background .3s}
-.rw-step:nth-child(odd)::before{bottom:50%}
-.rw-step:nth-child(even)::before{top:50%}
+.rw-step.up::before{bottom:50%}
+.rw-step.down::before{top:50%}
+.rw-cap::before{display:none}
 .rw-step::after{content:"";position:absolute;z-index:3;left:50%;top:50%;width:12px;height:12px;margin:-7px 0 0 -7px;transform:rotate(45deg);border-radius:2px;
  background:#5c0f22;border:2px solid rgba(242,201,110,.7);box-shadow:0 0 0 3px rgba(92,15,34,.6);transition:transform .3s,background .3s,box-shadow .3s}
 .rw-step.on::before{background:#ffe7a8}
@@ -31,17 +33,21 @@
 .rw-photo{position:absolute;left:calc(var(--gap)/2);width:var(--pw);height:var(--ph);padding:0;border:0;border-radius:16px;overflow:hidden;cursor:zoom-in;background:#3a0712;
  box-shadow:0 0 0 2px #e8c97a,0 0 0 6px rgba(92,15,34,.85),0 0 0 7.5px rgba(232,201,122,.5),0 16px 28px rgba(20,0,6,.55);
  transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;-webkit-tap-highlight-color:transparent}
-.rw-step:nth-child(odd) .rw-photo{bottom:calc(50% + var(--stem))}
-.rw-step:nth-child(even) .rw-photo{top:calc(50% + var(--stem))}
+.rw-step.up .rw-photo{bottom:calc(50% + var(--stem))}
+.rw-step.down .rw-photo{top:calc(50% + var(--stem))}
+/* the first and last photos sit on the line itself, a little larger: the start and the end of the journey */
+.rw-cap{width:calc(var(--cpw) + var(--gap))}
+.rw-cap .rw-photo{width:var(--cpw);height:var(--cph);top:50%;margin-top:calc(var(--cph)/-2)}
+.rw-cap::after{display:none}
 .rw-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 28%;transition:transform .6s ease;pointer-events:none}
 .rw-photo:hover img{transform:scale(1.05)}
 .rw-photo:focus-visible{outline:2px solid #fff3c4;outline-offset:6px}
 .rw-step.on .rw-photo{transform:scale(1.04);box-shadow:0 0 0 2px #ffe7a8,0 0 0 6px rgba(92,15,34,.85),0 0 0 7.5px #f2c96e,0 0 24px rgba(242,201,110,.45),0 18px 30px rgba(20,0,6,.6)}
 /* the paper plane (its nose points up-right in the drawing, so the inner element turns it level) */
-.rw-plane{position:absolute;z-index:5;left:0;top:50%;width:clamp(60px,9vw,110px);aspect-ratio:120/86;margin:calc(clamp(60px,9vw,110px)*-.358) 0 0 calc(clamp(60px,9vw,110px)*-.5);pointer-events:none;will-change:transform}
+.rw-plane{position:absolute;z-index:5;left:0;top:50%;width:clamp(64px,9vw,120px);aspect-ratio:160/100;margin:calc(clamp(64px,9vw,120px)*-.31) 0 0 calc(clamp(64px,9vw,120px)*-.5);pointer-events:none;will-change:transform}
 .rw-flip{width:100%;height:100%;transition:transform .25s ease-out}
 .rw-flip.back{transform:scaleX(-1)}
-.rw-plane svg{display:block;width:100%;height:100%;transform:rotate(19deg);filter:drop-shadow(0 10px 14px rgba(20,0,6,.45))}
+.rw-plane svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 1px rgba(20,0,6,.25)) drop-shadow(0 14px 14px rgba(20,0,6,.4))}
 
 /* ---- tap to view: the photo opens large over the blurred page ---- */
 .rw-lb{position:fixed;z-index:2000;inset:0;display:grid;place-items:center;padding:max(20px,env(safe-area-inset-top)) 16px;cursor:zoom-out;
