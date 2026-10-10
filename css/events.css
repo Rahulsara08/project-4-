@@ -109,7 +109,7 @@
    the frame casts a soft shadow on the wall; inside it a cream mat, tinted in the event's colour, sits recessed, and
    the illustration and details stand on it as raised layers. The frame is three pieces (top, a band of the side
    rosettes, bottom); when the details need more height (phones) the band repeats instead of stretching. ===== */
-.events{--fw:min(94vw,900px)}
+.events{--fw:min(94vw,740px,80vh)}
 .ev-track{width:var(--fw)!important;max-width:none!important;overflow:visible!important;background:none!important;border:0!important;border-radius:0!important;
  box-shadow:none!important;box-sizing:border-box;padding:calc(var(--fw)*.262) calc(var(--fw)*.115) calc(var(--fw)*.225)!important;
  min-height:calc(var(--fw)*1222/1216);align-content:center;transition:none}

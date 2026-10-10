@@ -49,7 +49,8 @@
 .p6-btn:hover,.p6-btn:focus-visible{transform:translateY(-2px);box-shadow:0 12px 24px rgba(107,31,42,.42),inset 0 0 0 2px #f2c96e;outline:none}
 .p6-btn::after{content:"";position:absolute;inset:-6px;border-radius:inherit;border:2px solid rgba(201,162,77,.6);animation:p6pulse 2.2s ease-out infinite}
 @keyframes p6pulse{from{transform:scale(.92);opacity:1}to{transform:scale(1.18);opacity:0}}
-.p6-btn.done{background:linear-gradient(180deg,#2f8f5b,#1f6b44);cursor:default}
+.p6-btn.done{background:linear-gradient(180deg,#fff1c4 0%,#f2c96e 45%,#c9952e 100%);color:#6b1f2a;cursor:default;
+ box-shadow:0 8px 18px rgba(107,31,42,.28),inset 0 0 0 2px rgba(122,21,48,.55),inset 0 0 0 4px rgba(255,241,196,.6)}
 .p6-btn.done::after{display:none}
 .p6-thanks{min-height:1.4em;margin:.2em 0 0;font:400 clamp(20px,5.5cqw,38px)/1.2 "Great Vibes",cursive;color:#7a1530;opacity:0;transform:translateY(8px);transition:opacity .6s,transform .6s}
 .p6-thanks.in{opacity:1;transform:none}

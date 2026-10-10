@@ -18,7 +18,7 @@
 .p8-blk::before{content:"";position:absolute;z-index:-1;inset:-6% -14%;background:radial-gradient(closest-side,rgba(234,218,175,.95),rgba(234,218,175,.8) 62%,rgba(234,218,175,0))}
 .p8-orn{display:block;width:clamp(44px,6vw,64px);height:auto;margin:clamp(6px,1.4vw,16px) auto}
 .p8-hi{font:400 clamp(15px,1.9vw,22px)/1.2 "Amita","Tiro Devanagari Hindi",serif;letter-spacing:.06em;color:#b8771a}
-.p8-h{margin-top:.25em!important;font:700 clamp(14px,1.8vw,20px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#7a1530}
+.p8-h{margin-top:.75em!important;font:700 clamp(14px,1.8vw,20px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#7a1530}
 .p8-big{margin-top:.25em!important;font:400 clamp(32px,5vw,56px)/1.1 "Yatra One",Georgia,serif;
  background:linear-gradient(180deg,#a8243f,#7a1530 55%,#5a0f20);-webkit-background-clip:text;background-clip:text;color:transparent}
 .p8-txt{margin-top:.45em!important;font:600 clamp(16px,1.9vw,21px)/1.55 "Cormorant Garamond",Georgia,serif;color:#5a3a30}

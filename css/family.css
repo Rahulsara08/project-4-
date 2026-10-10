@@ -85,3 +85,10 @@
 @keyframes p5sway{from{--pl-r:-1.2deg}to{--pl-r:1.2deg}}
 @property --pl-r{syntax:"<angle>";inherits:false;initial-value:0deg}
 @media (prefers-reduced-motion:reduce){.p5-plant{--pl-s:1}.p5-plant img{--reveal:110}.p5-plant.grown{animation:none}}
+/* computers only: fills the space between "Two families, one bond" and the two families */
+.p5-unite{display:none}
+@media (min-width:768px){
+ .p5-unite{position:absolute;left:24%;right:24%;top:calc(var(--fw)*.43);display:flex;flex-direction:column;align-items:center;gap:.4em;pointer-events:none}
+ .p5-unite span{font:400 clamp(30px,3.6cqw,52px)/1.2 "Great Vibes",cursive;color:#8a1c36;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+ .p5-unite img{display:block;width:min(calc(var(--fw)*.16),230px);height:auto;filter:drop-shadow(0 8px 12px rgba(90,30,10,.25))}
+}
