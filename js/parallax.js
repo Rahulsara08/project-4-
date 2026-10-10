@@ -5,8 +5,13 @@
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var items=[],ticking=false;
+  // phones: no scroll parallax at all - each page's background and decorations scroll together with the page, so
+  // nothing trails behind the finger (script-moved layers lag a frame behind a phone's native scrolling)
+  function phone(){return window.MOBILE&&MOBILE.on()}
   function measure(){
-    items=[].map.call(document.querySelectorAll('[data-par],[data-par-bg]'),function(el){
+    var all=document.querySelectorAll('[data-par],[data-par-bg]');
+    if(phone()){[].forEach.call(all,function(el){el.style.translate='';el.style.backgroundPositionY=''});items=[];return}
+    items=[].map.call(all,function(el){
       var bg=el.hasAttribute('data-par-bg');if(!bg)el.style.translate='';
       var r=el.getBoundingClientRect();
       return {el:el,bg:bg,k:parseFloat(el.getAttribute(bg?'data-par-bg':'data-par'))||0,top:r.top+scrollY,h:r.height};
@@ -22,7 +27,7 @@
       else it.el.style.translate='0 '+((it.top+it.h/2-mid)*it.k).toFixed(1)+'px';
     }
   }
-  function kick(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
+  function kick(){if(!ticking&&items.length){ticking=true;requestAnimationFrame(update)}}
   addEventListener('scroll',kick,{passive:true});
   var rt=0;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(measure,150)});
   addEventListener('load',function(){measure();setTimeout(measure,1200)});
