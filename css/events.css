@@ -143,3 +143,24 @@
 .ev-slide .ev-title{text-shadow:0 1px 0 rgba(255,255,255,.8),0 4px 8px rgba(90,40,10,.22)}
 .ev-slide .ev-body{text-shadow:0 1px 0 rgba(255,255,255,.6)}
 .ev-dots{position:relative;z-index:4;margin-top:clamp(4px,1.4vw,14px)}
+
+/* ---- "more events" indicators: gold arrow buttons on the frame's sides (the next one nudges until the guest
+   changes the event), a 1 / 5 counter in the dots pill and a short hint underneath ---- */
+.ev-arr{position:absolute;z-index:6;top:50%;width:clamp(40px,5.4vw,54px);aspect-ratio:1;margin-top:calc(clamp(40px,5.4vw,54px)/-2);padding:0;border:0;border-radius:50%;cursor:pointer;
+ display:grid;place-items:center;color:#6b1f2a;background:radial-gradient(circle at 35% 30%,#fff6d6,#f2c96e 55%,#b8862c);
+ box-shadow:0 6px 14px rgba(60,20,5,.4),inset 0 0 0 2px rgba(122,21,48,.55),inset 0 0 0 4px rgba(255,241,196,.7);transition:transform .25s,box-shadow .25s}
+.ev-arr svg{width:46%;height:46%}
+.ev-arr.prev{left:calc(var(--fw)*-.09)}
+.ev-arr.prev svg{transform:scaleX(-1)}
+.ev-arr.next{right:calc(var(--fw)*-.09)}
+.ev-arr:hover{transform:scale(1.08);box-shadow:0 9px 18px rgba(60,20,5,.45),inset 0 0 0 2px rgba(122,21,48,.7),inset 0 0 0 4px rgba(255,241,196,.8)}
+.ev-arr:focus-visible{outline:2px solid #fff1c4;outline-offset:3px}
+.events:not(.ev-seen) .ev-arr.next{animation:evnudge 1.6s ease-in-out infinite}
+@keyframes evnudge{0%,100%{translate:0 0}50%{translate:7px 0}}
+.ev-count{align-self:center;margin-left:4px;padding-left:10px;border-left:1px solid rgba(169,118,31,.5);font:700 12px/1 "Cinzel",Georgia,serif;letter-spacing:.12em;color:#6b1f2a}
+.ev-hint{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;gap:.45em;width:max-content;max-width:calc(100% - 32px);box-sizing:border-box;margin:8px auto 0;padding:5px 14px;border-radius:999px;
+ background:rgba(107,31,42,.82);font:italic 600 clamp(14px,1.5vw,17px)/1.2 "Cormorant Garamond",Georgia,serif;color:#fff3d6;transition:opacity .6s}
+.ev-hand{display:inline-block;font-style:normal;animation:evswipe 1.8s ease-in-out infinite}
+@keyframes evswipe{0%,100%{transform:translateX(-5px) rotate(-10deg)}50%{transform:translateX(7px) rotate(10deg)}}
+.events.ev-seen .ev-hint{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.events .ev-arr.next,.ev-hand{animation:none}}

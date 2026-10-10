@@ -57,3 +57,8 @@
 
 /* ---- Wishing Wall: the page is only as tall as its content, so the palace sits right on the divider below ---- */
 .pg7{min-height:0}
+
+/* ---- events: the arrows sit on the frame's gold sides (no room beside it on a phone) ---- */
+.ev-arr{width:38px;margin-top:-19px}
+.ev-arr.prev{left:calc(var(--fw)*.005)}
+.ev-arr.next{right:calc(var(--fw)*.005)}
