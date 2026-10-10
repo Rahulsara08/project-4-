@@ -10,6 +10,7 @@
   var SPEED=1.15;        // tweak: scrolling needed per pixel of runway travel (bigger = slower)
   var SWOOP=.42;         // tweak: how far the plane swoops towards each photo (share of the photo height)
   var steps=[].slice.call(track.querySelectorAll('.rw-step')),photos=steps.map(function(s){return s.querySelector('.rw-photo')});
+  var qStart=document.getElementById('rqStart'),qEnd=document.getElementById('rqEnd'),lotus=qEnd?[].slice.call(qEnd.querySelectorAll('.rq-lotus')):[];
   var line=track.querySelector('.rw-line'),dist=0,way=[],stageH=0,lastP=-1,dir=1,active=-1,ticking=false,cur=-1;
 
   function measure(){
@@ -38,6 +39,7 @@
     var dx=dv(p0.x,p1.x,p2.x,p3.x),dy=dv(p0.y,p1.y,p2.y,p3.y);
     return {x:c(p0.x,p1.x,p2.x,p3.x),y:c(p0.y,p1.y,p2.y,p3.y),a:Math.atan2(dy,dx)*180/Math.PI};
   }
+  function secOn(){var r=sec.getBoundingClientRect();return r.top<innerHeight*.6&&r.bottom>innerHeight*.4}
   function target(){var range=sec.offsetHeight-stageH;return range>0?Math.max(0,Math.min(1,(scrollY-sec.offsetTop)/range)):0}
   var lastT=0;
   function update(now){
@@ -54,6 +56,12 @@
     // the photo the plane is passing lights up
     var best=-1,bd=1e9;for(var i=1;i<way.length-1;i++){var dd=Math.abs(way[i].x-f.x);if(dd<bd){bd=dd;best=i}}
     if(best!==active){if(active>=0)steps[active].classList.remove('on');active=best;if(active>=0)steps[active].classList.add('on')}
+    // the quotes: each comes in as it is on screen; the closing quote's lotus grows over the last part of the runway
+    var vw=innerWidth;
+    [qStart,qEnd].forEach(function(q){if(!q)return;var r=q.getBoundingClientRect(),vis=r.right>vw*.12&&r.left<vw*.88&&secOn();
+      if(vis)q.classList.add('in');});
+    if(lotus.length&&qEnd){var r=qEnd.getBoundingClientRect(),k=Math.max(0,Math.min(1,(vw-r.left)/Math.max(1,r.width)));k=k*k*(3-2*k);
+      lotus.forEach(function(l){l.style.setProperty('--reveal',(6+104*k).toFixed(1));l.style.setProperty('--ls',(.92+.08*k).toFixed(3));l.classList.toggle('grown',k>=.999)})}
     if(cur!==t)requestAnimationFrame(update);else ticking=false;
   }
   function kick(){if(!ticking){ticking=true;lastT=performance.now();requestAnimationFrame(update)}}

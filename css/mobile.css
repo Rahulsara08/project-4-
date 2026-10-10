@@ -24,3 +24,7 @@
 
 /* ---- page 5, family: the growing lotus plants are larger on phones and start just above the peacocks ---- */
 .p5-plant{width:calc(var(--fw)*.34);bottom:calc(var(--fw)*.36)}
+
+/* ---- Meet the Bride & Groom: on a phone each quote takes the whole screen width (it is too narrow beside a photo) ---- */
+.rw-quote{width:100vw;padding:0 8vw}
+.rq-lotus{height:min(46%,300px);bottom:2%}
