@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="css/events.css?v=7bb0062e">
   <link rel="stylesheet" href="css/patrika.css?v=e87ec174">
   <link rel="stylesheet" href="css/family.css?v=bc67e421">
-  <link rel="stylesheet" href="css/couple.css?v=1af41ff5">
+  <link rel="stylesheet" href="css/couple.css?v=51d56af7">
   <link rel="stylesheet" href="css/rsvp.css?v=afbbd46c">
   <link rel="stylesheet" href="css/end.css?v=93dfe684">
   <link rel="stylesheet" href="css/garden.css?v=4e061333">
@@ -187,25 +187,35 @@
 <section class="pgc" id="pgc" aria-labelledby="pgct">
   <i class="bg-fix" aria-hidden="true"></i>
   <i class="pc-rod" aria-hidden="true"></i>
-  <div class="pc-head">
-    <h2 class="pc-title rv" id="pgct">Meet the Bride &amp; Groom</h2>
-    <svg class="pc-orn rv" viewBox="-60 -10 120 20" aria-hidden="true"><path d="M-56 0H-16M16 0H56" stroke="#e8c97a" stroke-width="1"/><path d="M0 8Q-5 1 0-8Q5 1 0 8Z" fill="#f2c96e"/><path d="M0 8Q-11 5-13-3Q-5-2 0 8Z" fill="#e8a24a"/><path d="M0 8Q11 5 13-3Q5-2 0 8Z" fill="#e8a24a"/></svg>
-  </div>
-  <!-- photo carousel: one photo at a time in the middle, its neighbours smaller; slides every 5 s, drag or swipe to move -->
-  <div class="tc rv" id="tc" role="region" aria-roledescription="carousel" aria-label="Photos of Shubh and Ayushi">
-    <div class="tc-view">
-      <div class="tc-strip" id="tcStrip">
-      <div class="tc-slide"><img src="assets/img/couple-1.webp" alt="Running hand in hand through the garden" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-2.webp" alt="Smiles and sunglasses at the mehndi" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-3.webp" alt="A kiss on the hand" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-4.webp" alt="A flower and a shy smile" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-5.webp" alt="Down on one knee" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-6.webp" alt="Under a shower of petals and colour" draggable="false" loading="lazy" decoding="async"></div>
-      <div class="tc-slide"><img src="assets/img/couple-7.webp" alt="Raising a toast with friends" draggable="false" loading="lazy" decoding="async"></div>
+  <!-- the stage holds still while the page scrolls past it; the runway of photos travels from right to left and a
+       paper plane flies along a curve over them (js/runway.js) -->
+  <div class="rw-stage" id="rwStage">
+    <div class="pc-head">
+      <h2 class="pc-title rv" id="pgct">Meet the Bride &amp; Groom</h2>
+      <svg class="pc-orn rv" viewBox="-60 -10 120 20" aria-hidden="true"><path d="M-56 0H-16M16 0H56" stroke="#e8c97a" stroke-width="1"/><path d="M0 8Q-5 1 0-8Q5 1 0 8Z" fill="#f2c96e"/><path d="M0 8Q-11 5-13-3Q-5-2 0 8Z" fill="#e8a24a"/><path d="M0 8Q11 5 13-3Q5-2 0 8Z" fill="#e8a24a"/></svg>
+    </div>
+    <div class="rw-view" id="rwView">
+      <div class="rw-track" id="rwTrack">
+        <i class="rw-line" aria-hidden="true"></i>
+        <div class="rw-plane" id="rwPlane" aria-hidden="true"><div class="rw-flip" id="rwFlip">
+          <svg viewBox="0 0 120 86"><defs><linearGradient id="rwP1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#f2d9a0"/></linearGradient><linearGradient id="rwP2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9a441"/><stop offset="1" stop-color="#b8802a"/></linearGradient></defs>
+            <path d="M2 44 118 4 46 54Z" fill="url(#rwP1)" stroke="#c9952e" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M46 54 118 4 60 82Z" fill="url(#rwP2)" stroke="#a8743a" stroke-width="1.2" stroke-linejoin="round"/>
+            <path d="M46 54 52 70 60 82" fill="none" stroke="#7a1530" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M2 44 46 54" fill="none" stroke="#a8243f" stroke-width="1.1" opacity=".55"/></svg>
+        </div></div>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 1"><img src="assets/img/couple-1.webp" alt="Running hand in hand through the garden" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 2"><img src="assets/img/couple-2.webp" alt="Smiles and sunglasses at the mehndi" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 3"><img src="assets/img/couple-3.webp" alt="A kiss on the hand" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 4"><img src="assets/img/couple-4.webp" alt="A flower and a shy smile" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 5"><img src="assets/img/couple-5.webp" alt="Down on one knee" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 6"><img src="assets/img/couple-6.webp" alt="Under a shower of petals and colour" loading="lazy" decoding="async"></button></figure>
+        <figure class="rw-step"><button class="rw-photo" type="button" aria-label="View photo 7"><img src="assets/img/couple-7.webp" alt="Raising a toast with friends" loading="lazy" decoding="async"></button></figure>
       </div>
     </div>
-    <div class="tc-thumbs" id="tcDots"></div>
   </div>
+  <!-- tap a photo: it opens large over a blurred page; tap anywhere (or Esc) to close -->
+  <div class="rw-lb" id="rwLb" role="dialog" aria-modal="true" aria-label="Photo" hidden><img id="rwLbImg" alt=""></div>
 </section>
 <section class="pg6" id="pg6" aria-labelledby="p6title">
   <i class="p6-rod" aria-hidden="true"></i>
@@ -336,7 +346,7 @@
 <script src="js/rsvp.js?v=f7a66b6b"></script>
 <script src="js/invitation.js?v=53d43dc0"></script>
 <script src="js/wishes.js?v=0dee0122"></script>
-<script src="js/carousel.js?v=8b8c4593"></script>
+<script src="js/runway.js?v=fe24f476"></script>
 <script src="js/lotus.js?v=f79813e9"></script>
 <script src="js/closing.js?v=7e6d3b4a"></script>
 <script src="js/mountains.js?v=aea14082"></script>
