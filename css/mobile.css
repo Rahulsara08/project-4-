@@ -26,8 +26,12 @@
 .p5-plant{width:calc(var(--fw)*.34);bottom:calc(var(--fw)*.36)}
 
 /* ---- Meet the Bride & Groom: on a phone each quote takes the whole screen width (it is too narrow beside a photo) ---- */
-.rw-quote{width:100vw;padding:0 8vw}
-.rq-lotus{height:min(46%,300px);bottom:2%}
+.rw-quote{width:100vw}
+.q-start{padding:8vh 0 0 7vw}
+.q-end{padding:0 7vw 10vh 0}
+.q-start .rq-in,.q-end .rq-in{width:80vw}
+.rq-lotus{height:min(62%,420px);bottom:0}
+.rw-note span{font-size:clamp(22px,6.4vw,30px)}
 
 /* ---- events: the frame almost full width; illustration above-left, details beside it, slightly smaller type ---- */
 .events{--fw:98vw}

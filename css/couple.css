@@ -92,3 +92,25 @@ html.rw-lock,html.rw-lock body{overflow:hidden}
 @keyframes rqsway{from{--lr:-1.4deg}to{--lr:1.4deg}}
 @property --lr{syntax:"<angle>";inherits:false;initial-value:0deg}
 @media (prefers-reduced-motion:reduce){.rq-in>*{opacity:1;transform:none;transition:none}.rq-lotus{--reveal:110;--ls:1}.rq-lotus.grown{animation:none}}
+
+/* ---- short quotes in the empty spaces beside the line (below it near the start and end, above it in the middle);
+   each fades up when it comes on screen ---- */
+.rw-note{position:absolute;z-index:3;left:0;right:0;margin:0;padding:0 6px;text-align:center;pointer-events:none;
+ display:flex;flex-direction:column;align-items:center;gap:.35em;opacity:0;transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rw-note.below{top:calc(50% + var(--stem) + clamp(14px,4vh,48px));transform:translateY(18px)}
+.rw-note.above{bottom:calc(50% + var(--stem) + clamp(14px,4vh,48px));transform:translateY(-18px);flex-direction:column-reverse}
+.rw-note.in{opacity:1;transform:none}
+.rw-note span{font:400 clamp(24px,3vw,40px)/1.15 "Great Vibes",cursive;
+ background:linear-gradient(180deg,#fff6d8,#f6d48a 50%,#d9a441);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 3px rgba(20,0,6,.85))}
+.rw-note i{display:block;width:clamp(40px,5vw,64px);height:12px;background:
+ radial-gradient(circle,#f2c96e 0 2.4px,transparent 3px) center/12px 12px no-repeat,
+ linear-gradient(90deg,transparent,#e8c97a 30%,transparent 46%,transparent 54%,#e8c97a 70%,transparent) center/100% 1px no-repeat}
+@media (prefers-reduced-motion:reduce){.rw-note{opacity:1;transform:none;transition:none}}
+
+/* ---- the opening quote sits towards the top left, the closing one towards the bottom right; the closing quote's
+   lotus plants grow from the very bottom, touching the divider of the next page ---- */
+.q-start{align-items:flex-start;justify-content:flex-start;padding:clamp(18px,6vh,70px) 0 0 clamp(16px,3vw,48px)}
+.q-start .rq-in{width:min(100%,420px)}
+.q-end{align-items:flex-end;justify-content:flex-end;padding:0 clamp(16px,3vw,48px) clamp(26px,9vh,96px) 0}
+.q-end .rq-in{width:min(100%,420px)}
+.rq-lotus{bottom:0;height:min(92%,640px)}

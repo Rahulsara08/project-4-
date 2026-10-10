@@ -10,7 +10,7 @@
   var SPEED=1.15;        // tweak: scrolling needed per pixel of runway travel (bigger = slower)
   var SWOOP=.42;         // tweak: how far the plane swoops towards each photo (share of the photo height)
   var steps=[].slice.call(track.querySelectorAll('.rw-step')),photos=steps.map(function(s){return s.querySelector('.rw-photo')});
-  var qStart=document.getElementById('rqStart'),qEnd=document.getElementById('rqEnd'),lotus=qEnd?[].slice.call(qEnd.querySelectorAll('.rq-lotus')):[];
+  var notes=[].slice.call(track.querySelectorAll('.rw-note')),qStart=document.getElementById('rqStart'),qEnd=document.getElementById('rqEnd'),lotus=qEnd?[].slice.call(qEnd.querySelectorAll('.rq-lotus')):[];
   var line=track.querySelector('.rw-line'),dist=0,way=[],stageH=0,lastP=-1,dir=1,active=-1,ticking=false,cur=-1;
 
   function measure(){
@@ -24,9 +24,15 @@
     var first=steps[0],last=steps[steps.length-1],gap=parseFloat(cs.getPropertyValue('--gap'))||60;
     var x0=first.offsetLeft+first.offsetWidth/2,x1=last.offsetLeft+last.offsetWidth/2;
     var cap=first.querySelector('.rw-photo').offsetWidth/2+gap*.35;
-    way=[{x:x0+cap,y:0}];
-    steps.slice(1,-1).forEach(function(s){way.push({x:s.offsetLeft+s.offsetWidth/2,y:s.classList.contains('up')?-amp:amp})});
-    way.push({x:x1-cap,y:0});
+    // the plane takes off from the opening "Jaipur", passes the first photo, swoops past each photo, passes the last
+    // photo and lands on the closing "Jaipur" (way[i].s = the photo it belongs to)
+    var tr=track.getBoundingClientRect(),mid=track.offsetHeight/2;
+    function at(el,side){if(!el)return null;var r=el.getBoundingClientRect();return {x:r.left-tr.left+r.width/2+side*r.width/2,y:r.top-tr.top+r.height/2-mid,s:-1}}
+    way=[];var a0=at(qStart&&qStart.querySelector('.rq-logo'),1);if(a0)way.push(a0);
+    way.push({x:x0+cap,y:0,s:-1});
+    steps.slice(1,-1).forEach(function(s,i){way.push({x:s.offsetLeft+s.offsetWidth/2,y:s.classList.contains('up')?-amp:amp,s:i+1})});
+    way.push({x:x1-cap,y:0,s:-1});
+    var a1=at(qEnd&&qEnd.querySelector('.rq-logo'),-1);if(a1)way.push(a1);
     line.style.left=x0+'px';line.style.width=(x1-x0)+'px';  // the gold line from the first photo to the last
     lastP=-1;cur=-1;update();
   }
@@ -54,12 +60,13 @@
     if(lastP>=0&&p!==lastP){var d=p<lastP?-1:1;if(d!==dir){dir=d;flip.classList.toggle('back',dir<0)}}
     lastP=p;
     // the photo the plane is passing lights up
-    var best=-1,bd=1e9;for(var i=1;i<way.length-1;i++){var dd=Math.abs(way[i].x-f.x);if(dd<bd){bd=dd;best=i}}
+    var best=-1,bd=1e9;for(var i=0;i<way.length;i++){if(way[i].s<0)continue;var dd=Math.abs(way[i].x-f.x);if(dd<bd){bd=dd;best=way[i].s}}
     if(best!==active){if(active>=0)steps[active].classList.remove('on');active=best;if(active>=0)steps[active].classList.add('on')}
     // the quotes: each comes in as it is on screen; the closing quote's lotus grows over the last part of the runway
     var vw=innerWidth;
     [qStart,qEnd].forEach(function(q){if(!q)return;var r=q.getBoundingClientRect(),vis=r.right>vw*.12&&r.left<vw*.88&&secOn();
-      if(vis)q.classList.add('in');});
+      if(vis&&!q.classList.contains('in')){q.classList.add('in');setTimeout(measure,1300)}});   // re-aim the plane once the logo has settled
+    notes.forEach(function(n){if(n.classList.contains('in'))return;var r=n.getBoundingClientRect();if(r.right>vw*.1&&r.left<vw*.9&&secOn())n.classList.add('in')});
     if(lotus.length&&qEnd){var r=qEnd.getBoundingClientRect(),k=Math.max(0,Math.min(1,(vw-r.left)/Math.max(1,r.width)));k=k*k*(3-2*k);
       lotus.forEach(function(l){l.style.setProperty('--reveal',(6+104*k).toFixed(1));l.style.setProperty('--ls',(.92+.08*k).toFixed(3));l.classList.toggle('grown',k>=.999)})}
     if(cur!==t)requestAnimationFrame(update);else ticking=false;
@@ -68,6 +75,7 @@
   addEventListener('scroll',kick,{passive:true});
   var rt=0;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(measure,120)});
   addEventListener('load',measure);
+  [].forEach.call(document.querySelectorAll('#pgc .rq-logo'),function(im){if(!im.complete)im.addEventListener('load',measure,{once:true})});
   photos.forEach(function(ph){var im=ph.querySelector('img');if(!im.complete)im.addEventListener('load',function(){kick()},{once:true})});
   measure();
 
